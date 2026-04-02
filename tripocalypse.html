@@ -1,106 +1,680 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tripocalypse — New Consensus</title>
-	<meta name="description" content="AI, climate, and fascism are connected crises that feed each other.">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-	<style>
-		*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-		:root {
-			--font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-			--font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-			--black: #0a0a0a; --gray-900: #111111; --gray-800: #1a1a1a; --gray-700: #222222;
-			--gray-600: #333333; --gray-500: #505050; --gray-400: #707070; --gray-300: #909090;
-			--gray-200: #a0a0a0; --gray-100: #e0e0e0; --white: #ffffff;
-			--red-500: #e7ff00; --red-400: #f7ff70; --red-300: #c4b5fd;
-		}
-		body { font-family: var(--font-sans); background: var(--black); color: var(--gray-100); line-height: 1.7; }
-		a { color: inherit; text-decoration: none; }
-		.scanlines { position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px); pointer-events: none; z-index: 1000; }
-		.scan-bar { position: fixed; left: 0; right: 0; height: 8px; background: linear-gradient(transparent, rgba(255,255,255,0.03), transparent); pointer-events: none; z-index: 1001; animation: scanline 6s linear infinite; }
-		@keyframes scanline { 0% { top: -100%; } 100% { top: 100%; } }
-		.panic-btn { position: fixed; bottom: 24px; right: 24px; width: 80px; height: 80px; border-radius: 16px; background: #0a0a0a; color: #fff; z-index: 500; border: none; box-shadow: 0 0 20px rgba(255,32,32,0.4); }
-		.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--black), transparent); }
-		.nav-logo { font-weight: 600; font-size: 15px; }
-		.nav-links { display: flex; align-items: center; gap: 32px; }
-		.nav-link { display: inline-flex; align-items: center; line-height: 1; font-size: 13px; color: var(--gray-300); text-transform: lowercase; }
-		.nav-link.active { color: var(--white); border-bottom: 1px solid var(--red-500); padding-bottom: 2px; }
-		.nav-dropdown { position: relative; }
-		.nav-dropdown-trigger { background: none; border: none; color: var(--gray-300); font-size: 13px; text-transform: lowercase; line-height: 1; display: inline-flex; align-items: center; gap: 4px; }
-		.nav-dropdown-menu { position: absolute; top: calc(100% + 8px); left: 0; min-width: 180px; background: #141414; border: 1px solid #2a2a2a; border-radius: 8px; padding: 8px 0; opacity: 0; visibility: hidden; }
-		.nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown[open] .nav-dropdown-menu { opacity: 1; visibility: visible; }
-		.nav-dropdown-item { display: block; padding: 10px 16px; color: #c4b5fd; font-size: 14px; }
-		.nav-dropdown-item.active, .nav-dropdown-item:hover { color: #fff; background: rgba(167,139,250,0.08); }
-		.nav-cta { display: inline-flex; align-items: center; line-height: 1; font-size: 13px; color: var(--red-400); text-transform: lowercase; }
-		.hero { padding: 120px 40px 40px; }
-		.hero-eyebrow { font-family: var(--font-mono); color: #c4b5fd; font-size: 14px; margin-bottom: 16px; text-transform: lowercase; }
-		.hero-headline { font-size: clamp(40px, 8vw, 72px); line-height: 1.05; }
-		.countdown-strip { display: flex; gap: 36px; padding: 24px 40px; background: var(--gray-900); border-top: 1px solid var(--gray-800); border-bottom: 1px solid var(--gray-800); flex-wrap: wrap; }
-		.countdown-label { font-family: var(--font-mono); font-size: 11px; color: var(--gray-500); text-transform: lowercase; }
-		.countdown-value { font-family: var(--font-mono); font-size: 22px; }
-		.section { padding: 64px 40px; border-top: 1px solid var(--gray-800); max-width: 980px; }
-		.section-head { font-size: clamp(26px, 4vw, 40px); color: var(--white); margin: 12px 0 16px; }
-		.tagline { font-weight: 600; color: var(--white); margin-bottom: 12px; }
-		.section p + p { margin-top: 14px; }
-		.cta-link { color: #c4b5fd; }
-		.footer { padding: 60px 40px; border-top: 1px solid var(--gray-800); }
-		.footer-links { display: flex; gap: 24px; margin-top: 12px; }
-		.glitch-overlay { display: none; position: fixed; inset: 0; background: var(--black); z-index: 2000; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 40px; }
-		.glitch-overlay.active { display: flex; }
-		@media (max-width: 768px) { .nav-links { display: none; } .hero, .section, .countdown-strip, .footer { padding-left: 24px; padding-right: 24px; } }
-	</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tripocalypse - New Consensus</title>
+  <meta name="description" content="AI, climate, and fascism are connected crises that feed each other.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+      --black: #0a0a0a;
+      --gray-900: #111111;
+      --gray-800: #1a1a1a;
+      --gray-700: #222222;
+      --gray-600: #333333;
+      --gray-500: #505050;
+      --gray-400: #707070;
+      --gray-300: #909090;
+      --gray-200: #a0a0a0;
+      --gray-100: #e0e0e0;
+      --white: #ffffff;
+
+      --red-500: #e7ff00;
+      --red-400: #f7ff70;
+      --accent-blue: #5aa7ff;
+      --accent-green: #57d987;
+      --accent-red: #ff5c5c;
+      --accent-gold: #f7cc58;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--black);
+      color: var(--gray-100);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .scan-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(transparent, rgba(255, 255, 255, 0.03), transparent);
+      animation: scanline 6s linear infinite;
+      pointer-events: none;
+      z-index: 1001;
+    }
+
+    @keyframes scanline {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+
+    @keyframes mapPulse {
+      0%, 100% { transform: scale(1); opacity: 0.55; }
+      50% { transform: scale(1.4); opacity: 1; }
+    }
+
+    .page-wrap {
+      padding-top: 96px;
+    }
+
+    .section {
+      padding: 72px 40px;
+      border-top: 1px solid var(--gray-800);
+    }
+
+    .hero {
+      padding-top: 32px;
+      border-top: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray-300);
+      text-transform: lowercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: clamp(40px, 8vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--gray-200);
+      margin-bottom: 26px;
+    }
+
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-300);
+      text-transform: lowercase;
+      border: 1px solid var(--gray-700);
+      background: rgba(17, 17, 17, 0.9);
+      padding: 10px 14px;
+      border-radius: 999px;
+    }
+
+    .dot-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 1.7s infinite ease-in-out;
+    }
+
+    .dot.blue { background: var(--accent-blue); }
+    .dot.green { background: var(--accent-green); animation-delay: 0.2s; }
+    .dot.red { background: var(--accent-red); animation-delay: 0.4s; }
+
+    .meta-copy {
+      color: var(--gray-200);
+    }
+
+    .crisis {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-400);
+      text-transform: lowercase;
+      margin-bottom: 10px;
+    }
+
+    .crisis-title {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .crisis-title.gold { color: var(--accent-gold); }
+    .crisis-title.green { color: var(--accent-green); }
+    .crisis-title.red { color: var(--accent-red); }
+
+    .crisis-copy p {
+      color: var(--gray-200);
+      max-width: 740px;
+    }
+
+    .crisis-copy p + p {
+      margin-top: 14px;
+    }
+
+    .viz-box {
+      border: 1px solid var(--gray-700);
+      background: linear-gradient(165deg, rgba(24, 24, 24, 0.95), rgba(10, 10, 10, 0.96));
+      border-radius: 14px;
+      padding: 20px;
+      min-height: 290px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .viz-label {
+      font-family: var(--font-mono);
+      text-transform: lowercase;
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .job-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .job-list li {
+      font-family: var(--font-mono);
+      color: var(--gray-300);
+      font-size: 14px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.09);
+      padding-bottom: 8px;
+      text-transform: lowercase;
+    }
+
+    .job-list li.struck {
+      text-decoration: line-through;
+      color: var(--gray-500);
+    }
+
+    .job-list li.current {
+      color: var(--accent-gold);
+      font-weight: 500;
+      border-color: rgba(247, 204, 88, 0.45);
+      text-shadow: 0 0 12px rgba(247, 204, 88, 0.35);
+    }
+
+    .map-box {
+      border: 1px solid rgba(87, 217, 135, 0.3);
+    }
+
+    .map-field {
+      position: absolute;
+      inset: 56px 16px 16px 16px;
+      border: 1px solid rgba(87, 217, 135, 0.15);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(87, 217, 135, 0.12), transparent 30%),
+        radial-gradient(circle at 70% 60%, rgba(87, 217, 135, 0.1), transparent 34%),
+        linear-gradient(rgba(87, 217, 135, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(87, 217, 135, 0.05) 1px, transparent 1px);
+      background-size: auto, auto, 28px 28px, 28px 28px;
+      border-radius: 10px;
+    }
+
+    .city-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 12px rgba(87, 217, 135, 0.75);
+      animation: mapPulse 2.2s infinite ease-in-out;
+    }
+
+    .city-dot:nth-child(1) { top: 28%; left: 20%; }
+    .city-dot:nth-child(2) { top: 54%; left: 34%; animation-delay: 0.3s; }
+    .city-dot:nth-child(3) { top: 42%; left: 59%; animation-delay: 0.6s; }
+    .city-dot:nth-child(4) { top: 65%; left: 75%; animation-delay: 0.9s; }
+    .city-dot:nth-child(5) { top: 24%; left: 70%; animation-delay: 1.2s; }
+
+    .map-note {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-family: var(--font-mono);
+      color: var(--accent-green);
+      font-size: 12px;
+      text-transform: lowercase;
+    }
+
+    .chart-box {
+      border: 1px solid rgba(255, 92, 92, 0.3);
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .chart-year {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+
+    .bar-track {
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .bar {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-blue), #7f7fff, var(--accent-red));
+      box-shadow: 0 0 10px rgba(255, 92, 92, 0.3);
+    }
+
+    .bar.wide { width: 89%; }
+    .bar.mid { width: 73%; }
+    .bar.narrow { width: 59%; }
+    .bar.small { width: 44%; }
+
+    .network-wrap {
+      margin-top: 26px;
+      border: 1px solid var(--gray-700);
+      border-radius: 14px;
+      background: linear-gradient(170deg, rgba(18, 18, 18, 0.95), rgba(10, 10, 10, 0.95));
+      padding: 22px;
+    }
+
+    .network-note {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-300);
+      text-transform: lowercase;
+      margin-bottom: 14px;
+    }
+
+    .network {
+      position: relative;
+      min-height: 190px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .network::before,
+    .network::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      border-top: 1px dashed var(--gray-500);
+      top: 46%;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .network::after {
+      width: 130px;
+      transform: translateX(-50%) rotate(60deg);
+    }
+
+    .node-link {
+      border: none;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--white);
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .node-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .node-link.ai { background: rgba(90, 167, 255, 0.2); border: 1px solid rgba(90, 167, 255, 0.65); }
+    .node-link.climate { background: rgba(87, 217, 135, 0.2); border: 1px solid rgba(87, 217, 135, 0.65); }
+    .node-link.fascism { background: rgba(255, 92, 92, 0.2); border: 1px solid rgba(255, 92, 92, 0.65); }
+
+    .node-link.active {
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+    }
+
+    .network-detail {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--gray-200);
+      min-height: 22px;
+    }
+
+    .solutions {
+      background: linear-gradient(180deg, rgba(87, 217, 135, 0.08), rgba(10, 10, 10, 0.96) 60%);
+      border-top: 1px solid rgba(87, 217, 135, 0.28);
+    }
+
+    .solutions .crisis-title {
+      color: var(--accent-green);
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 13px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--black);
+      background: var(--red-500);
+      border: 1px solid var(--red-500);
+      transition: all 0.15s ease;
+    }
+
+    .cta-link:hover {
+      background: var(--red-400);
+      border-color: var(--red-400);
+    }
+
+    @media (max-width: 980px) {
+      .crisis {
+        grid-template-columns: 1fr;
+      }
+
+      .viz-box {
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 60px 24px;
+      }
+
+      .hero-meta {
+        flex-wrap: wrap;
+        border-radius: 14px;
+      }
+
+      .network::before,
+      .network::after {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
-	<div class="scanlines"></div>
-	<div class="scan-bar"></div>
-	<button class="panic-btn" onclick="triggerPanic()">PANIC</button>
+  <div class="scanlines"></div>
+  <div class="scan-bar"></div>
 
-	<div id="site-header"></div>
+  <div id="site-header"></div>
 
-	<section class="hero">
-		<p class="hero-eyebrow">the tripocalypse</p>
-		<h1 class="hero-headline">Tripocalypse</h1>
-	</section>
+  <main class="page-wrap">
+    <section class="section hero">
+      <p class="hero-eyebrow">okay so</p>
+      <h1 class="hero-title">The Tripocalypse</h1>
+      <p class="hero-subtitle">AI. Climate. Fascism. Let's get into it.</p>
+      <div class="hero-meta">
+        <span class="dot-row">
+          <span class="dot blue"></span>
+          <span class="dot green"></span>
+          <span class="dot red"></span>
+        </span>
+        <span class="meta-copy">three crises / one planet / no time</span>
+      </div>
+    </section>
 
-	<div class="countdown-strip">
-		<div><div class="countdown-label">your job</div><div class="countdown-value">AI's now</div></div>
-		<div><div class="countdown-label">the climate</div><div class="countdown-value">we're cooked</div></div>
-		<div><div class="countdown-label">fascism</div><div class="countdown-value">having a moment</div></div>
-		<div><div class="countdown-label">time to fix it</div><div class="countdown-value" id="daysLeft">1,018 days</div></div>
-	</div>
+    <section class="section">
+      <div class="crisis">
+        <div class="crisis-copy">
+          <p class="kicker">crisis 01</p>
+          <h2 class="crisis-title gold">AI is eating jobs</h2>
+          <p>Your job is probably fine. For now.</p>
+          <p>AI isn't replacing jobs all at once. It's eating them category by category. First the routine stuff. Then the creative stuff. Then the stuff we thought was safe.</p>
+          <p>The new industries AI creates? They'll be staffed by AI. Not by you.</p>
+          <p>By 2029, whoever is president will inherit an economy where a significant chunk of the professional class can't make rent. The working class was already there. Now everyone else joins them.</p>
+        </div>
+        <aside class="viz-box">
+          <p class="viz-label">job loss tracker</p>
+          <ul class="job-list">
+            <li class="struck">customer service</li>
+            <li class="struck">paralegal</li>
+            <li class="struck">junior developer</li>
+            <li class="struck">radiologist</li>
+            <li class="current">your job (?)</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-	<section class="section"><p class="hero-eyebrow">crisis 01</p><h2 class="section-head">AI is eating jobs</h2><p class="tagline">Your job is probably fine. For now.</p><p>AI isn't replacing jobs all at once. It's eating them category by category. First the routine stuff. Then the creative stuff. Then the stuff we thought was safe.</p><p>The new industries AI creates? They'll be staffed by AI. Not by you.</p><p>By 2029, whoever is president will inherit an economy where a significant chunk of the professional class can't make rent. The working class was already there. Now everyone else joins them.</p></section>
-	<section class="section"><p class="hero-eyebrow">crisis 02</p><h2 class="section-head">Climate is eating cities</h2><p class="tagline">Not a future problem. A now problem.</p><p>Miami is flooding. Phoenix is on fire. The insurance companies already know — they're leaving. The question isn't if. It's how fast.</p><p>Every year we wait, the cost of fixing it doubles.</p></section>
-	<section class="section"><p class="hero-eyebrow">crisis 03</p><h2 class="section-head">Fascism is eating democracy</h2><p class="tagline">It doesn't announce itself. It shows up as "efficiency." As "common sense." As "just asking questions."</p><p>By the time it's obvious, it's usually too late. The data already shows where we are.</p><p>Economic desperation is the fuel. Scapegoats are the match. Both are in abundant supply.</p></section>
-	<section class="section"><p class="hero-eyebrow">here's the kicker</p><h2 class="section-head">They feed each other</h2><p>AI job loss drives economic desperation → fertile ground for fascism. Climate crisis strains economies → more desperation. Fascism blocks climate action → crisis accelerates. Each one makes the others worse.</p><p><em>Click the connections to see how.</em></p></section>
-	<section class="section"><p class="hero-eyebrow">that's actually good news</p><h2 class="section-head">Connected problems have connected solutions.</h2><p>If the crises feed each other, so do the solutions. A clean economy creates jobs → undercuts economic desperation → starves fascism of its fuel.</p><p>Fix one, you help fix all three. We have a plan for that.</p><p><a class="cta-link" href="https://www.newconsensus.com/read" target="_blank" rel="noopener noreferrer">Read the Mission for America →</a></p></section>
+    <section class="section">
+      <div class="crisis">
+        <div class="crisis-copy">
+          <p class="kicker">crisis 02</p>
+          <h2 class="crisis-title green">Climate is eating cities</h2>
+          <p>Not a future problem. A now problem.</p>
+          <p>Miami is flooding. Phoenix is on fire. The insurance companies already know - they're leaving. The question isn't if. It's how fast.</p>
+          <p>Every year we wait, the cost of fixing it doubles.</p>
+        </div>
+        <aside class="viz-box map-box">
+          <p class="viz-label">impact map</p>
+          <p class="map-note">now -> 2050 cities under threat</p>
+          <div class="map-field">
+            <span class="city-dot"></span>
+            <span class="city-dot"></span>
+            <span class="city-dot"></span>
+            <span class="city-dot"></span>
+            <span class="city-dot"></span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-	<div id="site-footer"></div>
+    <section class="section">
+      <div class="crisis">
+        <div class="crisis-copy">
+          <p class="kicker">crisis 03</p>
+          <h2 class="crisis-title red">Fascism is eating democracy</h2>
+          <p>It doesn't announce itself. It shows up as "efficiency." As "common sense." As "just asking questions."</p>
+          <p>By the time it's obvious, it's usually too late. The data already shows where we are.</p>
+          <p>Economic desperation is the fuel. Scapegoats are the match. Both are in abundant supply.</p>
+        </div>
+        <aside class="viz-box chart-box">
+          <p class="viz-label">democracy index: 2015 -> now</p>
+          <div class="chart-row">
+            <span class="chart-year">2015</span>
+            <div class="bar-track"><div class="bar wide"></div></div>
+          </div>
+          <div class="chart-row">
+            <span class="chart-year">2018</span>
+            <div class="bar-track"><div class="bar mid"></div></div>
+          </div>
+          <div class="chart-row">
+            <span class="chart-year">2021</span>
+            <div class="bar-track"><div class="bar narrow"></div></div>
+          </div>
+          <div class="chart-row">
+            <span class="chart-year">now</span>
+            <div class="bar-track"><div class="bar small"></div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-	<div class="glitch-overlay" id="glitchOverlay"><button onclick="closeGlitch()">close</button><div id="bigCountdown">1,018</div><p>AI's eating jobs. Climate's eating cities. Fascism's eating democracy.</p></div>
-	<script>
-		function getDaysRemaining(){const inauguration=new Date('2029-01-20');inauguration.setHours(0,0,0,0);const today=new Date();today.setHours(0,0,0,0);return Math.ceil((inauguration-today)/(1000*60*60*24));}
-		function updateCountdownDisplays(){const d=getDaysRemaining().toLocaleString();const a=document.getElementById('daysLeft');const b=document.getElementById('bigCountdown');if(a)a.textContent=d+' days';if(b)b.textContent=d;}
-		function triggerPanic(){document.getElementById('glitchOverlay').classList.add('active');document.body.style.overflow='hidden';}
-		function closeGlitch(){document.getElementById('glitchOverlay').classList.remove('active');document.body.style.overflow='';}
-		updateCountdownDisplays();setInterval(updateCountdownDisplays,60000);
+    <section class="section">
+      <p class="kicker">here's the kicker</p>
+      <h2 class="crisis-title">They feed each other</h2>
+      <div class="crisis-copy">
+        <p>AI job loss drives economic desperation -> fertile ground for fascism. Climate crisis strains economies -> more desperation. Fascism blocks climate action -> crisis accelerates. Each one makes the others worse.</p>
+      </div>
+      <div class="network-wrap">
+        <p class="network-note">click nodes to see how each crisis feeds the others</p>
+        <div class="network">
+          <button class="node-link ai active" data-detail="AI job loss increases insecurity, and insecurity is where authoritarian scapegoating takes root.">AI</button>
+          <button class="node-link climate" data-detail="Climate shocks destabilize prices, housing, and migration, intensifying social conflict and political extremism.">Climate</button>
+          <button class="node-link fascism" data-detail="Fascist politics blocks real climate and economic fixes, making both crises worse and more frequent.">Fascism</button>
+        </div>
+        <p class="network-detail" id="networkDetail">AI job loss increases insecurity, and insecurity is where authoritarian scapegoating takes root.</p>
+      </div>
+    </section>
 
-		document.addEventListener('keydown', function(e){if(e.key==='Escape') closeGlitch();});
+    <section class="section solutions">
+      <p class="kicker">that's actually good news</p>
+      <h2 class="crisis-title">Connected problems have connected solutions.</h2>
+      <div class="crisis-copy">
+        <p>If the crises feed each other, so do the solutions. A clean economy creates jobs -> undercuts economic desperation -> starves fascism of its fuel.</p>
+        <p>Fix one, you help fix all three. We have a plan for that.</p>
+        <p><a class="cta-link" href="https://www.newconsensus.com/read" target="_blank" rel="noopener noreferrer">Read the Mission for America -></a></p>
+      </div>
+    </section>
+  </main>
 
-		(function setupNavDropdown(){
-			const dropdowns=document.querySelectorAll('.nav-dropdown');if(!dropdowns.length) return;
-			function isMobile(){return window.innerWidth<=768;}
-			function setOpen(dropdown,open){const trigger=dropdown.querySelector('.nav-dropdown-trigger');dropdown.classList.toggle('open',open);if(open){dropdown.setAttribute('open','');}else{dropdown.removeAttribute('open');}if(trigger){trigger.setAttribute('aria-expanded',open?'true':'false');}}
-			function closeAll(){dropdowns.forEach((dropdown)=>setOpen(dropdown,false));}
-			dropdowns.forEach((dropdown)=>{const trigger=dropdown.querySelector('.nav-dropdown-trigger');if(!trigger) return;trigger.addEventListener('click',(e)=>{if(isMobile()){e.preventDefault();setOpen(dropdown,!dropdown.classList.contains('open'));}});trigger.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(dropdown,!dropdown.classList.contains('open'));}if(e.key==='Escape'){setOpen(dropdown,false);trigger.blur();}});dropdown.addEventListener('mouseenter',()=>{if(!isMobile()) setOpen(dropdown,true);});dropdown.addEventListener('mouseleave',()=>{if(!isMobile()) setOpen(dropdown,false);});dropdown.addEventListener('focusout',(e)=>{if(!dropdown.contains(e.relatedTarget)){setOpen(dropdown,false);}});});
-			document.addEventListener('click',(e)=>{if(!e.target.closest('.nav-dropdown')){closeAll();}});
-			document.addEventListener('keydown',(e)=>{if(e.key==='Escape') closeAll();});
-		})();
-	</script>
+  <div id="site-footer"></div>
+
+  <script>
+    (function setupNetworkNodes() {
+      const nodes = document.querySelectorAll('.node-link');
+      const detail = document.getElementById('networkDetail');
+      if (!nodes.length || !detail) return;
+
+      nodes.forEach((node) => {
+        node.addEventListener('click', () => {
+          nodes.forEach((n) => n.classList.remove('active'));
+          node.classList.add('active');
+          detail.textContent = node.getAttribute('data-detail') || '';
+        });
+      });
+    })();
+
+    (function setupNavDropdown() {
+      const dropdowns = document.querySelectorAll('.nav-dropdown');
+      if (!dropdowns.length) return;
+
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
+
+      function setOpen(dropdown, open) {
+        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+        dropdown.classList.toggle('open', open);
+        if (open) {
+          dropdown.setAttribute('open', '');
+        } else {
+          dropdown.removeAttribute('open');
+        }
+        if (trigger) {
+          trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+      }
+
+      function closeAll() {
+        dropdowns.forEach((dropdown) => setOpen(dropdown, false));
+      }
+
+      dropdowns.forEach((dropdown) => {
+        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+        if (!trigger) return;
+
+        trigger.addEventListener('click', (e) => {
+          if (isMobile()) {
+            e.preventDefault();
+            setOpen(dropdown, !dropdown.classList.contains('open'));
+          }
+        });
+
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setOpen(dropdown, !dropdown.classList.contains('open'));
+          }
+          if (e.key === 'Escape') {
+            setOpen(dropdown, false);
+            trigger.blur();
+          }
+        });
+
+        dropdown.addEventListener('mouseenter', () => {
+          if (!isMobile()) setOpen(dropdown, true);
+        });
+
+        dropdown.addEventListener('mouseleave', () => {
+          if (!isMobile()) setOpen(dropdown, false);
+        });
+
+        dropdown.addEventListener('focusout', (e) => {
+          if (!dropdown.contains(e.relatedTarget)) {
+            setOpen(dropdown, false);
+          }
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-dropdown')) {
+          closeAll();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAll();
+      });
+    })();
+  </script>
   <script src="/shared-layout.js"></script>
 </body>
 </html>
