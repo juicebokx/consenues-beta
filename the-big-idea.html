@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Big Idea — New Consensus</title>
+	<meta name="description" content="The end and the beginning are the same moment.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+	<style>
+		*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+		:root{--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-mono:'JetBrains Mono','SF Mono',Consolas,monospace;--black:#0a0a0a;--gray-900:#111;--gray-800:#1a1a1a;--gray-500:#505050;--gray-300:#909090;--gray-100:#e0e0e0;--white:#fff;--red-500:#ef4444;--violet:#c4b5fd}
+		body{font-family:var(--font-sans);background:var(--black);color:var(--gray-100);line-height:1.8}
+		a{color:inherit;text-decoration:none}
+		.nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,var(--black),transparent)}
+		.nav-logo{font-weight:600;font-size:15px}.nav-links{display:flex;gap:32px}.nav-link{font-size:13px;color:var(--gray-300);text-transform:lowercase}
+		.nav-dropdown{position:relative}.nav-dropdown-trigger{background:none;border:none;color:var(--gray-300);font-size:13px;text-transform:lowercase;display:inline-flex;gap:4px}
+		.nav-dropdown-trigger.active,.nav-link.active{color:var(--white)}
+		.nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:180px;background:#141414;border:1px solid #2a2a2a;border-radius:8px;padding:8px 0;opacity:0;visibility:hidden}
+		.nav-dropdown:hover .nav-dropdown-menu,.nav-dropdown[open] .nav-dropdown-menu{opacity:1;visibility:visible}
+		.nav-dropdown-item{display:block;padding:10px 16px;color:var(--violet)}.nav-dropdown-item.active,.nav-dropdown-item:hover{color:#fff;background:rgba(167,139,250,.08)}
+		.nav-cta{font-size:13px;color:var(--violet);text-transform:lowercase}
+		.hero{min-height:66vh;padding:140px 40px 40px;display:grid;place-items:center;border-bottom:1px solid var(--gray-800)}
+		.cross{position:relative;width:min(900px,92vw);height:320px}
+		.horiz{position:absolute;left:6%;top:44%;font-weight:700;font-size:clamp(56px,8vw,86px);line-height:1}
+		.vert{position:absolute;left:49%;top:2%;font-weight:700;font-size:clamp(56px,8vw,86px);line-height:1;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg)}
+		.red{color:var(--red-500)}
+		.pivot{font-family:var(--font-mono);font-size:14px;color:var(--violet);text-align:center;max-width:900px;padding:0 40px 48px}
+		.countdown-strip{display:flex;gap:36px;padding:24px 40px;background:var(--gray-900);border-top:1px solid var(--gray-800);border-bottom:1px solid var(--gray-800);flex-wrap:wrap}
+		.countdown-label{font-family:var(--font-mono);font-size:11px;color:var(--gray-500);text-transform:lowercase}.countdown-value{font-family:var(--font-mono);font-size:22px}
+		.section{padding:64px 40px;border-top:1px solid var(--gray-800);max-width:980px}.anchor{font-family:var(--font-mono);font-size:12px;color:var(--violet)}.section h2{font-size:clamp(28px,4vw,44px);line-height:1.2;margin:14px 0 16px}
+		.beat{margin:24px 0;color:var(--white)}.thesis{font-weight:600;color:var(--white)}.muted{color:var(--gray-300)}
+		.footer{padding:60px 40px;border-top:1px solid var(--gray-800)}
+		.footer-links{display:flex;gap:24px;margin-top:10px}
+		.panic-btn{position:fixed;bottom:24px;right:24px;width:80px;height:80px;border:none;border-radius:16px;background:#0a0a0a;color:#fff;box-shadow:0 0 20px rgba(255,32,32,.4)}
+		.glitch-overlay{display:none;position:fixed;inset:0;background:#0a0a0a;z-index:2000;align-items:center;justify-content:center;flex-direction:column}.glitch-overlay.active{display:flex}
+		@media (max-width:768px){.nav-links{display:none}.hero,.pivot,.section,.countdown-strip,.footer{padding-left:24px;padding-right:24px}}
+	</style>
+</head>
+<body>
+	<button class="panic-btn" onclick="triggerPanic()">PANIC</button>
+	<nav class="nav"><a href="/" class="nav-logo">New Consensus</a><div class="nav-links"><a class="nav-link" href="/tripocalypse">Tripocalypse</a><div class="nav-dropdown"><button class="nav-link nav-dropdown-trigger active" aria-expanded="false" aria-haspopup="true" type="button">Solution <span>▼</span></button><div class="nav-dropdown-menu"><a href="/the-big-idea" class="nav-dropdown-item active">The Big Idea</a></div></div><a href="/projects" class="nav-link">Projects</a><div class="nav-dropdown"><button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" type="button">About <span>▼</span></button><div class="nav-dropdown-menu"><a href="/team" class="nav-dropdown-item">Team</a><a href="/jobs" class="nav-dropdown-item">Jobs</a><a href="/contact" class="nav-dropdown-item">Contact</a></div></div><a href="/#join" class="nav-cta">Start serving</a></div></nav>
+	<section class="hero"><div class="cross"><div class="horiz">th<span class="red">e</span> end.</div><div class="vert">th<span class="red">e</span> beginning.</div></div></section>
+	<p class="pivot">The end of the world and the beginning of utopia are the same moment. Which one you get depends entirely on what you decide to do next.</p>
+	<div class="countdown-strip"><div><div class="countdown-label">your job</div><div class="countdown-value">AI's now</div></div><div><div class="countdown-label">the climate</div><div class="countdown-value">we're cooked</div></div><div><div class="countdown-label">fascism</div><div class="countdown-value">having a moment</div></div><div><div class="countdown-label">time to fix it</div><div class="countdown-value" id="daysLeft">1,018 days</div></div></div>
+	<section class="section"><p class="anchor">↑ the end</p><h2>Things are not fine. Let's start there.</h2><p>Three crises. Each accelerating. Each making the others worse. The people who should be fixing it are mostly arguing about whether it's real. This is not a moment for small ideas or managed decline or waiting to see how it plays out.</p><p class="beat">And yet.</p><p>Most people are trying to slow down the end. Managed decline. Small ideas. Survival mode. Making the inevitable a little less bad.</p><p class="thesis">That's not what we're doing.</p></section>
+	<section class="section"><p class="anchor">↓ the beginning</p><h2>We're building the beginning.</h2><p>The last time everything broke at once, we chose to act. Not manage. Not adapt. Act. We mobilized. Built a new economy in three years. Put millions of people to work. Defeated fascism in the process. Not because it was easy. Because we decided it was worth doing.</p><p>That's still possible. A clean economy creates jobs. Jobs replace desperation. Desperation dead means fascism starved. Fascism starved can't block climate policy. The climate gets a fighting chance.</p><p class="thesis">Connected problems. Connected solutions. One plan. The window is 2029.</p></section>
+	<section class="section"><h2>The Mission for America.</h2><p>The full plan. 20+ chapters. Every sector. If you read one thing, make it this.</p><p class="muted"><em>It's long. Sorry.</em></p><p><a href="https://www.newconsensus.com/read" target="_blank" rel="noopener noreferrer" style="color:#c4b5fd;">Read the Mission for America →</a></p></section>
+	<footer class="footer"><div>New Consensus</div><div class="footer-links"><a href="/team">about</a><a href="https://blog.newconsensus.com" target="_blank" rel="noopener noreferrer">blog</a><a href="/projects">projects</a><a href="/jobs">jobs</a><a href="https://x.com/newconsensus" target="_blank" rel="noopener noreferrer">twitter</a></div></footer>
+	<div class="glitch-overlay" id="glitchOverlay"><button onclick="closeGlitch()">close</button><div id="bigCountdown">1,018</div></div>
+	<script>
+		function getDaysRemaining(){const inauguration=new Date('2029-01-20');inauguration.setHours(0,0,0,0);const today=new Date();today.setHours(0,0,0,0);return Math.ceil((inauguration-today)/(1000*60*60*24));}
+		function updateCountdownDisplays(){const d=getDaysRemaining().toLocaleString();const a=document.getElementById('daysLeft');const b=document.getElementById('bigCountdown');if(a)a.textContent=d+' days';if(b)b.textContent=d;}
+		function triggerPanic(){document.getElementById('glitchOverlay').classList.add('active');document.body.style.overflow='hidden';}
+		function closeGlitch(){document.getElementById('glitchOverlay').classList.remove('active');document.body.style.overflow='';}
+		updateCountdownDisplays();setInterval(updateCountdownDisplays,60000);
+	</script>
+</body>
+</html>
