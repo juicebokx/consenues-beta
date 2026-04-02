@@ -112,6 +112,18 @@
 		function triggerPanic(){document.getElementById('glitchOverlay').classList.add('active');document.body.style.overflow='hidden';}
 		function closeGlitch(){document.getElementById('glitchOverlay').classList.remove('active');document.body.style.overflow='';}
 		updateCountdownDisplays();setInterval(updateCountdownDisplays,60000);
+
+		document.addEventListener('keydown', function(e){if(e.key==='Escape') closeGlitch();});
+
+		(function setupNavDropdown(){
+			const dropdowns=document.querySelectorAll('.nav-dropdown');if(!dropdowns.length) return;
+			function isMobile(){return window.innerWidth<=768;}
+			function setOpen(dropdown,open){const trigger=dropdown.querySelector('.nav-dropdown-trigger');dropdown.classList.toggle('open',open);if(open){dropdown.setAttribute('open','');}else{dropdown.removeAttribute('open');}if(trigger){trigger.setAttribute('aria-expanded',open?'true':'false');}}
+			function closeAll(){dropdowns.forEach((dropdown)=>setOpen(dropdown,false));}
+			dropdowns.forEach((dropdown)=>{const trigger=dropdown.querySelector('.nav-dropdown-trigger');if(!trigger) return;trigger.addEventListener('click',(e)=>{if(isMobile()){e.preventDefault();setOpen(dropdown,!dropdown.classList.contains('open'));}});trigger.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(dropdown,!dropdown.classList.contains('open'));}if(e.key==='Escape'){setOpen(dropdown,false);trigger.blur();}});dropdown.addEventListener('mouseenter',()=>{if(!isMobile()) setOpen(dropdown,true);});dropdown.addEventListener('mouseleave',()=>{if(!isMobile()) setOpen(dropdown,false);});dropdown.addEventListener('focusout',(e)=>{if(!dropdown.contains(e.relatedTarget)){setOpen(dropdown,false);}});});
+			document.addEventListener('click',(e)=>{if(!e.target.closest('.nav-dropdown')){closeAll();}});
+			document.addEventListener('keydown',(e)=>{if(e.key==='Escape') closeAll();});
+		})();
 	</script>
 </body>
 </html>
