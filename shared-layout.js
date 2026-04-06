@@ -276,7 +276,7 @@
 
     <div class="nav-dropdown">
       <button class="nav-link nav-dropdown-trigger${flags.solution ? ' active' : ''}" aria-expanded="false" aria-haspopup="true" type="button">
-        Solution <span class="dropdown-arrow">&#9660;</span>
+        The Solution <span class="dropdown-arrow">&#9660;</span>
       </button>
       <div class="nav-dropdown-menu">
         <a href="/the-mission" class="nav-dropdown-item${flags.mission ? ' active' : ''}">The Mission</a>
