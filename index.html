@@ -24,6 +24,48 @@
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
       --accent: #e7ff00;
+
+      --surface-900: #141414;
+      --surface-850: #161616;
+      --surface-800: #1d1d1d;
+      --border-subtle: #2a2a2a;
+      --border-white-06: rgba(255, 255, 255, 0.06);
+      --border-white-08: rgba(255, 255, 255, 0.08);
+      --surface-white-02: rgba(255, 255, 255, 0.02);
+      --surface-white-03: rgba(255, 255, 255, 0.03);
+      --text-white-65: rgba(255, 255, 255, 0.65);
+      --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+      --overlay-black-10: rgba(0, 0, 0, 0.1);
+      --flip-face-grad-start: rgba(12, 12, 12, 0.96);
+      --flip-face-grad-end: rgba(18, 18, 18, 0.9);
+      --panic-glow-10: rgba(255, 32, 32, 0.1);
+      --panic-glow-15: rgba(255, 32, 32, 0.15);
+      --panic-glow-20: rgba(255, 32, 32, 0.2);
+      --panic-glow-30: rgba(255, 32, 32, 0.3);
+      --panic-glow-40: rgba(255, 32, 32, 0.4);
+      --panic-glow-50: rgba(255, 32, 32, 0.5);
+      --purple-300: #c4b5fd;
+      --purple-400-soft: rgba(167, 139, 250, 0.08);
+      --end-rail: #8b0000;
+      --end-rail-glow: rgba(139, 0, 0, 0.2);
+      --begin-rail: #004d00;
+      --begin-rail-corner: #0f6a2e;
+      --begin-rail-glow: rgba(0, 77, 0, 0.22);
+      --end-accent: #ff5b5b;
+      --begin-accent: #5ab86a;
+
+      --palette-red-500: #ff2020;
+      --palette-red-400: #ff4040;
+      --palette-red-300: #ff6060;
+      --palette-blue-500: #0000cc;
+      --palette-blue-400: #0000ff;
+      --palette-blue-300: #3366ff;
+      --palette-purple-500: #8b5cf6;
+      --palette-purple-400: #a78bfa;
+      --palette-purple-300: #c4b5fd;
+      --palette-yellow-500: #fff700;
+      --palette-yellow-400: #ffec4c;
+      --palette-yellow-300: #ffe88c;
       
       --black: #0a0a0a;
       --gray-900: #111111;
@@ -93,24 +135,24 @@
     @keyframes pulseGlow {
       0%, 100% {
         box-shadow:
-          0 0 20px rgba(255, 32, 32, 0.4),
-          0 0 40px rgba(255, 32, 32, 0.3),
-          0 0 60px rgba(255, 32, 32, 0.2),
-          0 0 80px rgba(255, 32, 32, 0.1);
+          0 0 20px var(--panic-glow-40),
+          0 0 40px var(--panic-glow-30),
+          0 0 60px var(--panic-glow-20),
+          0 0 80px var(--panic-glow-10);
       }
       50% {
         box-shadow:
-          0 0 30px rgba(255, 32, 32, 0.5),
-          0 0 50px rgba(255, 32, 32, 0.4),
-          0 0 70px rgba(255, 32, 32, 0.3),
-          0 0 100px rgba(255, 32, 32, 0.15);
+          0 0 30px var(--panic-glow-50),
+          0 0 50px var(--panic-glow-40),
+          0 0 70px var(--panic-glow-30),
+          0 0 100px var(--panic-glow-15);
       }
     }
 
     @keyframes rgbSplit {
       0%, 88%, 100% { text-shadow: none; }
-      90% { text-shadow: -2px 0 var(--red-400), 2px 0 #00ffff; }
-      94% { text-shadow: 2px 0 var(--red-400), -2px 0 #00ffff; }
+      90% { text-shadow: -2px 0 var(--red-400), 2px 0 var(--cyan-500); }
+      94% { text-shadow: 2px 0 var(--red-400), -2px 0 var(--cyan-500); }
     }
 
     @keyframes trackingError {
@@ -164,8 +206,8 @@
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 0, 0, 0.1) 2px,
-        rgba(0, 0, 0, 0.1) 4px
+        var(--overlay-black-10) 2px,
+        var(--overlay-black-10) 4px
       );
       pointer-events: none;
       z-index: 1000;
@@ -178,7 +220,7 @@
       height: 8px;
       background: linear-gradient(
         transparent,
-        rgba(255, 255, 255, 0.03),
+        var(--surface-white-03),
         transparent
       );
       animation: scanline 6s linear infinite;
@@ -216,10 +258,10 @@
       right: 32px;
       width: 80px;
       height: 80px;
-      background: #0a0a0a;
+      background: var(--black);
       border: none;
       border-radius: 16px;
-      color: #ffffff;
+      color: var(--white);
       font-family: var(--font-sans);
       font-weight: 500;
       font-size: 14px;
@@ -234,19 +276,19 @@
       flex-direction: column;
       animation: float 3s ease-in-out infinite, pulseGlow 2s ease-in-out infinite;
       box-shadow:
-        0 0 20px rgba(255, 32, 32, 0.4),
-        0 0 40px rgba(255, 32, 32, 0.3),
-        0 0 60px rgba(255, 32, 32, 0.2),
-        0 0 80px rgba(255, 32, 32, 0.1);
+        0 0 20px var(--panic-glow-40),
+        0 0 40px var(--panic-glow-30),
+        0 0 60px var(--panic-glow-20),
+        0 0 80px var(--panic-glow-10);
     }
 
     .panic-btn:hover {
       transform: scale(1.05);
       box-shadow:
-        0 0 30px rgba(255, 32, 32, 0.5),
-        0 0 60px rgba(255, 32, 32, 0.4),
-        0 0 90px rgba(255, 32, 32, 0.3),
-        0 0 120px rgba(255, 32, 32, 0.2);
+        0 0 30px var(--panic-glow-50),
+        0 0 60px var(--panic-glow-40),
+        0 0 90px var(--panic-glow-30),
+        0 0 120px var(--panic-glow-20);
     }
 
     .panic-btn:active {
@@ -362,8 +404,8 @@
       top: calc(100% + 8px);
       left: 0;
       min-width: 180px;
-      background: #141414;
-      border: 1px solid #2a2a2a;
+      background: var(--surface-900);
+      border: 1px solid var(--border-subtle);
       border-radius: 8px;
       padding: 8px 0;
       opacity: 0;
@@ -383,7 +425,7 @@
     .nav-dropdown-item {
       display: block;
       padding: 10px 16px;
-      color: #c4b5fd;
+      color: var(--purple-300);
       font-family: var(--font-sans);
       font-size: 14px;
       text-decoration: none;
@@ -393,8 +435,8 @@
     .nav-dropdown-item:hover,
     .nav-dropdown-item:focus-visible,
     .nav-dropdown-item.active {
-      background: rgba(167, 139, 250, 0.08);
-      color: #ffffff;
+      background: var(--purple-400-soft);
+      color: var(--white);
       outline: none;
     }
 
@@ -577,7 +619,7 @@
     .countdown-label {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: #ffffff;
+      color: var(--white);
       text-transform: lowercase;
       letter-spacing: 0.05em;
       margin-bottom: 6px;
@@ -692,7 +734,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 20px;
-      background: linear-gradient(150deg, rgba(12, 12, 12, 0.96), rgba(18, 18, 18, 0.9));
+      background: linear-gradient(150deg, var(--flip-face-grad-start), var(--flip-face-grad-end));
       overflow: hidden;
     }
 
@@ -703,13 +745,13 @@
     }
 
     .flip-card.end-card .flip-card-face {
-      border-top-color: #8b0000;
-      box-shadow: inset 0 0 26px rgba(139, 0, 0, 0.2);
+      border-top-color: var(--end-rail);
+      box-shadow: inset 0 0 26px var(--end-rail-glow);
     }
 
     .flip-card.begin-card .flip-card-face {
-      border-top-color: #004d00;
-      box-shadow: inset 0 0 26px rgba(0, 77, 0, 0.22);
+      border-top-color: var(--begin-rail);
+      box-shadow: inset 0 0 26px var(--begin-rail-glow);
     }
 
     .card-corner {
@@ -722,8 +764,8 @@
       opacity: 0.7;
     }
 
-    .end-card .card-corner { border-color: #8b0000; }
-    .begin-card .card-corner { border-color: #0f6a2e; }
+    .end-card .card-corner { border-color: var(--end-rail); }
+    .begin-card .card-corner { border-color: var(--begin-rail-corner); }
 
     .card-corner.tl { top: 8px; left: 8px; border-top-width: 1px; border-left-width: 1px; }
     .card-corner.tr { top: 8px; right: 8px; border-top-width: 1px; border-right-width: 1px; }
@@ -751,13 +793,13 @@
     .end-card .card-eyebrow,
     .end-card .card-flip-link,
     .end-card .card-separator {
-      color: #ff5b5b;
+      color: var(--end-accent);
     }
 
     .begin-card .card-eyebrow,
     .begin-card .card-flip-link,
     .begin-card .card-separator {
-      color: #5ab86a;
+      color: var(--begin-accent);
     }
 
     .card-title {
@@ -772,7 +814,7 @@
 
     .card-teaser {
       margin: 0;
-      font-family: "JetBrains Mono", monospace;
+      font-family: var(--font-mono);
       font-size: 19px;
       line-height: 1.65;
       color: var(--gray-200);
@@ -789,7 +831,7 @@
 
     .card-back-copy {
       margin: 0;
-      font-family: "JetBrains Mono", monospace;
+      font-family: var(--font-mono);
       font-size: 16px;
       line-height: 1.8;
       color: var(--gray-300);
@@ -830,7 +872,7 @@
        PROJECTS GRID
     ============================================ */
     .projects-section {
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid var(--border-white-06);
       margin-top: 80px;
       padding-top: 80px;
     }
@@ -848,23 +890,23 @@
     }
 
     .project-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--surface-white-02);
+      border: 1px solid var(--border-white-08);
       padding: 28px;
       transition: all var(--transition-med);
     }
 
     .project-card:hover {
       border-color: var(--accent);
-      background: #161616;
+      background: var(--surface-850);
       transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--shadow-card-hover);
     }
 
     .project-card--featured {
       display: flex;
       flex-direction: column;
-      background: #1d1d1d;
+      background: var(--surface-800);
       border: none;
       border-left: 4px solid var(--accent);
       padding-top: 48px;
@@ -898,7 +940,7 @@
 
     .project-desc {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.65);
+      color: var(--text-white-65);
       line-height: 1.7;
     }
 
@@ -1176,11 +1218,14 @@
 <body>
 
   <script>
+    const cssVar = (name) =>
+      getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
     const palettes = {
-      red: ['#ff2020', '#ff4040', '#ff6060'],
-      blue: ['#0000CC', '#0000FF', '#3366FF'],
-      purple: ['#8B5CF6', '#A78BFA', '#C4B5FD'],
-      yellow: ['#FFF700', '#FFEC4C', '#FFE88C']
+      red: [cssVar('--palette-red-500'), cssVar('--palette-red-400'), cssVar('--palette-red-300')],
+      blue: [cssVar('--palette-blue-500'), cssVar('--palette-blue-400'), cssVar('--palette-blue-300')],
+      purple: [cssVar('--palette-purple-500'), cssVar('--palette-purple-400'), cssVar('--palette-purple-300')],
+      yellow: [cssVar('--palette-yellow-500'), cssVar('--palette-yellow-400'), cssVar('--palette-yellow-300')]
     };
     const colors = Object.keys(palettes);
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
