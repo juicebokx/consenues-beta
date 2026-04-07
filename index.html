@@ -502,6 +502,43 @@
       color: var(--red-400);
     }
 
+    .mission-cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+      max-width: 680px;
+    }
+
+    .mission-cta-actions .mission-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: var(--red-500);
+      border: none;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .mission-cta-actions .mission-cta-btn:hover {
+      background: var(--red-400);
+      color: var(--white);
+    }
+
+    @media (min-width: 1024px) {
+      .mission-cta-actions {
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .mission-cta-actions .mission-cta-btn {
+        flex: 1;
+        width: auto;
+      }
+    }
+
     /* ============================================
        COUNTDOWN STRIP
     ============================================ */
@@ -585,6 +622,199 @@
 
     .section-body p + p {
       margin-top: 24px;
+    }
+
+    /* ============================================
+       TWO FUTURES FLIP SECTION
+    ============================================ */
+    .two-futures-section {
+      padding: 80px 40px;
+      border-top: 1px solid var(--gray-800);
+    }
+
+    .two-futures-section .section-title {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 30px;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+    }
+
+    .flip-cards-container {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: stretch;
+      perspective: 1600px;
+    }
+
+    .flip-card {
+      position: relative;
+      min-height: 560px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .flip-card:focus-visible .flip-card-front,
+    .flip-card:focus-visible .flip-card-back {
+      box-shadow: 0 0 0 2px var(--gray-100);
+    }
+
+    .flip-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card.dimmed {
+      opacity: 0.35;
+      filter: blur(1px);
+    }
+
+    .flip-card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border: 1px solid var(--gray-700);
+      border-top-width: 2px;
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(150deg, rgba(12, 12, 12, 0.96), rgba(18, 18, 18, 0.9));
+      overflow: hidden;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      gap: 14px;
+    }
+
+    .flip-card.end-card .flip-card-face {
+      border-top-color: #8b0000;
+      box-shadow: inset 0 0 26px rgba(139, 0, 0, 0.2);
+    }
+
+    .flip-card.begin-card .flip-card-face {
+      border-top-color: #004d00;
+      box-shadow: inset 0 0 26px rgba(0, 77, 0, 0.22);
+    }
+
+    .card-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-style: solid;
+      border-width: 0;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .end-card .card-corner { border-color: #8b0000; }
+    .begin-card .card-corner { border-color: #0f6a2e; }
+
+    .card-corner.tl { top: 8px; left: 8px; border-top-width: 1px; border-left-width: 1px; }
+    .card-corner.tr { top: 8px; right: 8px; border-top-width: 1px; border-right-width: 1px; }
+    .card-corner.bl { bottom: 8px; left: 8px; border-bottom-width: 1px; border-left-width: 1px; }
+    .card-corner.br { bottom: 8px; right: 8px; border-bottom-width: 1px; border-right-width: 1px; }
+
+    .card-label {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: lowercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-300);
+    }
+
+    .card-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 14px 0 10px;
+    }
+
+    .end-card .card-eyebrow,
+    .end-card .card-flip-link,
+    .end-card .card-separator {
+      color: #ff5b5b;
+    }
+
+    .begin-card .card-eyebrow,
+    .begin-card .card-flip-link,
+    .begin-card .card-separator {
+      color: #5ab86a;
+    }
+
+    .card-title {
+      font-size: clamp(34px, 4.3vw, 54px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--gray-100);
+      margin-bottom: 12px;
+      text-transform: lowercase;
+      font-weight: 600;
+    }
+
+    .card-teaser {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--gray-200);
+    }
+
+    .card-back-headline {
+      margin: 2px 0 2px;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.2;
+      color: var(--gray-100);
+      letter-spacing: -0.02em;
+      font-weight: 500;
+    }
+
+    .card-back-copy {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--gray-300);
+    }
+
+    .card-back-copy + .card-back-copy {
+      margin-top: 8px;
+    }
+
+    .card-separator {
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+    }
+
+    .card-flip-link {
+      margin-top: 8px;
+      background: none;
+      border: none;
+      padding: 0;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .pivot-line {
+      grid-column: 1 / -1;
+      margin-top: 2px;
+      max-width: 860px;
+      color: var(--gray-300);
+      font-size: 16px;
+      line-height: 1.8;
     }
 
     /* ============================================
@@ -816,6 +1046,23 @@
         padding: 60px 24px;
       }
 
+      .two-futures-section {
+        padding: 60px 24px;
+      }
+
+      .flip-cards-container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .flip-card {
+        min-height: 530px;
+      }
+
+      .flip-card-face {
+        padding: 24px;
+      }
+
       .countdown-strip {
         padding: 24px;
         gap: 24px;
@@ -910,7 +1157,7 @@
   <div class="countdown-strip">
     <div class="countdown-item">
       <div class="countdown-label">your job</div>
-      <div class="countdown-value red">terminated</div>
+      <div class="countdown-value red">AI's now</div>
     </div>
     <div class="countdown-item">
       <div class="countdown-label">the climate</div>
@@ -918,11 +1165,11 @@
     </div>
     <div class="countdown-item">
       <div class="countdown-label">fascism</div>
-      <div class="countdown-value red">it's back</div>
+      <div class="countdown-value red">having a moment</div>
     </div>
     <div class="countdown-item">
       <div class="countdown-label">time to fix it</div>
-      <div class="countdown-value gray">running out</div>
+      <div class="countdown-value gray" id="daysLeft">1,018 days</div>
     </div>
   </div>
 
@@ -939,18 +1186,90 @@
     </div>
   </section>
 
-  <!-- Section: We've Done This Before -->
+  <section class="two-futures-section">
+    <div class="section-header">
+      <h2 class="section-title">two futures. same moment.</h2>
+    </div>
+
+    <div class="flip-cards-container">
+      <article class="flip-card end-card" id="homeEndCard" role="button" tabindex="0" aria-label="Flip the end card" aria-pressed="false">
+        <div class="flip-card-face flip-card-front">
+          <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+          <div>
+            <p class="card-label">↓ the end</p>
+            <p class="card-eyebrow">THE END OF THE WORLD</p>
+            <h3 class="card-title">the end.</h3>
+            <p class="card-teaser">"Things are not fine. Let's start there."</p>
+          </div>
+          <p class="card-label">↓ that isn't the whole story</p>
+        </div>
+
+        <div class="flip-card-face flip-card-back">
+          <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+          <p class="card-eyebrow">↑ the end</p>
+          <h3 class="card-back-headline">Things are not fine. Let's start there.</h3>
+          <p class="card-back-copy">Three crises. Each accelerating. Each making the others worse. The people who should be fixing it are arguing about whether it's real. This is not a moment for small ideas or managed decline.</p>
+          <p class="card-back-copy">And yet.</p>
+          <p class="card-back-copy">Most people are trying to slow the descent. Small ideas. Making the inevitable a little less bad.</p>
+          <p class="card-back-copy">That's not what we're doing.</p>
+          <p class="card-separator">─ ─ ─</p>
+          <button class="card-flip-link" id="homeToBegin" type="button">NOW SEE THE OTHER SIDE →</button>
+        </div>
+      </article>
+
+      <article class="flip-card begin-card" id="homeBeginCard" role="button" tabindex="0" aria-label="Flip the beginning card" aria-pressed="false">
+        <div class="flip-card-face flip-card-front">
+          <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+          <div>
+            <p class="card-label">↓ the beginning</p>
+            <p class="card-eyebrow">THE BEGINNING OF UTOPIA</p>
+            <h3 class="card-title">the beginning.</h3>
+            <p class="card-teaser">"We're building the beginning."</p>
+          </div>
+          <p class="card-label">↓ there's another side</p>
+        </div>
+
+        <div class="flip-card-face flip-card-back">
+          <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
+          <p class="card-eyebrow">↓ the beginning</p>
+          <h3 class="card-back-headline">We're building the beginning.</h3>
+          <p class="card-back-copy">The last time everything broke at once, we chose to act. Not manage. Not adapt. Act. We mobilized. Built a new economy overnight. Put millions of people to work in great jobs. Defeated fascism. Not because it was easy. Because we committed.</p>
+          <p class="card-back-copy">Time to do it again. A clean economy creates good jobs. Good jobs kills desperation. Desperation dead means fascism starved. Fascism starved means climate policy survives.</p>
+          <p class="card-back-copy">Connected problems. Connected solutions. One plan. The window is 2029.</p>
+          <button class="card-flip-link" id="homeToEnd" type="button">← SEE WHAT WE'RE UP AGAINST</button>
+        </div>
+      </article>
+
+      <p class="pivot-line">The end of the world and the beginning of utopia are the same moment. Which one you get depends entirely on what you decide to do next.</p>
+    </div>
+  </section>
+
+  <!-- Section: Mission for America CTA -->
   <section class="section">
-    <h2 class="section-head">we've done this before. and we're doing it again.</h2>
+    <h2 class="section-head">The Mission for America.</h2>
     <div class="section-body">
       <p>
-        Last time the apocalypse came knocking, we built a new economy. Defeated fascism. Created the middle class. Whole new industries overnight. Millions of unemployed trained into high-paying jobs.
+        The full plan. 20+ chapters. Every sector. If you read one thing, make it this. (It's long. Sorry.)
+      </p>
+      <div class="mission-cta-actions">
+        <a href="https://www.newconsensus.com/read" class="cta mission-cta-btn" target="_blank" rel="noopener noreferrer">read the plan →</a>
+        <a href="/join" class="cta mission-cta-btn">sign up to serve →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: We've Done This Before -->
+  <section class="section">
+    <h2 class="section-head">we've done this before</h2>
+    <div class="section-body">
+      <p>
+        Last time the apocalypse came knocking, we built a new economy. Defeated fascism. Created the middle class. Whole industries overnight. Millions of unemployed trained into jobs that actually paid.
       </p>
       <p>
         We didn't have to. We chose to.
       </p>
       <p>
-        We wrote the Green New Deal. Now we're writing the Mission for America. A new president takes office in 2029. The plan is being written now.
+        We can do it again. The window is 2029. We're writing the break-glass plan now — the Mission for America.
       </p>
       <p>
         <strong>Serve in the 2029 Mission for America administration →</strong>
@@ -1038,7 +1357,10 @@
       day: '2-digit', 
       year: 'numeric' 
     }).replace(/\//g, '.');
-    document.getElementById('currentDate').textContent = dateStr;
+    const currentDateEl = document.getElementById('currentDate');
+    if (currentDateEl) {
+      currentDateEl.textContent = dateStr;
+    }
 
     function getDaysRemaining() {
       const inauguration = new Date('2029-01-20');
@@ -1176,6 +1498,101 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAll();
       });
+    })();
+
+    (function setupHomeFlipCards() {
+      const endCard = document.getElementById('homeEndCard');
+      const beginCard = document.getElementById('homeBeginCard');
+      const toBegin = document.getElementById('homeToBegin');
+      const toEnd = document.getElementById('homeToEnd');
+      if (!endCard || !beginCard) return;
+
+      function updateAria() {
+        endCard.setAttribute('aria-pressed', endCard.classList.contains('flipped') ? 'true' : 'false');
+        beginCard.setAttribute('aria-pressed', beginCard.classList.contains('flipped') ? 'true' : 'false');
+      }
+
+      function setDimState() {
+        const endFlipped = endCard.classList.contains('flipped');
+        const beginFlipped = beginCard.classList.contains('flipped');
+
+        endCard.classList.remove('dimmed');
+        beginCard.classList.remove('dimmed');
+
+        if (endFlipped && !beginFlipped) {
+          beginCard.classList.add('dimmed');
+        } else if (beginFlipped && !endFlipped) {
+          endCard.classList.add('dimmed');
+        }
+      }
+
+      function toggleCard(card, other) {
+        if (card.classList.contains('flipped')) {
+          card.classList.remove('flipped');
+          other.classList.remove('dimmed');
+        } else {
+          card.classList.add('flipped');
+          other.classList.remove('flipped');
+        }
+        setDimState();
+        updateAria();
+      }
+
+      function addKeyboardFlip(card, other) {
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleCard(card, other);
+          }
+        });
+      }
+
+      endCard.addEventListener('click', function (e) {
+        if (e.target.closest('.card-flip-link')) return;
+        toggleCard(endCard, beginCard);
+      });
+
+      beginCard.addEventListener('click', function (e) {
+        if (e.target.closest('.card-flip-link')) return;
+        toggleCard(beginCard, endCard);
+      });
+
+      addKeyboardFlip(endCard, beginCard);
+      addKeyboardFlip(beginCard, endCard);
+
+      if (toBegin) {
+        toBegin.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          endCard.classList.remove('flipped');
+          beginCard.classList.remove('flipped');
+          endCard.classList.add('dimmed');
+          beginCard.classList.remove('dimmed');
+          setTimeout(function () {
+            beginCard.classList.add('flipped');
+            setDimState();
+            updateAria();
+          }, 260);
+        });
+      }
+
+      if (toEnd) {
+        toEnd.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          endCard.classList.remove('flipped');
+          beginCard.classList.remove('flipped');
+          beginCard.classList.add('dimmed');
+          endCard.classList.remove('dimmed');
+          setTimeout(function () {
+            endCard.classList.add('flipped');
+            setDimState();
+            updateAria();
+          }, 260);
+        });
+      }
+
+      updateAria();
     })();
   </script>
 
