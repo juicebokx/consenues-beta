@@ -254,9 +254,8 @@
     const p = normalizePath(pathname);
     return {
       tripocalypse: p === '/tripocalypse',
-      projects: p === '/projects' || p === '/fish-tank' || p === '/crashlab' || p === '/wont-get-fooled-again-act' || p === '/cost-of-waiting' || p === '/bigsim' || p === '/ai-convening' || p === '/abundance-101' || p === '/nc-news',
+      projects: p === '/projects' || p === '/crashlab' || p === '/wont-get-fooled-again-act' || p === '/cost-of-waiting' || p === '/bigsim' || p === '/ai-convening' || p === '/abundance-101' || p === '/nc-news',
       projectsMain: p === '/projects',
-      fishTank: p === '/fish-tank',
       crashlab: p === '/crashlab',
       wgfaa: p === '/wont-get-fooled-again-act',
       costOfWaiting: p === '/cost-of-waiting',
@@ -302,7 +301,7 @@
         Projects <span class="dropdown-arrow">&#9660;</span>
       </button>
       <div class="nav-dropdown-menu">
-        <a href="/fish-tank" class="nav-dropdown-item${flags.fishTank ? ' active' : ''}">Fish Tank</a>
+        <a href="/projects" class="nav-dropdown-item${flags.projectsMain ? ' active' : ''}">Fish Tank</a>
         <a href="/crashlab" class="nav-dropdown-item${flags.crashlab ? ' active' : ''}">CrashLab</a>
         <a href="/wont-get-fooled-again-act" class="nav-dropdown-item${flags.wgfaa ? ' active' : ''}">The Won't Get Fooled Again Act</a>
         <a href="/cost-of-waiting" class="nav-dropdown-item${flags.costOfWaiting ? ' active' : ''}">The Cost of Waiting</a>
