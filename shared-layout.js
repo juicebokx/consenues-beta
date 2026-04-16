@@ -376,11 +376,10 @@
       mission: p === '/the-mission',
       evidence: p === '/mission-for-america',
       bigIdea: p === '/the-big-idea',
-      intel: p === '/library' || p === '/blog' || p === '/press',
       library: p === '/library',
       blog: p === '/blog',
       press: p === '/press',
-      about: p === '/team' || p === '/jobs' || p === '/contact',
+      about: p === '/team' || p === '/jobs' || p === '/contact' || p === '/library' || p === '/blog' || p === '/press',
       team: p === '/team',
       jobs: p === '/jobs',
       contact: p === '/contact'
@@ -411,16 +410,6 @@
       </div>
     </div>
     <div class="nav-dropdown">
-      <button class="nav-link nav-dropdown-trigger${flags.intel ? ' active' : ''}" aria-expanded="false" aria-haspopup="true" type="button">
-        Intel <span class="dropdown-arrow">&#9660;</span>
-      </button>
-      <div class="nav-dropdown-menu">
-        <a href="/library" class="nav-dropdown-item${flags.library ? ' active' : ''}">Library</a>
-        <a href="/blog" class="nav-dropdown-item${flags.blog ? ' active' : ''}">Blog</a>
-        <a href="/press" class="nav-dropdown-item${flags.press ? ' active' : ''}">Press</a>
-      </div>
-    </div>
-    <div class="nav-dropdown">
       <button class="nav-link nav-dropdown-trigger${flags.about ? ' active' : ''}" aria-expanded="false" aria-haspopup="true" type="button">
         About <span class="dropdown-arrow">&#9660;</span>
       </button>
@@ -428,6 +417,9 @@
         <a href="/team" class="nav-dropdown-item${flags.team ? ' active' : ''}">Team</a>
         <a href="/jobs" class="nav-dropdown-item${flags.jobs ? ' active' : ''}">Jobs</a>
         <a href="/contact" class="nav-dropdown-item${flags.contact ? ' active' : ''}">Contact</a>
+        <a href="/library" class="nav-dropdown-item${flags.library ? ' active' : ''}">Library</a>
+        <a href="/blog" class="nav-dropdown-item${flags.blog ? ' active' : ''}">Blog</a>
+        <a href="/press" class="nav-dropdown-item${flags.press ? ' active' : ''}">Press</a>
       </div>
     </div>
     <a href="/#join" class="nav-cta">Start serving</a>
