@@ -1,8 +1,14 @@
-// CMS Wire
+// CMS Wire — version-gated to prevent twitch on reload
 fetch('/content/homepage.json').then(r=>r.json()).then(d=>{
-  const s=(q,v)=>{const e=document.querySelector(q);if(e&&e.textContent.trim()!==(v||'').trim())e.textContent=v};
-  const h=(q,v)=>{const e=document.querySelector(q);if(e&&e.getAttribute('href')!==v)e.href=v};
-  const g=(els,i,v)=>{if(els[i]&&els[i].textContent.trim()!==(v||'').trim())els[i].textContent=v};
+  const v = d._v || '0';
+  const key = 'cms_v';
+  if (localStorage.getItem(key) === v) return; // same version, skip all writes
+  localStorage.setItem(key, v);
+
+  const s=(q,val)=>{const e=document.querySelector(q);if(e&&e.textContent.trim()!==(val||'').trim())e.textContent=val};
+  const h=(q,val)=>{const e=document.querySelector(q);if(e&&e.getAttribute('href')!==val)e.href=val};
+  const g=(els,i,val)=>{if(els[i]&&els[i].textContent.trim()!==(val||'').trim())els[i].textContent=val};
+
   s('.hero-eyebrow',d.hero_eyebrow);
   s('.hero-headline',d.hero_headline);
   s('.hero-subhead',d.hero_subhead);
