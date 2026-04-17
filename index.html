@@ -842,6 +842,31 @@
       color: var(--gray-200);
     }
 
+    .card-tap-hint {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--gray-600);
+      transition: opacity 0.4s ease;
+    }
+    .card-tap-hint .tap-arrow {
+      display: inline-block;
+      animation: tapBounce 1.6s ease-in-out infinite;
+    }
+    @keyframes tapBounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(4px); }
+    }
+    .flip-card.flipped .card-tap-hint,
+    .flip-card.hinted .card-tap-hint {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .card-back-headline {
       margin: 2px 0 2px;
       font-size: clamp(24px, 3vw, 34px);
@@ -1342,6 +1367,7 @@
             <p class="card-eyebrow">THE END OF THE WORLD</p>
             <h3 class="card-title">the end.</h3>
             <p class="card-teaser">Things are not fine. Let's start there.</p>
+            <p class="card-tap-hint">tap to flip <span class="tap-arrow">→</span></p>
           </div>
         </div>
 
@@ -1364,6 +1390,7 @@
             <p class="card-eyebrow">THE BEGINNING OF UTOPIA</p>
             <h3 class="card-title">the beginning.</h3>
             <p class="card-teaser">We're building the beginning.</p>
+            <p class="card-tap-hint">tap to flip <span class="tap-arrow">→</span></p>
           </div>
         </div>
 
@@ -1634,6 +1661,7 @@
           other.classList.remove('dimmed');
         } else {
           card.classList.add('flipped');
+          card.classList.add('hinted');
           other.classList.remove('flipped');
         }
         setDimState();
