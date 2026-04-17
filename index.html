@@ -723,9 +723,9 @@
 
     .flip-card {
       position: relative;
-      min-height: 560px;
+      min-height: 0;
       transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease, filter 0.3s ease;
+      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), height 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease, filter 0.3s ease;
       cursor: pointer;
       outline: none;
     }
@@ -751,11 +751,11 @@
       border: 1px solid var(--gray-700);
       border-top-width: 2px;
       border-radius: 12px;
-      padding: 28px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      gap: 20px;
+      justify-content: flex-start;
+      gap: 0;
       background: linear-gradient(150deg, var(--flip-face-grad-start), var(--flip-face-grad-end));
       overflow: hidden;
     }
@@ -763,7 +763,7 @@
     .flip-card-back {
       transform: rotateY(180deg);
       justify-content: flex-start;
-      gap: 14px;
+      gap: 8px;
     }
 
     .flip-card.end-card .flip-card-face {
@@ -1214,7 +1214,7 @@
       }
 
       .flip-card {
-        min-height: 530px;
+        min-height: 0;
       }
 
       .flip-card-face {
@@ -1618,6 +1618,16 @@
         }
       }
 
+      function syncHeight(card) {
+        const isFlipped = card.classList.contains('flipped');
+        const face = card.querySelector(isFlipped ? '.flip-card-back' : '.flip-card-front');
+        face.style.position = 'relative';
+        face.style.inset = 'auto';
+        card.style.height = face.offsetHeight + 'px';
+        face.style.position = '';
+        face.style.inset = '';
+      }
+
       function toggleCard(card, other) {
         if (card.classList.contains('flipped')) {
           card.classList.remove('flipped');
@@ -1628,6 +1638,8 @@
         }
         setDimState();
         updateAria();
+        syncHeight(card);
+        syncHeight(other);
       }
 
       function addKeyboardFlip(card, other) {
@@ -1664,6 +1676,8 @@
             beginCard.classList.add('flipped');
             setDimState();
             updateAria();
+            syncHeight(endCard);
+            syncHeight(beginCard);
           }, 260);
         });
       }
@@ -1680,11 +1694,15 @@
             endCard.classList.add('flipped');
             setDimState();
             updateAria();
+            syncHeight(endCard);
+            syncHeight(beginCard);
           }, 260);
         });
       }
 
       updateAria();
+      syncHeight(endCard);
+      syncHeight(beginCard);
     })();
   </script>
 
