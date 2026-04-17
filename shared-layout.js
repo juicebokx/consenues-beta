@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 900;
+    z-index: 920;
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
@@ -141,6 +141,183 @@
 
   .nav-cta:hover {
     color: var(--red-300, #fbff9e);
+  }
+
+  /* ============================================
+     MOBILE NAV: HAMBURGER + DRAWER
+  ============================================ */
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    margin: -8px;
+    cursor: pointer;
+    color: #ffffff;
+    z-index: 920;
+  }
+
+  .nav-hamburger-bars {
+    display: block;
+    width: 22px;
+    height: 14px;
+    position: relative;
+  }
+
+  .nav-hamburger-bars::before,
+  .nav-hamburger-bars::after,
+  .nav-hamburger-bars span {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+  }
+
+  .nav-hamburger-bars::before { top: 0; }
+  .nav-hamburger-bars span    { top: 6px; }
+  .nav-hamburger-bars::after  { top: 12px; }
+
+  .nav-hamburger[aria-expanded="true"] .nav-hamburger-bars::before {
+    top: 6px;
+    transform: rotate(45deg);
+  }
+  .nav-hamburger[aria-expanded="true"] .nav-hamburger-bars span {
+    opacity: 0;
+  }
+  .nav-hamburger[aria-expanded="true"] .nav-hamburger-bars::after {
+    top: 6px;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0a0a0a;
+    z-index: 910;
+    padding: 80px 24px 40px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-menu-body {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-menu-link {
+    display: block;
+    padding: 16px 0;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    text-decoration: none;
+    border-bottom: 1px solid #1a1a1a;
+    transition: color 0.15s ease;
+  }
+
+  .mobile-menu-link:hover,
+  .mobile-menu-link.active {
+    color: var(--red-400, #f7ff70);
+  }
+
+  .mobile-menu-group {
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .mobile-menu-group-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .mobile-menu-group-trigger .chev {
+    font-size: 12px;
+    color: #707070;
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-menu-group.open .mobile-menu-group-trigger .chev {
+    transform: rotate(180deg);
+  }
+
+  .mobile-menu-group-items {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .mobile-menu-group.open .mobile-menu-group-items {
+    max-height: 600px;
+  }
+
+  .mobile-menu-sublink {
+    display: block;
+    padding: 12px 0 12px 16px;
+    color: #909090;
+    font-size: 15px;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .mobile-menu-sublink:last-child {
+    padding-bottom: 20px;
+  }
+
+  .mobile-menu-sublink:hover,
+  .mobile-menu-sublink.active {
+    color: #ffffff;
+  }
+
+  .mobile-menu-cta {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 28px;
+    background: var(--red-400, #f7ff70);
+    color: #0a0a0a;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: lowercase;
+    text-decoration: none;
+    border-radius: 100px;
+    align-self: flex-start;
+  }
+
+  body.mobile-menu-lock {
+    overflow: hidden;
   }
 
   .footer {
@@ -314,32 +491,8 @@
       display: none;
     }
 
-    .nav-dropdown-menu {
-      position: static;
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0 0 0 16px;
-      opacity: 1;
-      visibility: hidden;
-      transform: none;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease, visibility 0.2s;
-    }
-
-    .nav-dropdown.open .nav-dropdown-menu {
-      visibility: visible;
-      max-height: 200px;
-    }
-
-    .nav-dropdown:hover .nav-dropdown-menu {
-      opacity: 1;
-      visibility: hidden;
-    }
-
-    .nav-dropdown.open .nav-dropdown-menu {
-      visibility: visible;
+    .nav-hamburger {
+      display: inline-flex;
     }
 
     .footer {
@@ -424,7 +577,48 @@
     </div>
     <a href="/#join" class="nav-cta">Start serving</a>
   </div>
-</nav>`;
+  <button class="nav-hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span class="nav-hamburger-bars"><span></span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu-body">
+    <a class="mobile-menu-link${flags.tripocalypse ? ' active' : ''}" href="/tripocalypse">The Tripocalypse</a>
+    <a class="mobile-menu-link${flags.evidence ? ' active' : ''}" href="/mission-for-america">The Mission</a>
+
+    <div class="mobile-menu-group${flags.projects ? ' open' : ''}">
+      <button class="mobile-menu-group-trigger" type="button" aria-expanded="${flags.projects ? 'true' : 'false'}">
+        Projects <span class="chev">&#9660;</span>
+      </button>
+      <div class="mobile-menu-group-items">
+        <a href="/projects" class="mobile-menu-sublink${flags.projectsMain ? ' active' : ''}">Fish Tank</a>
+        <a href="/crashlab" class="mobile-menu-sublink${flags.crashlab ? ' active' : ''}">CrashLab</a>
+        <a href="/wont-get-fooled-again-act" class="mobile-menu-sublink${flags.wgfaa ? ' active' : ''}">The Won't Get Fooled Again Act</a>
+        <a href="/cost-of-waiting" class="mobile-menu-sublink${flags.costOfWaiting ? ' active' : ''}">The Cost of Waiting</a>
+        <a href="/bigsim" class="mobile-menu-sublink${flags.bigsim ? ' active' : ''}">BigSim</a>
+        <a href="/ai-convening" class="mobile-menu-sublink${flags.aiConvening ? ' active' : ''}">2026 AI Convening</a>
+        <a href="/abundance-101" class="mobile-menu-sublink${flags.abundance101 ? ' active' : ''}">Class: REAL Abundance 101</a>
+        <a href="/nc-news" class="mobile-menu-sublink${flags.ncNews ? ' active' : ''}">NC News</a>
+      </div>
+    </div>
+
+    <div class="mobile-menu-group${flags.about ? ' open' : ''}">
+      <button class="mobile-menu-group-trigger" type="button" aria-expanded="${flags.about ? 'true' : 'false'}">
+        About <span class="chev">&#9660;</span>
+      </button>
+      <div class="mobile-menu-group-items">
+        <a href="/team" class="mobile-menu-sublink${flags.team ? ' active' : ''}">Team</a>
+        <a href="/jobs" class="mobile-menu-sublink${flags.jobs ? ' active' : ''}">Jobs</a>
+        <a href="/press" class="mobile-menu-sublink${flags.press ? ' active' : ''}">Press</a>
+        <a href="/library" class="mobile-menu-sublink${flags.library ? ' active' : ''}">Library</a>
+        <a href="/blog" class="mobile-menu-sublink${flags.blog ? ' active' : ''}">Blog</a>
+        <a href="/contact" class="mobile-menu-sublink${flags.contact ? ' active' : ''}">Contact</a>
+      </div>
+    </div>
+
+    <a href="/#join" class="mobile-menu-cta">Start serving</a>
+  </div>
+</div>`;
   }
 
   function buildFooter() {
@@ -523,6 +717,51 @@
     });
   }
 
+  function setupMobileMenu() {
+    const hamburger = document.querySelector('.nav-hamburger');
+    const menu = document.getElementById('mobile-menu');
+    if (!hamburger || !menu) return;
+
+    function setOpen(open) {
+      menu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.classList.toggle('mobile-menu-lock', open);
+    }
+
+    hamburger.addEventListener('click', () => {
+      setOpen(!menu.classList.contains('open'));
+    });
+
+    menu.querySelectorAll('.mobile-menu-link, .mobile-menu-sublink, .mobile-menu-cta').forEach((a) => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+
+    menu.querySelectorAll('.mobile-menu-group').forEach((group) => {
+      const trigger = group.querySelector('.mobile-menu-group-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const willOpen = !group.classList.contains('open');
+        group.classList.toggle('open', willOpen);
+        trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        setOpen(false);
+        hamburger.focus();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && menu.classList.contains('open')) {
+        setOpen(false);
+      }
+    });
+  }
+
   function injectPanicButton() {
     // If this page already has its own panic button, leave it alone.
     if (document.querySelector('.panic-btn')) return;
@@ -607,6 +846,7 @@
     if (footerHost) footerHost.innerHTML = buildFooter();
 
     setupNavDropdown();
+    setupMobileMenu();
     injectPanicButton();
   }
 
