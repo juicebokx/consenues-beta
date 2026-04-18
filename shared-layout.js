@@ -364,6 +364,24 @@
     color: #ffffff;
   }
 
+  .footer-social {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .footer-social-link {
+    color: #707070;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s ease;
+  }
+
+  .footer-social-link:hover {
+    color: #ffffff;
+  }
+
   .footer-copy {
     width: 100%;
     padding-top: 40px;
@@ -636,7 +654,14 @@
     <a href="https://blog.newconsensus.com" class="footer-link" target="_blank" rel="noopener noreferrer">blog</a>
     <a href="/projects" class="footer-link">projects</a>
     <a href="/jobs" class="footer-link">jobs</a>
-    <a href="https://x.com/newconsensus" class="footer-link" target="_blank" rel="noopener noreferrer">twitter</a>
+  </div>
+  <div class="footer-social">
+    <a href="https://x.com/newconsensus" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+    </a>
+    <a href="https://blog.newconsensus.com" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Substack">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+    </a>
   </div>
   <div class="footer-copy">
     © 2026 New Consensus. All rights reserved. (Assuming there's still a world to reserve rights in.)
