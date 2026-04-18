@@ -689,7 +689,7 @@
     </nav>
   </div>
   <div class="footer-copy">
-    © 2026 New Consensus. All rights reserved. · <a href="/privacy" class="footer-copy-link">Privacy Policy</a>
+    © 2026 New Consensus. All rights reserved.
   </div>
 </footer>`;
   }
