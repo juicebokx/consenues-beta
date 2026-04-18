@@ -962,6 +962,8 @@
       border: 1px solid var(--border-white-08);
       padding: 28px;
       transition: all var(--transition-med);
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
@@ -1030,7 +1032,8 @@
       font-size: 13px;
       color: var(--accent);
       display: inline-block;
-      margin-top: 28px;
+      margin-top: auto;
+      padding-top: 28px;
     }
 
     @media (max-width: 900px) {
@@ -1441,7 +1444,7 @@
     </div>
     <div class="section-body" style="margin-top: 28px;">
       <p>
-        <a href="/projects" class="cta cta-primary">see everything we're building →</a>
+        <a href="/projects" class="project-link">see everything we're building →</a>
       </p>
     </div>
   </section>
