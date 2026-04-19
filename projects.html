@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — New Consensus</title>
-  <meta name="description" content="What we're building at New Consensus. Catch all 8 projects in the fish tank to unlock the origin story.">
+  <meta name="description" content="The projects at New Consensus. One emergency, every tool we have.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -224,6 +224,48 @@
       .tank { min-height: 400px; }
     }
 
+    /* ── CONNECTIVE TISSUE ── */
+    .connective-section {
+      padding: 72px 40px;
+      border-top: 1px solid var(--gray-800);
+      max-width: 860px;
+    }
+
+    .connective-headline {
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+
+    .connective-body {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--gray-300);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .connective-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--red-300);
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .connective-cta:hover {
+      color: var(--red-400);
+      border-color: var(--red-400);
+    }
+
     /* ── PROJECT CARDS ── */
     .projects-section {
       padding: 64px 40px 80px;
@@ -292,7 +334,48 @@
       color: var(--red-400);
     }
 
+    .project-card-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      border: 1px solid var(--gray-800);
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 4px;
+    }
+
+    .past-projects-section {
+      border-top: 1px solid var(--gray-800);
+    }
+
+    .past-projects-intro {
+      font-size: 14px;
+      color: var(--gray-500);
+      font-style: italic;
+      margin-bottom: 32px;
+      margin-top: -16px;
+    }
+
+    .project-card-past {
+      opacity: 0.75;
+    }
+
+    .project-card-past:hover {
+      opacity: 1;
+    }
+
     @media (max-width: 768px) {
+      .connective-section { padding: 48px 24px; }
       .projects-section { padding: 48px 24px 60px; }
       .projects-grid { grid-template-columns: 1fr; }
     }
@@ -309,8 +392,8 @@
   <main class="page-wrap">
     <section class="hero">
       <p class="hero-eyebrow">what we're building</p>
-      <h1 class="hero-headline">Six projects. One emergency.</h1>
-      <p class="hero-subhead">Catch all 8 fish to unlock the origin story. <em>(yes, this is how we do project pages)</em></p>
+      <h1 class="hero-headline">The Projects</h1>
+      <p class="hero-subhead">The think tank has a fish tank. The fish tank has the plan. The plan is going to save the world. The fish are just here for moral support.</p>
     </section>
 
     <section class="tank-section">
@@ -320,71 +403,95 @@
 
         <div class="tank-ui">
           <div class="tank-instruction">click the water to cast 🎣</div>
-          <div class="progress-wrap">
-            <div class="progress-count" id="progressCount">0/8 projects caught</div>
-            <div class="progress-icons" id="progressIcons"></div>
-          </div>
         </div>
 
         <div class="fish-layer" id="fishLayer"></div>
-
-        <div class="completion-banner" id="completionBanner">
-          <p class="completion-text">you caught all 8. nice.</p>
-          <a href="#lore" class="completion-btn" id="buildBtn">now help us build the real thing. -></a>
-        </div>
       </div>
     </section>
 
+    <!-- SLOT 2: CONNECTIVE TISSUE -->
+    <section class="connective-section">
+      <h2 class="connective-headline">one emergency. every tool we have.</h2>
+      <p class="connective-body">CrashLab models the collapse. BigSim tests whether the fix works. The Won't Get Fooled Again Act handles the financial wreckage. The Cost of Waiting explains why we can't just wait and see. The Convening gets the right people in the room before it's too late. The Mission for America is what you deploy when you finally have the power to deploy it.</p>
+      <p class="connective-body">Every project on this page is a piece of the same plan. The window is 2029. We're building now.</p>
+      <a href="/#join" class="connective-cta">sign up to serve →</a>
+    </section>
+
+    <!-- SLOT 3: CURRENT PROJECTS -->
     <section class="projects-section">
-      <p class="projects-section-label">all projects</p>
+      <p class="projects-section-label">current projects</p>
       <div class="projects-grid">
 
         <div class="project-card">
+          <span class="project-tag">the plan</span>
           <div class="project-card-title">Mission for America</div>
-          <p class="project-card-desc">The plan. 23 chapters of real policy for rebuilding the American economy. What Project 2025 would look like if it were written by people who actually want to govern.</p>
-          <a class="project-card-link" href="https://www.newconsensus.com/read" target="_blank" rel="noopener noreferrer">enter the plan →</a>
+          <p class="project-card-desc">The whole plan. 20+ chapters, every sector. What a WWII-scale mobilization actually looks like when someone finally writes it down. If you read one thing, make it this. It's long. Sorry.</p>
+          <a class="project-card-link" href="https://newconsensus.com/read" target="_blank" rel="noopener noreferrer">read the plan →</a>
         </div>
 
         <div class="project-card">
+          <span class="project-tag">the simulator</span>
           <div class="project-card-title">CrashLab</div>
-          <p class="project-card-desc">Open-source economic simulator. Model how AI-driven automation transforms the economy and test policy responses in real time.</p>
-          <a class="project-card-link" href="https://crashlab.org/" target="_blank" rel="noopener noreferrer">launch CrashLab →</a>
+          <p class="project-card-desc">We model AI-driven unemployment until the economy breaks. Digitally. Then we figure out what stops it. Then we do it again. The goal is to break it on a screen before it breaks in real life.</p>
+          <a class="project-card-link" href="https://crashlab.org/" target="_blank" rel="noopener noreferrer">explore CrashLab →</a>
         </div>
 
         <div class="project-card">
-          <div class="project-card-title">BigSim</div>
-          <p class="project-card-desc">Agent-based economy simulator. Watch thousands of simulated workers, firms, and governments interact. Built for movements, politicians, and researchers.</p>
-          <a class="project-card-link" href="https://sim.newconsensus.ai/" target="_blank" rel="noopener noreferrer">explore BigSim →</a>
+          <span class="project-tag">the law</span>
+          <div class="project-card-title">The Won't Get Fooled Again Act</div>
+          <p class="project-card-desc">The AI bubble is going to burst. When it does, Washington's instinct will be to write a very large check to the people who caused it. This is the law we're writing to make sure that doesn't happen again.</p>
+          <a class="project-card-link" href="https://newconsensus.com/projects/wgfaa" target="_blank" rel="noopener noreferrer">read the act →</a>
         </div>
 
         <div class="project-card">
-          <div class="project-card-title">NC Book Club</div>
-          <p class="project-card-desc">Read the books that shaped the movement. Discuss them with people who actually want to build something.</p>
-          <a class="project-card-link" href="https://www.newconsensus.com/library" target="_blank" rel="noopener noreferrer">join the book club →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-card-title">Won't Get Fooled Again Act</div>
-          <p class="project-card-desc">A framework for converting failed banks and AI companies into mission-driven public institutions. No more bailouts without accountability.</p>
-          <a class="project-card-link" href="https://www.newconsensus.com/projects/wgfaa" target="_blank" rel="noopener noreferrer">read the framework →</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-card-title">Abundance 101</div>
-          <p class="project-card-desc">How to build an abundant, fair, and clean world economy for all — in a single generation. Dozens of nations have done this before.</p>
-          <a class="project-card-link" href="https://www.newconsensus.com/projects/abundance-101" target="_blank" rel="noopener noreferrer">take the class →</a>
-        </div>
-
-        <div class="project-card">
+          <span class="project-tag">the math</span>
           <div class="project-card-title">The Cost of Waiting</div>
-          <p class="project-card-desc">What's the cost of not acting on the economy right now? The answer will make you uncomfortable.</p>
+          <p class="project-card-desc">Every year we don't act costs trillions. We did the math. We wish we hadn't. Here it is anyway.</p>
           <a class="project-card-link" href="https://thecostofwaiting.org/" target="_blank" rel="noopener noreferrer">see the cost →</a>
         </div>
 
         <div class="project-card">
+          <span class="project-tag">the model</span>
+          <div class="project-card-title">BigSim</div>
+          <p class="project-card-desc">An agent-based economic model so policymakers can test ideas before deploying them on actual humans. Somehow this doesn't exist yet. We're building it.</p>
+          <a class="project-card-link" href="https://sim.newconsensus.ai/" target="_blank" rel="noopener noreferrer">explore BigSim →</a>
+        </div>
+
+        <div class="project-card">
+          <span class="project-tag">the room</span>
           <div class="project-card-title">2026 AI Convening</div>
-          <p class="project-card-desc">We're assembling a group to meticulously work through the consequences of the AI revolution under different policy responses.</p>
-          <a class="project-card-link" href="https://www.newconsensus.com/projects/ai-convening" target="_blank" rel="noopener noreferrer">learn more →</a>
+          <p class="project-card-desc">Getting the people who'll actually have to govern through the AI crisis in a room to war-game it before it happens. Turns out you can prepare for things. Wild concept.</p>
+          <a class="project-card-link" href="https://newconsensus.com/projects/ai-convening" target="_blank" rel="noopener noreferrer">learn more →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SLOT 4: PAST PROJECTS -->
+    <section class="projects-section past-projects-section">
+      <p class="projects-section-label">past projects</p>
+      <p class="past-projects-intro">Where it started. Still worth reading.</p>
+      <div class="projects-grid">
+
+        <div class="project-card project-card-past">
+          <div class="project-card-title">The Green New Deal</div>
+          <p class="project-card-desc">A WWII-scale mobilization to fix America's most pressing economic and environmental problems. Where it all began. We wrote it. They talked about it for years. Now we're writing the sequel.</p>
+          <a class="project-card-link" href="https://newconsensus.com/projects/the-green-new-deal" target="_blank" rel="noopener noreferrer">read it →</a>
+        </div>
+
+        <div class="project-card project-card-past">
+          <div class="project-card-title">No More Bailouts</div>
+          <p class="project-card-desc">Our original plan for converting failed banks to public banks. The Won't Get Fooled Again Act is the updated version. This is the director's cut.</p>
+          <a class="project-card-link" href="https://newconsensus.com/projects/no-more-bailouts" target="_blank" rel="noopener noreferrer">read it →</a>
+        </div>
+
+        <div class="project-card project-card-past">
+          <div class="project-card-title">NC News</div>
+          <p class="project-card-desc">Local news from almost every country in the world with local perspective. An early experiment in what we could build. The fish weren't involved in this one.</p>
+          <div class="project-card-links">
+            <a class="project-card-link" href="https://news.newconsensus.com" target="_blank" rel="noopener noreferrer">web →</a>
+            <a class="project-card-link" href="https://apps.apple.com/us/app/nc-news/id6740434411" target="_blank" rel="noopener noreferrer">iPhone app →</a>
+          </div>
         </div>
 
       </div>
@@ -392,15 +499,6 @@
   </main>
 
   <div id="site-footer"></div>
-
-  <div class="project-modal" id="projectModal" aria-hidden="true">
-    <div class="project-card-modal">
-      <button class="modal-close" id="modalClose" aria-label="Close">x</button>
-      <h3 class="modal-title" id="modalTitle"></h3>
-      <p class="modal-desc" id="modalDesc"></p>
-      <a class="modal-cta" id="modalCta" href="#">learn more -></a>
-    </div>
-  </div>
 
   <div class="glitch-overlay" id="glitchOverlay">
     <button class="close-glitch" onclick="closeGlitch()">x ok I get it</button>
@@ -451,10 +549,7 @@
     }
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeGlitch();
-        hideModal();
-      }
+      if (e.key === 'Escape') closeGlitch();
     });
 
     const fishProjects = [
@@ -565,26 +660,8 @@
 
     const tankEl = document.getElementById('fishTank');
     const fishLayerEl = document.getElementById('fishLayer');
-    const progressCountEl = document.getElementById('progressCount');
-    const progressIconsEl = document.getElementById('progressIcons');
-    const completionBannerEl = document.getElementById('completionBanner');
-    const buildBtnEl = document.getElementById('buildBtn');
 
-    const modalEl = document.getElementById('projectModal');
-    const modalCloseEl = document.getElementById('modalClose');
-    const modalTitleEl = document.getElementById('modalTitle');
-    const modalDescEl = document.getElementById('modalDesc');
-    const modalCtaEl = document.getElementById('modalCta');
-
-    const loreSections = [
-      document.getElementById('lore'),
-      document.getElementById('principle')
-    ];
-
-    const caughtStoreKey = 'nc-about-fish-caught';
     let fishEntities = [];
-    let caughtIds = new Set();
-    let activeModalProject = null;
     let lastTick = performance.now();
 
     function initBubbles() {
@@ -606,65 +683,12 @@
       }
     }
 
-    function loadProgress() {
-      try {
-        const raw = localStorage.getItem(caughtStoreKey);
-        if (!raw) return;
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed)) {
-          caughtIds = new Set(parsed.filter((id) => fishProjects.some((p) => p.id === id)));
-        }
-      } catch (err) {
-        caughtIds = new Set();
-      }
-    }
-
-    function persistProgress() {
-      localStorage.setItem(caughtStoreKey, JSON.stringify(Array.from(caughtIds)));
-    }
-
-    function createProgressIcons() {
-      progressIconsEl.innerHTML = '';
-      fishProjects.forEach((project) => {
-        const icon = document.createElement('div');
-        icon.className = 'progress-icon';
-        icon.id = `icon-${project.id}`;
-        icon.textContent = project.short;
-        if (caughtIds.has(project.id)) {
-          icon.classList.add('caught');
-        }
-        progressIconsEl.appendChild(icon);
-      });
-      updateProgressCount();
-    }
-
-    function updateProgressCount() {
-      progressCountEl.textContent = `${caughtIds.size}/8 projects caught`;
-      if (caughtIds.size === fishProjects.length) {
-        unlockLore(true);
-      }
-    }
-
-    function unlockLore(withScroll) {
-      loreSections.forEach((section) => section.classList.remove('locked'));
-      completionBannerEl.classList.add('show');
-      if (withScroll) {
-        setTimeout(() => {
-          document.getElementById('lore').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 700);
-      }
-    }
-
     function spawnFish() {
       fishEntities = [];
       fishLayerEl.innerHTML = '';
       const rect = tankEl.getBoundingClientRect();
 
       fishProjects.forEach((project) => {
-        if (caughtIds.has(project.id)) {
-          return;
-        }
-
         const fish = new Fish(project, rect.width, rect.height);
         const fishEl = document.createElement('div');
         fishEl.className = `fish ${fish.size}`;
@@ -733,12 +757,7 @@
         const result = tryCatchFish(x, y);
         line.classList.add('reel');
 
-        if (result) {
-          setTimeout(() => {
-            presentProject(result.project);
-          }, 300);
-        }
-
+  
         setTimeout(() => line.remove(), 450);
       }, 420);
     }
@@ -766,64 +785,12 @@
 
       winner.caught = true;
       winner.el.classList.add('hooked');
-      setTimeout(() => {
-        winner.el.remove();
-      }, 520);
-
-      caughtIds.add(winner.id);
-      persistProgress();
-
-      const icon = document.getElementById(`icon-${winner.id}`);
-      if (icon) {
-        icon.classList.add('caught');
-      }
-
-      updateProgressCount();
+      setTimeout(() => winner.el.remove(), 520);
       return winner;
     }
 
-    function presentProject(project) {
-      activeModalProject = project;
-      modalTitleEl.textContent = project.title;
-      modalDescEl.textContent = project.description;
-      modalCtaEl.textContent = project.cta;
-      modalCtaEl.setAttribute('href', project.link);
-
-      if (project.link.startsWith('http')) {
-        modalCtaEl.setAttribute('target', '_blank');
-        modalCtaEl.setAttribute('rel', 'noopener noreferrer');
-      } else {
-        modalCtaEl.removeAttribute('target');
-        modalCtaEl.removeAttribute('rel');
-      }
-
-      modalEl.classList.add('show');
-      modalEl.setAttribute('aria-hidden', 'false');
-    }
-
-    function hideModal() {
-      activeModalProject = null;
-      modalEl.classList.remove('show');
-      modalEl.setAttribute('aria-hidden', 'true');
-    }
-
-    modalCloseEl.addEventListener('click', hideModal);
-    modalEl.addEventListener('click', (event) => {
-      if (event.target === modalEl) {
-        hideModal();
-      }
-    });
-
     tankEl.addEventListener('click', (event) => {
-      if (event.target.closest('.completion-banner')) {
-        return;
-      }
       castLine(event.clientX, event.clientY);
-    });
-
-    buildBtnEl.addEventListener('click', (event) => {
-      event.preventDefault();
-      document.getElementById('lore').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     function handleResize() {
@@ -836,14 +803,8 @@
 
     window.addEventListener('resize', handleResize);
 
-    loadProgress();
     initBubbles();
-    createProgressIcons();
     spawnFish();
-
-    if (caughtIds.size === fishProjects.length) {
-      unlockLore(false);
-    }
 
     requestAnimationFrame((ts) => {
       lastTick = ts;
