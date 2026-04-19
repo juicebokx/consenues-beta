@@ -593,14 +593,7 @@
     <a class="nav-link${flags.tripocalypse ? ' active' : ''}" href="/tripocalypse">The Tripocalypse</a>
     <a class="nav-link${flags.evidence ? ' active' : ''}" href="/mission-for-america">The Mission</a>
 
-    <div class="nav-dropdown">
-      <button class="nav-link nav-dropdown-trigger${flags.projects ? ' active' : ''}" aria-expanded="false" aria-haspopup="true" type="button">
-        Projects <span class="dropdown-arrow">&#9660;</span>
-      </button>
-      <div class="nav-dropdown-menu">
-        <a href="/projects" class="nav-dropdown-item${flags.projectsMain ? ' active' : ''}">Fish Tank</a>
-      </div>
-    </div>
+    <a class="nav-link${flags.projects ? ' active' : ''}" href="/projects">projects</a>
     <div class="nav-dropdown">
       <button class="nav-link nav-dropdown-trigger${flags.about ? ' active' : ''}" aria-expanded="false" aria-haspopup="true" type="button">
         About <span class="dropdown-arrow">&#9660;</span>
@@ -625,14 +618,7 @@
     <a class="mobile-menu-link${flags.tripocalypse ? ' active' : ''}" href="/tripocalypse">The Tripocalypse</a>
     <a class="mobile-menu-link${flags.evidence ? ' active' : ''}" href="/mission-for-america">The Mission</a>
 
-    <div class="mobile-menu-group${flags.projects ? ' open' : ''}">
-      <button class="mobile-menu-group-trigger" type="button" aria-expanded="${flags.projects ? 'true' : 'false'}">
-        Projects <span class="chev">&#9660;</span>
-      </button>
-      <div class="mobile-menu-group-items">
-        <a href="/projects" class="mobile-menu-sublink${flags.projectsMain ? ' active' : ''}">Fish Tank</a>
-      </div>
-    </div>
+    <a class="mobile-menu-link${flags.projects ? ' active' : ''}" href="/projects">projects</a>
 
     <div class="mobile-menu-group${flags.about ? ' open' : ''}">
       <button class="mobile-menu-group-trigger" type="button" aria-expanded="${flags.about ? 'true' : 'false'}">

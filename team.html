@@ -125,9 +125,93 @@
       color: var(--white);
     }
 
+    .text-section {
+      padding: 56px 40px;
+      border-top: 1px solid var(--gray-800);
+      max-width: 860px;
+    }
+
+    .text-section-headline {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+      text-transform: lowercase;
+    }
+
+    .text-section-body {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--gray-300);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .text-section-body:last-child {
+      margin-bottom: 0;
+    }
+
+    .team-section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+      padding: 56px 40px 0;
+    }
+
+    .contact-section {
+      padding: 56px 40px 80px;
+      border-top: 1px solid var(--gray-800);
+      max-width: 860px;
+    }
+
+    .contact-headline {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .contact-body {
+      font-size: 16px;
+      color: var(--gray-300);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-item {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--gray-400);
+    }
+
+    .contact-item a {
+      color: var(--red-300);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .contact-item a:hover {
+      color: var(--red-400);
+      border-color: var(--red-400);
+    }
+
     @media (max-width: 768px) {
       .page-hero { padding: 34px 24px; }
       .bio-vitals { grid-template-columns: 1fr; }
+      .text-section { padding: 40px 24px; }
+      .team-section-label { padding: 40px 24px 0; }
+      .contact-section { padding: 40px 24px 64px; }
     }
 </style>
 </head>
@@ -143,9 +227,28 @@
   <main class="page-wrap">
 
     <section class="page-hero">
-      <p class="hero-eyebrow">the people building it</p>
-      <h1 class="hero-headline">THE TEAM</h1>
+      <p class="hero-eyebrow">the team</p>
+      <h1 class="hero-headline">The People Building the Plan</h1>
+      <p class="hero-subhead">New Consensus is what happens when you get tired of think tanks that think but don't do anything.</p>
     </section>
+
+    <div class="text-section">
+      <h2 class="text-section-headline">what we do</h2>
+      <p class="text-section-body">We design comprehensive, detailed plans for governments to actually achieve economic renewal and transformation. Not vibes. Not white papers that die in someone's inbox. Actual plans.</p>
+      <p class="text-section-body">The tripocalypse — climate crisis, AI displacement, rising fascism — has the same root cause and the same solution. Rebuild the economy to solve all three simultaneously. We have everything we need to build that world in a single generation. The only thing stopping us is politics. Not physics. Politics.</p>
+      <p class="text-section-body">So we're fixing the politics part.</p>
+    </div>
+
+    <div class="text-section">
+      <h2 class="text-section-headline">why the old consensus sucks</h2>
+      <p class="text-section-body">The reigning economic consensus — the "Washington Consensus" — has been teaching world leaders to accept slow economic growth, stagnant wages, and gradual decline as "just how things are."</p>
+      <p class="text-section-body">We're done with that.</p>
+      <p class="text-section-body">A new consensus is rising. One that isn't afraid to think as big as the problems we face. We solve climate change, economic stagnation, and wealth gaps by proposing solutions modeled after mass economic mobilizations of the past. You know, when we actually built things.</p>
+      <p class="text-section-body">Like in 1942, when America retooled its entire economy in under three years because we had to.</p>
+      <p class="text-section-body">We're at that moment again. Except now the enemy is three things at once and also kind of abstract.</p>
+    </div>
+
+    <p class="team-section-label">the people building it</p>
 
     <section class="section">
       <div class="team-grid">
@@ -249,6 +352,16 @@
 
       </div>
     </section>
+
+    <div class="contact-section">
+      <h2 class="contact-headline">get in touch — we actually respond.</h2>
+      <p class="contact-body">Questions? Want to collaborate? Just want to yell about the Tripocalypse?</p>
+      <div class="contact-list">
+        <div class="contact-item">General inquiries: <a href="mailto:info@newconsensus.com">info@newconsensus.com</a></div>
+        <div class="contact-item">Press / Media: <a href="mailto:press@newconsensus.com">press@newconsensus.com</a></div>
+        <div class="contact-item">Zack directly: <a href="mailto:zack@newconsensus.com">zack@newconsensus.com</a> (he asked to be included)</div>
+      </div>
+    </div>
 
   </main>
 
