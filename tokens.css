@@ -531,28 +531,6 @@ nav, .nav {
 
 
 /* ============================================================
-   FOOTER — base pattern
-   ============================================================ */
-footer {
-  border-top: 1px solid var(--border-subtle);
-  padding: var(--space-12) var(--space-section-horizontal);
-  color: var(--text-footer);
-  font-family: var(--font-sans);
-  font-size: 14px;
-}
-
-footer a {
-  color: var(--text-footer);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-footer a:hover {
-  color: var(--text-muted);
-}
-
-
-/* ============================================================
    SCANLINE OVERLAY — paste this HTML into every page <body>
    <div class="scanlines"></div>
    <div class="scan-bar"></div>
