@@ -1026,6 +1026,51 @@
       transition: opacity 0.2s;
     }
     .venn-zone:hover { opacity: 0.85; }
+
+    /* ── MOBILE: 768px ── */
+    @media (max-width: 768px) {
+      .scroll-hint { display: none; }
+
+      .hero-title { font-size: clamp(2rem, 12vw, 4rem); }
+      .hero-sub { font-size: 14px; }
+      .hero-status { padding: 6px 12px; font-size: 9px; }
+      .hero-eyebrow { letter-spacing: 0.2em; }
+
+      .crawl-inner { transform: none; }
+
+      .crisis-section {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+        gap: 48px;
+      }
+      .crisis-left { padding-left: 20px; }
+      .crisis-title { font-size: clamp(1.8rem, 9vw, 3.6rem); }
+
+      .tracker-bar-wrap { width: 80px; }
+      .signal-name { min-width: 110px; }
+      .status-tag { font-size: 8px; padding: 2px 6px; }
+      .panel-header { flex-wrap: wrap; gap: 8px; }
+
+      .climate-list li { font-size: 12px; gap: 8px; }
+
+      .terminal-grid { grid-template-columns: 1fr; }
+
+      .interconnection { padding: 60px 24px; }
+      .solution { padding: 60px 24px; }
+
+      .cta-btn { width: 100%; justify-content: center; }
+
+      #panic-btn { bottom: 16px; right: 16px; }
+    }
+
+    /* ── MOBILE: 480px ── */
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(2rem, 14vw, 3rem); }
+      .crisis-title { font-size: clamp(1.8rem, 11vw, 2.8rem); }
+      .tracker-bar-wrap { width: 60px; }
+      .signal-name { min-width: 90px; }
+      .climate-list li { font-size: 11px; }
+    }
   </style>
 </head>
 <body>
