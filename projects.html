@@ -223,6 +223,79 @@
       .tank-section { padding: 14px 24px 20px; }
       .tank { min-height: 400px; }
     }
+
+    /* ── PROJECT CARDS ── */
+    .projects-section {
+      padding: 64px 40px 80px;
+      border-top: 1px solid var(--gray-800);
+    }
+
+    .projects-section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 32px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--gray-800);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--gray-600);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .project-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .project-card-desc {
+      font-size: 14px;
+      color: var(--gray-300);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .project-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--red-300);
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+      transition: color 0.2s;
+    }
+
+    .project-card-link:hover {
+      color: var(--red-400);
+    }
+
+    @media (max-width: 768px) {
+      .projects-section { padding: 48px 24px 60px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
 </style>
 </head>
 <body>
@@ -262,28 +335,58 @@
       </div>
     </section>
 
-    <p class="transition-copy">that was the fun part. this is the urgent part. ↓</p>
+    <section class="projects-section">
+      <p class="projects-section-label">all projects</p>
+      <div class="projects-grid">
 
-    <section class="section locked" id="lore">
-      <h2 class="section-head">You caught all 8. Nice. Here's the lore.</h2>
-      <div class="section-body">
-        <p>New Consensus is what happens when you get tired of think tanks that think but don't do anything.</p>
-        <p>We design comprehensive, detailed plans for governments to actually achieve economic renewal and transformation. Not vibes. Not white papers that die in someone's inbox. Actual plans.</p>
-      </div>
-    </section>
+        <div class="project-card">
+          <div class="project-card-title">Mission for America</div>
+          <p class="project-card-desc">The plan. 23 chapters of real policy for rebuilding the American economy. What Project 2025 would look like if it were written by people who actually want to govern.</p>
+          <a class="project-card-link" href="https://www.newconsensus.com/read" target="_blank" rel="noopener noreferrer">enter the plan →</a>
+        </div>
 
-    <section class="section locked" id="principle">
-      <h2 class="section-head">Our guiding principle (aka why we do this)</h2>
-      <div class="section-body">
-        <p>The tripocalypse: climate crisis, AI displacement, rising fascism. Same root cause. Same solution. Rebuild the economy to solve all three simultaneously.</p>
-        <p>We have everything we need to build that world in a single generation:</p>
-        <ul class="principle-list">
-          <li>Billions of creative, hardworking people</li>
-          <li>Technology that actually works (if we deployed it)</li>
-          <li>Virtually unlimited clean energy just sitting there</li>
-        </ul>
-        <p>The only thing stopping us? Politics. Not physics. Politics.</p>
-        <p><strong>So we're fixing the politics part.</strong></p>
+        <div class="project-card">
+          <div class="project-card-title">CrashLab</div>
+          <p class="project-card-desc">Open-source economic simulator. Model how AI-driven automation transforms the economy and test policy responses in real time.</p>
+          <a class="project-card-link" href="https://crashlab.org/" target="_blank" rel="noopener noreferrer">launch CrashLab →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-title">BigSim</div>
+          <p class="project-card-desc">Agent-based economy simulator. Watch thousands of simulated workers, firms, and governments interact. Built for movements, politicians, and researchers.</p>
+          <a class="project-card-link" href="https://sim.newconsensus.ai/" target="_blank" rel="noopener noreferrer">explore BigSim →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-title">NC Book Club</div>
+          <p class="project-card-desc">Read the books that shaped the movement. Discuss them with people who actually want to build something.</p>
+          <a class="project-card-link" href="https://www.newconsensus.com/library" target="_blank" rel="noopener noreferrer">join the book club →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-title">Won't Get Fooled Again Act</div>
+          <p class="project-card-desc">A framework for converting failed banks and AI companies into mission-driven public institutions. No more bailouts without accountability.</p>
+          <a class="project-card-link" href="https://www.newconsensus.com/projects/wgfaa" target="_blank" rel="noopener noreferrer">read the framework →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-title">Abundance 101</div>
+          <p class="project-card-desc">How to build an abundant, fair, and clean world economy for all — in a single generation. Dozens of nations have done this before.</p>
+          <a class="project-card-link" href="https://www.newconsensus.com/projects/abundance-101" target="_blank" rel="noopener noreferrer">take the class →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-title">The Cost of Waiting</div>
+          <p class="project-card-desc">What's the cost of not acting on the economy right now? The answer will make you uncomfortable.</p>
+          <a class="project-card-link" href="https://thecostofwaiting.org/" target="_blank" rel="noopener noreferrer">see the cost →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-title">2026 AI Convening</div>
+          <p class="project-card-desc">We're assembling a group to meticulously work through the consequences of the AI revolution under different policy responses.</p>
+          <a class="project-card-link" href="https://www.newconsensus.com/projects/ai-convening" target="_blank" rel="noopener noreferrer">learn more →</a>
+        </div>
+
       </div>
     </section>
   </main>
