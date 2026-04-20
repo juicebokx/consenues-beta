@@ -1,276 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/tokens.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jobs — New Consensus</title>
-  <meta name="description" content="Jobs at New Consensus. We're building the plan to save the economy.">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-
-    .hero {
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 40px 80px;
-      max-width: 900px;
-      animation: flicker 5s infinite;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --surface: #111; --surface2: #181818;
+      --border: rgba(255,255,255,0.07); --border-mid: rgba(255,255,255,0.14);
+      --text: #e0e0dc; --text-dim: #555550; --text-mid: #888880;
+      --yellow: #d4c84a; --red: #e63329;
+      --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
     }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+    main.page-wrap { position: relative; z-index: 1; }
+    @keyframes up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
 
-    .job-card {
-      background: var(--gray-900);
-      border: 1px solid var(--gray-700);
-      padding: 28px;
-      transition: all var(--transition-med);
-    }
+    /* HERO */
+    .hero { padding: 80px 64px 64px; border-bottom: 1px solid var(--border-mid); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }
+    .hero-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: var(--yellow); text-transform: uppercase; margin-bottom: 20px; opacity:0; animation: up 0.6s 0.1s forwards; }
+    .hero-title { font-family: var(--sans); font-size: clamp(3rem,6vw,6rem); font-weight: 900; line-height: 0.95; color: #fff; letter-spacing: -0.03em; opacity:0; animation: up 0.7s 0.2s forwards; }
+    .hero-right { opacity:0; animation: up 0.7s 0.35s forwards; }
+    .hero-desc { font-size: 15px; color: var(--text-mid); line-height: 1.85; max-width: 480px; }
+    .hero-desc p { margin-bottom: 16px; }
+    .hero-desc p:last-child { margin-bottom: 0; }
+    .hero-tagline { font-family: var(--sans); font-size: 18px; font-weight: 700; color: #fff; margin-top: 28px; }
 
-    .job-card:hover {
-      border-color: var(--red-500);
-      background: var(--gray-800);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-card-hover);
-    }
+    /* STATS */
+    .stats-strip { display: flex; border-bottom: 1px solid var(--border-mid); }
+    .stat-item { flex: 1; padding: 24px 40px; border-right: 1px solid var(--border); display: flex; align-items: baseline; gap: 10px; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--sans); font-size: 2rem; font-weight: 900; color: var(--yellow); letter-spacing: -0.02em; }
+    .stat-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; }
 
-    .job-title {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
+    /* LIST HEADER */
+    .list-header { padding: 32px 64px 20px; display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .list-header-label { font-size: 10px; font-weight: 700; letter-spacing: 0.35em; color: var(--text-dim); text-transform: uppercase; }
+    .list-header-count { font-size: 10px; color: var(--text-dim); letter-spacing: 0.15em; }
 
-    .job-meta {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--gray-400);
-      margin-bottom: 12px;
-      text-transform: lowercase;
-    }
+    /* JOB ROW */
+    .job-item { display: grid; grid-template-columns: 64px 1fr 260px; border-bottom: 1px solid var(--border); transition: background 0.2s; position: relative; cursor: pointer; }
+    .job-item:hover { background: rgba(255,255,255,0.025); }
+    .job-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; opacity: 0; transition: opacity 0.2s; }
+    .job-item:hover::before { opacity: 1; }
+    .job-director::before  { background: var(--yellow); }
+    .job-researcher::before { background: var(--red); }
 
-    .job-desc {
-      font-size: 14px;
-      color: var(--gray-300);
-      line-height: 1.7;
-    }
+    .job-num-col { display: flex; align-items: flex-start; justify-content: center; padding: 32px 0; border-right: 1px solid var(--border); }
+    .job-num { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--text-dim); writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); }
 
-    .jobs-grid {
-      display: grid;
-      gap: 16px;
-      margin-top: 32px;
-    }
+    .job-main { padding: 32px 40px; border-right: 1px solid var(--border); }
+    .job-title { font-family: var(--sans); font-size: clamp(1.3rem,2.2vw,1.7rem); font-weight: 900; color: #fff; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 8px; }
+    .job-meta-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .job-tag { font-size: 8px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 8px; border: 1px solid; }
+    .job-director .job-tag  { color: var(--yellow); border-color: rgba(212,200,74,0.3); }
+    .job-researcher .job-tag { color: var(--red); border-color: rgba(230,51,41,0.3); }
+    .job-location { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); }
+    .job-desc { font-family: var(--sans); font-size: 15px; color: var(--text); line-height: 1.8; max-width: 640px; }
+
+    .job-aside { padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .job-type { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+    .job-salary { font-size: 12px; color: var(--text-mid); font-style: italic; }
+    .job-apply { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--surface); border: 1px solid rgba(212,200,74,0.3); text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--yellow); transition: all 0.15s; }
+    .job-apply:hover { border-color: var(--yellow); background: rgba(212,200,74,0.06); }
+
+    /* EXPANDED DETAIL */
+    .job-detail { display: none; background: var(--surface); border-bottom: 1px solid var(--border-mid); }
+    .job-detail.open { display: grid; grid-template-columns: 1fr 280px; gap: 64px; padding: 48px 64px 56px calc(64px + 64px); }
+
+    .detail-section { margin-bottom: 36px; }
+    .detail-section:last-child { margin-bottom: 0; }
+    .detail-heading { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .detail-heading::before { content: ''; width: 16px; height: 2px; background: var(--yellow); flex-shrink: 0; }
+    .detail-subheading { font-family: var(--sans); font-size: 13px; font-weight: 700; color: var(--text-mid); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; margin-top: 20px; }
+    .detail-text { font-family: var(--sans); font-size: 15px; color: var(--text); line-height: 1.85; }
+    .detail-text p { margin-bottom: 14px; }
+    .detail-text p:last-child { margin-bottom: 0; }
+    .detail-text em { font-style: italic; color: #fff; }
+    .detail-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .detail-list li { font-family: var(--sans); font-size: 14px; color: var(--text-mid); line-height: 1.6; padding-left: 18px; position: relative; }
+    .detail-list li::before { content: '→'; position: absolute; left: 0; color: var(--text-dim); font-family: var(--mono); font-size: 10px; top: 3px; }
+
+    /* SIDEBAR */
+    .detail-sidebar {}
+    .detail-sidebar-section { padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .detail-sidebar-section:first-child { padding-top: 0; }
+    .detail-sidebar-section:last-child { border-bottom: none; padding-bottom: 0; }
+    .detail-sidebar-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 5px; }
+    .detail-sidebar-value { font-size: 13px; color: var(--text-mid); font-style: italic; line-height: 1.5; }
+    .detail-apply-big { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--yellow); color: #000; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; margin-top: 24px; transition: opacity 0.2s; }
+    .detail-apply-big:hover { opacity: 0.85; }
+
+    /* Chevron */
+    .job-chevron { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text-dim); transition: transform 0.25s; pointer-events: none; }
+    .job-item.expanded .job-chevron { transform: translateY(-50%) rotate(180deg); }
+
+    /* MISSION SECTION */
+    .mission-section { border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border-mid); }
+    .mission-cell { padding: 56px 64px; border-right: 1px solid var(--border); }
+    .mission-cell:last-child { border-right: none; }
+    .mission-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .mission-label::before { content: ''; width: 16px; height: 2px; background: var(--yellow); flex-shrink: 0; }
+    .mission-heading { font-family: var(--sans); font-size: clamp(1.4rem,2.5vw,2rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .mission-body { font-size: 13px; color: var(--text-mid); line-height: 1.85; }
+    .mission-body p { margin-bottom: 14px; }
+    .mission-body p:last-child { margin-bottom: 0; }
+    .mission-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow); text-decoration: none; border-bottom: 1px solid rgba(212,200,74,0.3); padding-bottom: 2px; transition: border-color 0.2s; }
+    .mission-link:hover { border-color: var(--yellow); }
+
+    /* CTA */
+    .cta-section { padding: 80px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .cta-kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.35em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 20px; }
+    .cta-title { font-family: var(--sans); font-size: clamp(1.8rem,3vw,3rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .cta-sub { font-size: 13px; color: var(--text-mid); line-height: 1.8; }
+    .cta-right { display: flex; flex-direction: column; gap: 2px; }
+    .cta-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--surface); border: 1px solid var(--border); text-decoration: none; transition: border-color 0.2s, background 0.2s; gap: 16px; }
+    .cta-item:hover { border-color: var(--border-mid); background: var(--surface2); }
+    .cta-item-label { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-dim); }
+    .cta-item-value { font-size: 12px; color: var(--yellow); }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s, transform 0.6s; }
+    .fade-in.visible { opacity: 1; transform: none; }
 
     @media (max-width: 768px) {
-      .hero { padding: 100px 24px 60px; }
-    }
+      /* Hero — single column, title left stacks above desc */
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 48px 20px 40px;
+      }
+      .hero-title { font-size: clamp(2.8rem,12vw,4rem); }
+      .hero-tagline { font-size: 15px; margin-top: 20px; }
+      .hero-desc { font-size: 14px; }
 
-    @media (max-width: 480px) {
-      .cta-row { flex-direction: column; }
-      .cta { width: 100%; text-align: center; }
+      /* Stats — 2×1 stacked */
+      .stats-strip { flex-direction: column; }
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 18px 20px;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 10px;
+      }
+      .stat-item:last-child { border-bottom: none; }
+      .stat-num { font-size: 1.6rem; }
+
+      /* List header */
+      .list-header { padding: 20px 20px 14px; }
+
+      /* Job rows — hide aside column, 2-col: num + main */
+      .job-item { grid-template-columns: 44px 1fr; min-height: unset; }
+      .job-aside { display: none; }
+      .job-num-col { padding: 24px 0; }
+      .job-num { font-size: 9px; }
+      .job-main { padding: 24px 20px; border-right: none; }
+      .job-title { font-size: 1.2rem; }
+      .job-meta-row { gap: 8px; margin-bottom: 12px; }
+      .job-desc { font-size: 14px; }
+      .job-chevron { right: 14px; }
+
+      /* Expanded detail — single column */
+      .job-detail.open {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 28px 20px 36px 20px;
+      }
+      .detail-text { font-size: 14px; }
+      .detail-list li { font-size: 13px; }
+      .detail-apply-big { padding: 14px 16px; font-size: 11px; }
+
+      /* Sidebar stacks below body on mobile */
+      .detail-sidebar { border-top: 1px solid var(--border); padding-top: 24px; }
+
+      /* Mission section */
+      .mission-section { grid-template-columns: 1fr; }
+      .mission-cell {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 36px 20px;
+      }
+      .mission-cell:last-child { border-bottom: none; }
+      .mission-heading { font-size: clamp(1.3rem,6vw,1.7rem); }
+
+      /* CTA */
+      .cta-section { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
+      .cta-title { font-size: clamp(1.6rem,7vw,2.2rem); }
+      .cta-item { padding: 16px 18px; flex-direction: column; align-items: flex-start; gap: 4px; }
+      .cta-item-value { font-size: 11px; }
     }
-</style>
+  </style>
 </head>
 <body>
-  <div class="scanlines"></div>
-  <div class="scan-bar"></div>
-  <div id="site-header"></div>
+<script src="/shared-layout.js"></script>
+<main class="page-wrap">
 
   <section class="hero">
-    <p class="hero-eyebrow">we're hiring</p>
-    <h1 class="hero-headline">Join us.</h1>
-    <p class="hero-subhead">Jobs at New Consensus. We're building the plan to save the economy. Could use some help.</p>
-    <div class="cta-row">
-      <a href="https://www.newconsensus.com/about" class="cta cta-primary" target="_blank" rel="noopener noreferrer">Learn more about New Consensus</a>
-      <a href="https://www.newconsensus.com/read" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">Learn more about the Mission for America</a>
+    <div class="hero-left">
+      <div class="hero-kicker">we're hiring</div>
+      <h1 class="hero-title">Join<br>Us.</h1>
+    </div>
+    <div class="hero-right">
+      <div class="hero-desc">
+        <p>Jobs at New Consensus. We're building the plan to save the economy. Could use some help.</p>
+      </div>
+      <p class="hero-tagline">This is not traditional policy work. It's closer to economic architecture.</p>
     </div>
   </section>
 
-  <section class="section">
-    <h2 class="section-head">Open positions</h2>
-    <div class="projects-grid">
-      <a href="#director" class="project-card">
-        <h3 class="project-title">Director - Mission for America Project</h3>
-        <p class="project-desc">Full-time · Remote · Competitive Salary</p>
-      </a>
-      <a href="#researcher" class="project-card">
-        <h3 class="project-title">Researcher - Mission for America Project</h3>
-        <p class="project-desc">Full-time · Remote · Competitive Salary</p>
-      </a>
-    </div>
-  </section>
-
-  <section class="section" id="director">
-    <h2 class="section-head">Director, Mission for America Project</h2>
-    <p class="section-meta">Remote · Full-time · Competitive Salary</p>
-    <div class="section-body">
-      <h3 class="section-subhead">The Opportunity</h3>
-      <p>The rise of MAGA and fascism in America can only be stopped when an opposing political movement proves it can deliver real economic progress for the majority of Americans who have been left behind for most of the postwar era. Deindustrialization, the destruction of state capacity, the erosion of public services, and the skyrocketing costs of housing, health care, and every other essential have broken the foundational American promise that every generation will be better off than the last. That is the root of the American crisis, and no amount of political messaging will fix it without a plan to actually start making people's lives better again.</p>
-      <p>In January 2029, a new president will take office with a chance to do exactly that - and possibly facing something with no precedent in American economic history: AI-driven layoffs of a significant share of the professional and managerial class, with cascading effects that drive collateral job losses across the entire economy. They will need a plan. Not a collection of policy papers. A <em>plan</em> - comprehensive, actionable, and ready to execute on day one.</p>
-      <p>The Mission for America is that plan. Think of it as the progressive answer to Project 2025: a governing blueprint for a sweeping national mobilization to build a new, clean economy that actually provides prosperity for all Americans - not just the handful of prosperous metro areas where the modern economy happens to work, but the vast majority of the country that has been left behind.</p>
-      <p>We are looking for a Director to lead this project to completion, and to make it their own.</p>
-
-      <h3 class="section-subhead">What Makes This Different</h3>
-      <p>Most progressive think tanks produce policy proposals designed to be politically realistic - incremental steps that might survive a hostile Congress. That work matters, but it isn't what we do.</p>
-      <p>The Mission for America is a plan to go all the way: to do what is actually needed to get wages rising again, to create millions of well-paying jobs, to rebuild the homes, buildings, and infrastructure of the America that has been left behind. And it must do so on a timeline that matters politically - making the majority of Americans' lives noticeably and permanently better within the first term, with visible results before the midterms. This is a plan for a national mobilization on the scale of what the United States achieved in World War II - when the country proved that a democratic government can transform an entire economy in years, not decades.</p>
-      <p>This is not traditional policy work. It is closer to economic architecture - designing interlocking systems across 20+ sectors of the economy that together add up to a fundamentally different country. If you have spent your career in policy and have been frustrated by the smallness of what's considered possible, this is the job where you get to think at a completely different scale.</p>
-
-      <h3 class="section-subhead">The Role</h3>
-      <p>The Director leads a research team to complete the Mission for America. You will manage teams developing detailed plans across 20+ national missions covering different industries and sectors - energy, housing, transportation, manufacturing, care, agriculture, and more. Solutions must be fast, technically feasible, and capable of driving rapid transformation.</p>
-      <p>You will have significant latitude to shape the project's approach, methodology, and priorities. The mandate is clear: a plan for sweeping mobilization that goes far beyond what is currently being imagined in mainstream policy circles. How you get there is something you will determine in collaboration with the Executive Director and our advisors.</p>
-      <p>This role is designed to position you for senior policy leadership in the next administration. We are building the plan that the next president will need - and we expect the people who build it to be the ones called on to help implement it.</p>
-
-      <h3 class="section-subhead">Key Responsibilities</h3>
-      <p><strong>Research & Economic Architecture</strong></p>
-      <ul>
-        <li>Drive the development of detailed, actionable plans across every sector of the economy.</li>
-        <li>Interview scientists, engineers, entrepreneurs, investors, and operators to stress-test assumptions and identify practical pathways.</li>
-        <li>Synthesize research into clear, coherent frameworks that can guide execution at national scale.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="section" id="researcher">
-    <h2 class="section-head">Researcher, Mission for America Project</h2>
-    <p class="section-meta">Remote · Full-time · Competitive Salary</p>
-    <div class="section-body">
-      <p>You will help build the core research and analysis behind the Mission for America across sectors including housing, energy, manufacturing, care, transportation, and more. This role is ideal for researchers who care about execution and want to produce work that can actually be used in government.</p>
-      <p>You'll work closely with the Director and cross-functional teams to identify bottlenecks, evaluate policy options, and develop practical recommendations designed for rapid deployment in a future administration.</p>
-      <p>Strong candidates are curious, rigorous, collaborative, and comfortable moving between detailed analysis and big-picture strategy.</p>
-    </div>
-  </section>
-
-  <section class="section" id="join">
-    <h2 class="section-head">join</h2>
-    <div class="section-body">
-      <p>If this sounds like your kind of emergency, send a note with your background and why you want to help build the Mission for America.</p>
-      <p><a href="mailto:jobs@newconsensus.com" class="cta cta-primary">start serving</a></p>
-    </div>
-  </section>
-
-  <div id="site-footer"></div>
-
-  <div class="glitch-overlay" id="glitchOverlay">
-    <button class="close-glitch" onclick="closeGlitch()">× close (fine, I'll help)</button>
-    <div class="countdown-big" id="bigCountdown">1,018</div>
+  <div class="stats-strip fade-in">
+    <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">open positions</span></div>
+    <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">sectors to cover</span></div>
   </div>
 
-  <script>
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('en-US', {
-      month: '2-digit',
-      day: '2-digit',
-      year: 'numeric'
-    }).replace(/\//g, '.');
-    function getDaysRemaining() {
-      const inauguration = new Date('2029-01-20');
-      inauguration.setHours(0, 0, 0, 0);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return Math.ceil((inauguration - today) / (1000 * 60 * 60 * 24));
-    }
+  <div class="list-header fade-in">
+    <span class="list-header-label">open positions</span>
+    <span class="list-header-count">02 roles</span>
+  </div>
 
-    function updateCountdownDisplays() {
-      const daysRemaining = getDaysRemaining();
-      const daysLeftEl = document.getElementById('daysLeft');
-      const bigCountdownEl = document.getElementById('bigCountdown');
-      if (daysLeftEl) {
-        daysLeftEl.textContent = daysRemaining.toLocaleString() + ' days';
-      }
-      if (bigCountdownEl) {
-        bigCountdownEl.textContent = daysRemaining.toLocaleString();
-      }
-    }
+  <!-- DIRECTOR -->
+  <div class="job-item job-director fade-in" onclick="toggleJob('director', this)" id="job-director-row">
+    <div class="job-num-col"><span class="job-num">01</span></div>
+    <div class="job-main">
+      <div class="job-title">Director — Mission for America Project</div>
+      <div class="job-meta-row">
+        <span class="job-tag">Leadership</span>
+        <span class="job-location">Full-time · Remote · Competitive Salary</span>
+      </div>
+      <p class="job-desc">Lead the research team building the Mission for America — a comprehensive governing blueprint for a sweeping national mobilization. Design interlocking economic systems across 20+ sectors that together add up to a fundamentally different country.</p>
+    </div>
+    <div class="job-aside">
+      <div>
+        <div class="job-type">Full-time · Remote</div>
+        <div class="job-salary">Competitive salary + health + retirement</div>
+      </div>
+      <a href="mailto:jobs@newconsensus.com?subject=Application: Director, Mission for America Project" class="job-apply" onclick="event.stopPropagation()">Apply <span>→</span></a>
+    </div>
+    <span class="job-chevron">▼</span>
+  </div>
+  <div class="job-detail" id="detail-director">
+    <div class="detail-body">
+      <div class="detail-section">
+        <div class="detail-heading">The Opportunity</div>
+        <div class="detail-text">
+          <p>The rise of MAGA and fascism in America can only be stopped when an opposing political movement proves it can deliver real economic progress for the majority of Americans who have been left behind for most of the postwar era. Deindustrialization, the destruction of state capacity, the erosion of public services, and the skyrocketing costs of housing, health care, and every other essential have broken the foundational American promise that every generation will be better off than the last. That is the root of the American crisis, and no amount of political messaging will fix it without a plan to actually start making people's lives better again.</p>
+          <p>In January 2029, a new president will take office with a chance to do exactly that — and possibly facing something with no precedent in American economic history: AI-driven layoffs of a significant share of the professional and managerial class, with cascading effects that drive collateral job losses across the entire economy. They will need a plan. Not a collection of policy papers. <em>A plan</em> — comprehensive, actionable, and ready to execute on day one.</p>
+          <p>The Mission for America is that plan. Think of it as the progressive answer to Project 2025: a governing blueprint for a sweeping national mobilization to build a new, clean economy that actually provides prosperity for all Americans — not just the handful of prosperous metro areas where the modern economy happens to work, but the vast majority of the country that has been left behind.</p>
+          <p>We are looking for a Director to lead this project to completion, and to make it their own.</p>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">What Makes This Different</div>
+        <div class="detail-text">
+          <p>Most progressive think tanks produce policy proposals designed to be politically realistic — incremental steps that might survive a hostile Congress. That work matters, but it isn't what we do.</p>
+          <p>The Mission for America is a plan to go all the way: to do what is actually needed to get wages rising again, to create millions of well-paying jobs, to rebuild the homes, buildings, and infrastructure of the America that has been left behind. And it must do so on a timeline that matters politically — making the majority of Americans' lives noticeably and permanently better within the first term, with visible results before the midterms.</p>
+          <p>This is not traditional policy work. It is closer to economic architecture — designing interlocking systems across 20+ sectors of the economy that together add up to a fundamentally different country. If you have spent your career in policy and have been frustrated by the smallness of what's considered possible, this is the job where you get to think at a completely different scale.</p>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">The Role</div>
+        <div class="detail-text">
+          <p>The Director leads a research team to complete the Mission for America. You will manage teams developing detailed plans across 20+ national missions covering different industries and sectors — energy, housing, transportation, manufacturing, care, agriculture, and more.</p>
+          <p>You will have significant latitude to shape the project's approach, methodology, and priorities. This role is designed to position you for senior policy leadership in the next administration. We are building the plan that the next president will need — and we expect the people who build it to be the ones called on to help implement it.</p>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Key Responsibilities</div>
+        <div class="detail-subheading">Research &amp; Economic Architecture</div>
+        <ul class="detail-list">
+          <li>Drive the development of detailed, actionable plans across every sector of the economy</li>
+          <li>Interview scientists, engineers, entrepreneurs, investors, factory owners, workers, and policy experts to ground plans in real-world feasibility</li>
+          <li>Ensure that sector-level plans interlock into a coherent whole — not a menu of options, but an integrated mobilization</li>
+          <li>Determine the form the plan needs to take to actually be useful in the chaos of a new administration</li>
+        </ul>
+        <div class="detail-subheading">Team Building &amp; Management</div>
+        <ul class="detail-list">
+          <li>Recruit, hire, and manage a team of researchers and analysts</li>
+          <li>Build a culture of ambition, rigor, and speed — this is not an academic exercise</li>
+        </ul>
+        <div class="detail-subheading">Strategic Leadership</div>
+        <ul class="detail-list">
+          <li>Collaborate with the Executive Director and senior advisors to refine the framework</li>
+          <li>Represent the project in discussions with policymakers, potential allies, and future administration leaders</li>
+          <li>Build and maintain relationships with the network of people who will serve in government in 2029</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Who You Are</div>
+        <div class="detail-text">
+          <p>Experience that matters most:</p>
+        </div>
+        <ul class="detail-list">
+          <li>You've worked on policy inside government — in a presidential administration, on a congressional committee, or at a senior level in a federal agency</li>
+          <li>You have a network that reaches into the ranks of the people likely to serve in the next administration and Congress</li>
+          <li>You've led teams and have strong management experience</li>
+          <li>You can write — clearly, rigorously, and persuasively</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">A Note on AI and Technology</div>
+        <div class="detail-text">
+          <p>This is a policy role, not a technology role. But our approach to research is not the usual one. We are building our own AI agents — coding multi-agent, multi-step systems that research topics across dozens of sources, gather and structure data, synthesize findings, and handle the labor-intensive parts of producing rigorous written analysis.</p>
+          <p>The right candidate does not need to be a technologist. But you do need to be genuinely excited about working this way — and willing to learn the basics: working with GitHub, using command-line tools, writing simple scripts, and connecting to APIs. We will teach you. What we can't teach is the appetite to learn.</p>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Critical Context</div>
+        <div class="detail-text">
+          <p>Skeptics — economists, journalists, political staffers — will tell you this is unrealistic. They said the same thing about Roosevelt's "impossible" WWII production targets, the New Deal, the Interstate Highway System, and the moon landing. If you are swayed by that kind of thinking, this is not the right role. If it makes you want to prove them wrong, we should talk.</p>
+          <p>Required reading: <em>Bad Samaritans</em> (Chang, 2007), <em>Destructive Creation</em> (Wilson, 2016), <em>Unprecedented Power</em> (Fenberg, 2011)</p>
+        </div>
+      </div>
+    </div>
+    <div class="detail-sidebar">
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Type</div>
+        <div class="detail-sidebar-value">Full-time</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Location</div>
+        <div class="detail-sidebar-value">Remote</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Compensation</div>
+        <div class="detail-sidebar-value">Competitive salary commensurate with experience. Health insurance and retirement contributions included.</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Reports to</div>
+        <div class="detail-sidebar-value">Zack Exley, Executive Director</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">How to Apply</div>
+        <div class="detail-sidebar-value">Send your resume and a brief statement of interest explaining what draws you to this project and why you believe you're the right person to lead it.</div>
+      </div>
+      <a href="mailto:jobs@newconsensus.com?subject=Application: Director, Mission for America Project" class="detail-apply-big">Apply now →</a>
+    </div>
+  </div>
 
-    function triggerPanic() {
-      const overlay = document.getElementById('glitchOverlay');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+  <!-- RESEARCHER -->
+  <div class="job-item job-researcher fade-in" onclick="toggleJob('researcher', this)" id="job-researcher-row">
+    <div class="job-num-col"><span class="job-num">02</span></div>
+    <div class="job-main">
+      <div class="job-title">Researcher — Mission for America Project</div>
+      <div class="job-meta-row">
+        <span class="job-tag">Research</span>
+        <span class="job-location">Full-time · Remote · Competitive Salary</span>
+      </div>
+      <p class="job-desc">Build the core research and analysis behind the Mission for America across housing, energy, manufacturing, care, transportation, and more. Produce technically feasible, compelling visions for national-scale industrial and climate policy — work that can actually be used in government.</p>
+    </div>
+    <div class="job-aside">
+      <div>
+        <div class="job-type">Full-time · Remote</div>
+        <div class="job-salary">Competitive salary + health + retirement</div>
+      </div>
+      <a href="mailto:jobs@newconsensus.com?subject=Application: Researcher, Mission for America Project" class="job-apply" onclick="event.stopPropagation()">Apply <span>→</span></a>
+    </div>
+    <span class="job-chevron">▼</span>
+  </div>
+  <div class="job-detail" id="detail-researcher">
+    <div class="detail-body">
+      <div class="detail-section">
+        <div class="detail-heading">About the Role</div>
+        <div class="detail-text">
+          <p>Researchers work directly under the Project Director investigating and drafting detailed plans for economic mobilization. Work produces technically feasible, compelling visions for national-scale industrial and climate policy.</p>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Key Responsibilities</div>
+        <ul class="detail-list">
+          <li>Conduct in-depth research on industry-specific policy, infrastructure, technology, public investment, and economic history</li>
+          <li>Become an expert in decarbonization strategies across multiple U.S. economy sectors through reading and interviews with engineers, scientists, business owners, and practitioners</li>
+          <li>Draft clear, rigorous sections of the MFA framework</li>
+          <li>Collaborate with other researchers to ensure proposals are interlocking, comprehensive, and technically feasible</li>
+          <li>Interview experts, practitioners, scientists, engineers, managers, policymakers, and investors</li>
+          <li>Incorporate feedback and iterate on policy ideas</li>
+          <li>Monitor trends in industrial policy, clean energy, technology, and economic strategy</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Required Qualifications</div>
+        <ul class="detail-list">
+          <li>Deep interest in the MFA approach; willingness to learn rapidly</li>
+          <li>Strong analytical, writing, and communication abilities</li>
+          <li>Demonstrated experience in research, policy development, or strategic writing</li>
+          <li>Ability to work independently and collaboratively in a fast-paced remote environment</li>
+          <li>Comfort reaching out to experts and finding difficult-to-locate information</li>
+          <li>Self-motivated problem-solver</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Preferred Qualifications</div>
+        <ul class="detail-list">
+          <li>Background in public policy, economics, engineering, environmental studies, or a related field</li>
+          <li>Experience in industrial sectors, public investment programs, or national economic strategies</li>
+        </ul>
+      </div>
+      <div class="detail-section">
+        <div class="detail-heading">Required Reading</div>
+        <div class="detail-text">
+          <p>Please read the Director listing for full context on the Mission for America, what makes this project different, and our approach to AI and technology.</p>
+          <p>Required reading: <em>Bad Samaritans</em> (Chang, 2007), <em>Destructive Creation</em> (Wilson, 2016), <em>Unprecedented Power</em> (Fenberg, 2011)</p>
+        </div>
+      </div>
+    </div>
+    <div class="detail-sidebar">
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Type</div>
+        <div class="detail-sidebar-value">Full-time</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Location</div>
+        <div class="detail-sidebar-value">Remote</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Compensation</div>
+        <div class="detail-sidebar-value">Competitive salary commensurate with experience. Health insurance and retirement contributions included.</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">Sectors</div>
+        <div class="detail-sidebar-value">Energy · Housing · Manufacturing · Care · Transport · Agriculture</div>
+      </div>
+      <div class="detail-sidebar-section">
+        <div class="detail-sidebar-label">How to Apply</div>
+        <div class="detail-sidebar-value">Send your resume and a brief statement of interest.</div>
+      </div>
+      <a href="mailto:jobs@newconsensus.com?subject=Application: Researcher, Mission for America Project" class="detail-apply-big">Apply now →</a>
+    </div>
+  </div>
 
-    function closeGlitch() {
-      const overlay = document.getElementById('glitchOverlay');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+  <!-- MISSION CONTEXT -->
+  <div class="mission-section">
+    <div class="mission-cell fade-in">
+      <div class="mission-label">the mission</div>
+      <h2 class="mission-heading">Not policy papers.<br>A plan.</h2>
+      <div class="mission-body">
+        <p>The Mission for America is a comprehensive governing blueprint — 20+ chapters covering every sector of the economy, designed to be executable on day one of a new administration.</p>
+        <p>Think WWII mobilization scale. When the country needed to transform its entire economy in under three years, it did. We're doing the same thing for climate, AI displacement, and economic renewal simultaneously.</p>
+      </div>
+      <a href="/read" class="mission-link">Read the Mission for America →</a>
+    </div>
+    <div class="mission-cell fade-in">
+      <div class="mission-label">don't see the right fit?</div>
+      <h2 class="mission-heading">We want to<br>hear from you.</h2>
+      <div class="mission-body">
+        <p>We're always interested in hearing from talented people who share our mission. Send us your resume and tell us how you'd like to contribute.</p>
+      </div>
+      <a href="mailto:jobs@newconsensus.com" class="mission-link">jobs@newconsensus.com →</a>
+    </div>
+  </div>
 
-    updateCountdownDisplays();
-    setInterval(updateCountdownDisplays, 60 * 1000);
+  <!-- CTA -->
+  <section class="cta-section fade-in">
+    <div>
+      <div class="cta-kicker">sound like your kind of emergency?</div>
+      <h2 class="cta-title">Send us a note.</h2>
+      <p class="cta-sub">Send your resume and a brief statement of interest explaining what draws you to this project. No long cover letter required.</p>
+    </div>
+    <div class="cta-right">
+      <a href="mailto:jobs@newconsensus.com?subject=Application: Director, Mission for America Project" class="cta-item">
+        <span class="cta-item-label">Director role</span>
+        <span class="cta-item-value">jobs@newconsensus.com</span>
+      </a>
+      <a href="mailto:jobs@newconsensus.com?subject=Application: Researcher, Mission for America Project" class="cta-item">
+        <span class="cta-item-label">Researcher role</span>
+        <span class="cta-item-value">jobs@newconsensus.com</span>
+      </a>
+      <a href="mailto:jobs@newconsensus.com" class="cta-item">
+        <span class="cta-item-label">Not sure which? Just say hi</span>
+        <span class="cta-item-value">jobs@newconsensus.com</span>
+      </a>
+    </div>
+  </section>
 
-    (function setupNavDropdown() {
-      const dropdowns = document.querySelectorAll('.nav-dropdown');
-      if (!dropdowns.length) return;
-
-      function isMobile() {
-        return window.innerWidth <= 768;
-      }
-
-      function setOpen(dropdown, open) {
-        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-        dropdown.classList.toggle('open', open);
-        if (open) {
-          dropdown.setAttribute('open', '');
-        } else {
-          dropdown.removeAttribute('open');
-        }
-        if (trigger) {
-          trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        }
-      }
-
-      function closeAll() {
-        dropdowns.forEach((dropdown) => setOpen(dropdown, false));
-      }
-
-      dropdowns.forEach((dropdown) => {
-        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-        if (!trigger) return;
-
-        trigger.addEventListener('click', (e) => {
-          if (isMobile()) {
-            e.preventDefault();
-            setOpen(dropdown, !dropdown.classList.contains('open'));
-          }
-        });
-
-        trigger.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            setOpen(dropdown, !dropdown.classList.contains('open'));
-          }
-          if (e.key === 'Escape') {
-            setOpen(dropdown, false);
-            trigger.blur();
-          }
-        });
-
-        dropdown.addEventListener('mouseenter', () => {
-          if (!isMobile()) setOpen(dropdown, true);
-        });
-
-        dropdown.addEventListener('mouseleave', () => {
-          if (!isMobile()) setOpen(dropdown, false);
-        });
-
-        dropdown.addEventListener('focusout', (e) => {
-          if (!dropdown.contains(e.relatedTarget)) {
-            setOpen(dropdown, false);
-          }
-        });
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav-dropdown')) {
-          closeAll();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeAll();
-      });
-    })();
-  </script>
-  <script src="/shared-layout.js"></script>
+</main>
+<script>
+  function toggleJob(id, rowEl) {
+    const detail = document.getElementById('detail-' + id);
+    const isOpen = detail.classList.contains('open');
+    document.querySelectorAll('.job-detail').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.job-item').forEach(r => r.classList.remove('expanded'));
+    if (!isOpen) { detail.classList.add('open'); rowEl.classList.add('expanded'); }
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
