@@ -1,88 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/tokens.css">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Contact — New Consensus</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>	<style>
+  <link rel="stylesheet" href="/tokens.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — New Consensus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0a; --surface: #111; --surface2: #181818;
+      --border: rgba(255,255,255,0.07); --border-mid: rgba(255,255,255,0.14);
+      --text: #e0e0dc; --text-dim: #555550; --text-mid: #888880;
+      --yellow: #d4c84a; --red: #e63329;
+      --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); font-size: 14px; line-height: 1.7; overflow-x: hidden; min-height: 100vh; }
+    main.page-wrap { position: relative; z-index: 1; }
+    @keyframes up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
+    /* ── HERO — full viewport height, centered ── */
     .hero {
-      padding: 130px 40px 24px;
+      min-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 64px 64px;
+      border-bottom: 1px solid var(--border-mid);
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero h1 {
-      font-size: clamp(38px, 8vw, 68px);
-      line-height: 1.05;
-      margin-bottom: 18px;
-      letter-spacing: -0.03em;
+    /* Giant background text */
+    .hero-bg-text {
+      position: absolute;
+      font-family: var(--sans);
+      font-size: clamp(120px, 22vw, 260px);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+      color: rgba(255,255,255,0.025);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
     }
 
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--red-300);
-      text-transform: lowercase;
-      margin-bottom: 14px;
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+    .hero-kicker {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
+      color: var(--yellow); text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0; animation: up 0.5s 0.1s forwards;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-kicker::before { content: ''; width: 24px; height: 2px; background: var(--yellow); }
+
+    .hero-title {
+      font-family: var(--sans);
+      font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: #fff;
+      margin-bottom: 28px;
+      opacity: 0; animation: up 0.6s 0.15s forwards;
     }
 
-    .body {
-      max-width: 760px;
-      color: var(--gray-300);
-      line-height: 1.8;
+    /* Blinking cursor on title */
+    .hero-title .cursor {
+      display: inline-block;
+      width: 0.08em;
+      height: 0.85em;
+      background: var(--yellow);
+      vertical-align: middle;
+      margin-left: 4px;
+      animation: blink 1s step-start infinite;
     }
 
-    .contact-list {
+    .hero-sub {
+      font-family: var(--mono);
+      font-size: 14px; color: var(--text-mid);
+      line-height: 1.7;
+      opacity: 0; animation: up 0.6s 0.25s forwards;
+    }
+
+    /* ── CONTACT ROWS ── */
+    .contact-list { border-bottom: 1px solid var(--border-mid); }
+
+    .contact-row {
       display: grid;
-      gap: 18px;
-      max-width: 760px;
-      margin-top: 32px;
+      grid-template-columns: 280px 1fr auto;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding: 0 64px;
+      min-height: 96px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row:hover { background: var(--surface); }
+
+    /* Yellow sweep on hover */
+    .contact-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: var(--yellow);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+    }
+    .contact-row:hover::before { transform: scaleY(1); }
+
+    .cr-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--text-dim);
     }
 
-    .contact-list a {
-      color: var(--red-300);
-      font-family: var(--font-mono);
-      font-size: 15px;
-      transition: color var(--transition-fast);
+    .cr-email {
+      font-family: var(--mono);
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: 0.02em;
+      transition: letter-spacing 0.2s;
+    }
+    .contact-row:hover .cr-email { letter-spacing: 0.04em; }
+
+    .cr-note {
+      font-size: 12px; color: var(--text-dim);
+      font-style: italic;
+      text-align: right;
     }
 
-    .contact-list a:hover {
-      color: var(--red-400);
+    .cr-arrow {
+      position: absolute; right: 64px;
+      font-size: 20px; color: var(--text-dim);
+      transition: transform 0.2s, color 0.2s;
+      opacity: 0;
     }
+    .contact-row:hover .cr-arrow { opacity: 1; transform: translateX(4px); color: var(--yellow); }
 
+    /* ── BOTTOM STRIP — cheeky note ── */
+    .bottom-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-mid);
+    }
+    .bs-cell {
+      padding: 32px 40px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bs-cell:last-child { border-right: none; }
+    .bs-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-dim); }
+    .bs-value { font-family: var(--sans); font-size: 15px; font-weight: 700; color: #fff; line-height: 1.3; }
+    .bs-value em { font-style: italic; color: var(--text-mid); font-weight: 400; font-family: var(--mono); font-size: 13px; }
+
+
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.6s, transform 0.6s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
-      .hero { padding: 100px 24px 24px; }
+      .hero { padding: 48px 20px 40px; min-height: 60vh; }
+      .hero-bg-text { font-size: clamp(60px, 18vw, 100px); }
+      .hero-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+      .hero-kicker { margin-bottom: 16px; }
+      .contact-row { grid-template-columns: 1fr; padding: 24px 20px; min-height: unset; gap: 6px; }
+      .cr-arrow { display: none; }
+      .cr-email { font-size: 1rem; }
+      .cr-note { text-align: left; }
+      .bottom-strip { grid-template-columns: 1fr; }
+      .bs-cell { border-right: none; border-bottom: 1px solid var(--border); padding: 24px 20px; }
+      .bs-cell:last-child { border-bottom: none; }
+      .terminal { padding: 32px 20px; }
+      .terminal-body { font-size: 12px; }
     }
-</style>
+  </style>
 </head>
 <body>
-<div class="scanlines"></div>
-<div class="scan-bar"></div>
-	<div id="site-header"></div>
-	<section class="hero"><p class="eyebrow">get in touch</p><h1>we actually respond</h1><p class="body">Questions? Want to collaborate?</p></section>
-	<section class="section"><div class="contact-list"><div>General inquiries: <a href="mailto:info@newconsensus.com">info@newconsensus.com</a></div><div>Press / Media: <a href="mailto:press@newconsensus.com">press@newconsensus.com</a></div><div>Zack directly: <a href="mailto:zack@newconsensus.com">zack@newconsensus.com</a> <span class="muted">(he asked to be included)</span></div></div></section>
-	<div id="site-footer"></div>
-	<div class="glitch-overlay" id="glitchOverlay"><button onclick="closeGlitch()">close</button><div id="bigCountdown">1,018</div></div>
-	<script>
-		function getDaysRemaining(){const i=new Date('2029-01-20');i.setHours(0,0,0,0);const t=new Date();t.setHours(0,0,0,0);return Math.ceil((i-t)/(1000*60*60*24));}
-		function updateCountdownDisplays(){const d=getDaysRemaining().toLocaleString();const a=document.getElementById('daysLeft');const b=document.getElementById('bigCountdown');if(a)a.textContent=d+' days';if(b)b.textContent=d;}
-		function triggerPanic(){document.getElementById('glitchOverlay').classList.add('active');document.body.style.overflow='hidden';}
-		function closeGlitch(){document.getElementById('glitchOverlay').classList.remove('active');document.body.style.overflow='';}
-		updateCountdownDisplays();setInterval(updateCountdownDisplays,60000);
+<div id="site-header"></div>
+<main class="page-wrap">
 
-		document.addEventListener('keydown', function(e){if(e.key==='Escape') closeGlitch();});
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-text">hi.</div>
+    <div class="hero-content">
+      <div class="hero-kicker">get in touch</div>
+      <h1 class="hero-title">we actually<br>respond.<span class="cursor"></span></h1>
+      <p class="hero-sub">Questions? Want to collaborate?</p>
+    </div>
+  </section>
 
-		(function setupNavDropdown(){
-			const dropdowns=document.querySelectorAll('.nav-dropdown');if(!dropdowns.length) return;
-			function isMobile(){return window.innerWidth<=768;}
-			function setOpen(dropdown,open){const trigger=dropdown.querySelector('.nav-dropdown-trigger');dropdown.classList.toggle('open',open);if(open){dropdown.setAttribute('open','');}else{dropdown.removeAttribute('open');}if(trigger){trigger.setAttribute('aria-expanded',open?'true':'false');}}
-			function closeAll(){dropdowns.forEach((dropdown)=>setOpen(dropdown,false));}
-			dropdowns.forEach((dropdown)=>{const trigger=dropdown.querySelector('.nav-dropdown-trigger');if(!trigger) return;trigger.addEventListener('click',(e)=>{if(isMobile()){e.preventDefault();setOpen(dropdown,!dropdown.classList.contains('open'));}});trigger.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(dropdown,!dropdown.classList.contains('open'));}if(e.key==='Escape'){setOpen(dropdown,false);trigger.blur();}});dropdown.addEventListener('mouseenter',()=>{if(!isMobile()) setOpen(dropdown,true);});dropdown.addEventListener('mouseleave',()=>{if(!isMobile()) setOpen(dropdown,false);});dropdown.addEventListener('focusout',(e)=>{if(!dropdown.contains(e.relatedTarget)){setOpen(dropdown,false);}});});
-			document.addEventListener('click',(e)=>{if(!e.target.closest('.nav-dropdown')){closeAll();}});
-			document.addEventListener('keydown',(e)=>{if(e.key==='Escape') closeAll();});
-		})();
-	</script>
-  <script src="/shared-layout.js"></script>
+  <!-- CONTACT ROWS -->
+  <div class="contact-list fade-in">
+
+    <a href="mailto:info@newconsensus.com" class="contact-row">
+      <div class="cr-label">General inquiries</div>
+      <div class="cr-email">info@newconsensus.com</div>
+      <div class="cr-note">for everything else</div>
+      <span class="cr-arrow">→</span>
+    </a>
+
+    <a href="mailto:press@newconsensus.com" class="contact-row">
+      <div class="cr-label">Press / Media</div>
+      <div class="cr-email">press@newconsensus.com</div>
+      <div class="cr-note">journalists welcome</div>
+      <span class="cr-arrow">→</span>
+    </a>
+
+    <a href="mailto:zack@newconsensus.com" class="contact-row">
+      <div class="cr-label">Zack directly</div>
+      <div class="cr-email">zack@newconsensus.com</div>
+      <div class="cr-note">(he asked to be included)</div>
+      <span class="cr-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- CHEEKY BOTTOM STRIP -->
+  <div class="bottom-strip fade-in">
+    <div class="bs-cell">
+      <div class="bs-label">response time</div>
+      <div class="bs-value">Usually fast.<br><em>We're not a regular think tank.</em></div>
+    </div>
+    <div class="bs-cell">
+      <div class="bs-label">preferred subject line</div>
+      <div class="bs-value">Anything.<br><em>As long as it's not "Per my last email"</em></div>
+    </div>
+    <div class="bs-cell">
+      <div class="bs-label">wrong number?</div>
+      <div class="bs-value">Still email us.<br><em>We'll figure it out together.</em></div>
+    </div>
+  </div>
+
+</main>
+<div id="site-footer"></div>
+<script src="/shared-layout.js"></script>
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
