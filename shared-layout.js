@@ -377,8 +377,9 @@
 
   .footer-nav {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px 24px;
+    grid-template-columns: repeat(5, max-content);
+    gap: 8px 48px;
+    justify-content: flex-end;
   }
 
   .footer-nav-col {}
