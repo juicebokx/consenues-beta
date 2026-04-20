@@ -30,11 +30,11 @@
       grid-template-columns: 1fr 1fr;
       gap: 64px;
       align-items: end;
-      background: var(--bg);
+      background: #0a0a0a;
     }
     .hero-kicker {
       font-size: 11px; font-weight: 700; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--ink-mid);
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
       margin-bottom: 16px;
     }
     .hero-title {
@@ -42,12 +42,12 @@
       font-size: clamp(3rem,6vw,5.5rem);
       font-weight: 900;
       line-height: 1.0;
-      color: var(--ink);
+      color: #fff;
       letter-spacing: -0.02em;
       text-shadow: 4px 4px 0 var(--gold);
     }
     .hero-title .accent { color: var(--purple); }
-    .hero-desc { font-size: 15px; color: var(--ink-mid); line-height: 1.75; max-width: 480px; font-weight: 700; }
+    .hero-desc { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; font-weight: 700; }
     .hero-hint {
       display: inline-flex; align-items: center; gap: 8px;
       margin-top: 20px;
@@ -340,8 +340,9 @@
         font-size: clamp(3.2rem, 16vw, 5rem);
         text-shadow: 3px 3px 0 var(--gold);
         line-height: 0.95;
+        color: #fff;
       }
-      .hero-desc { font-size: 14px; max-width: 100%; }
+      .hero-desc { font-size: 14px; max-width: 100%; color: rgba(255,255,255,0.65); }
       .hero-hint { display: none; }
 
       /* Fish tank — hidden */
@@ -519,37 +520,37 @@
 
   <div class="projects-grid">
 
-    <a href="/read" class="project-card featured">
+    <a href="https://www.newconsensus.com/read" target="_blank" rel="noopener" class="project-card featured">
       <div class="project-name">Mission for America</div>
       <p class="project-desc">The whole plan. 20+ chapters, every sector. What a WWII-scale mobilization actually looks like when someone finally writes it down. If you read one thing, make it this. It's long. Sorry.</p>
       <span class="project-link">read the plan →</span>
     </a>
 
-    <a href="/crashlab" class="project-card">
+    <a href="https://crashlab.org" target="_blank" rel="noopener" class="project-card">
       <div class="project-name">CrashLab</div>
       <p class="project-desc">We model AI-driven unemployment until the economy breaks. Digitally. Then we figure out what stops it. Then we do it again. The goal is to break it on a screen before it breaks in real life.</p>
       <span class="project-link">explore CrashLab →</span>
     </a>
 
-    <a href="/wontgetfooled" class="project-card">
+    <a href="https://www.newconsensus.com/projects/wgfaa" target="_blank" rel="noopener" class="project-card">
       <div class="project-name">The Won't Get Fooled Again Act</div>
       <p class="project-desc">The AI bubble is going to burst. When it does, Washington's instinct will be to write a very large check to the people who caused it. This is the law we're writing to make sure that doesn't happen again.</p>
       <span class="project-link">read the act →</span>
     </a>
 
-    <a href="/costofwaiting" class="project-card">
+    <a href="https://thecostofwaiting.org" target="_blank" rel="noopener" class="project-card">
       <div class="project-name">The Cost of Waiting</div>
       <p class="project-desc">Every year we don't act costs trillions. We did the math. We wish we hadn't. Here it is anyway.</p>
       <span class="project-link">see the cost →</span>
     </a>
 
-    <a href="/bigsim" class="project-card">
+    <a href="https://sim.newconsensus.ai" target="_blank" rel="noopener" class="project-card">
       <div class="project-name">BigSim</div>
       <p class="project-desc">An agent-based economic model so policymakers can test ideas before deploying them on actual humans. Somehow this doesn't exist yet. We're building it.</p>
       <span class="project-link">explore BigSim →</span>
     </a>
 
-    <a href="/convening" class="project-card">
+    <a href="https://www.newconsensus.com/projects/ai-convening" target="_blank" rel="noopener" class="project-card">
       <div class="project-name">2026 AI Convening</div>
       <p class="project-desc">Getting the people who'll actually have to govern through the AI crisis in a room to war-game it before it happens. Turns out you can prepare for things. Wild concept.</p>
       <span class="project-link">learn more →</span>
@@ -567,12 +568,12 @@
     <div class="past-card">
       <div class="past-name">The Green New Deal</div>
       <p class="past-desc">A WWII-scale mobilization to fix America's most pressing economic and environmental problems. Where it all began. We wrote it. They talked about it for years. Now we're writing the sequel.</p>
-      <div class="past-links"><a href="/gnd" class="past-link">read it →</a></div>
+      <div class="past-links"><a href="https://www.newconsensus.com/projects/the-green-new-deal" target="_blank" rel="noopener" class="past-link">read it →</a></div>
     </div>
     <div class="past-card">
       <div class="past-name">No More Bailouts</div>
       <p class="past-desc">Our original plan for converting failed banks to public banks. The Won't Get Fooled Again Act is the updated version. This is the director's cut.</p>
-      <div class="past-links"><a href="/bailouts" class="past-link">read it →</a></div>
+      <div class="past-links"><a href="https://www.newconsensus.com/projects/no-more-bailouts" target="_blank" rel="noopener" class="past-link">read it →</a></div>
     </div>
     <div class="past-card">
       <div class="past-name">NC News</div>
@@ -595,37 +596,37 @@ const projects = [
     finColor:'#FF8C42', eyeColor:'#1A1A2E', spotColor:'#FFB627',
     desc:'The whole plan. 20+ chapters, every sector. What a WWII-scale mobilization actually looks like when someone finally writes it down. If you read one thing, make it this. It\'s long. Sorry.',
     tags:['POLICY','20+ CHAPTERS','THE PLAN','CLIMATE','ECONOMY'],
-    url:'/read', pixelSize:5, baseSize:2.4, speed:0.35 },
+    url:'https://www.newconsensus.com/read', pixelSize:5, baseSize:2.4, speed:0.35 },
   { id:'crashlab', name:'CrashLab', badge:'SIMULATOR',
     bodyColor:'#00D4AA', outlineColor:'#008868', bellyColor:'#A0FFE8',
     finColor:'#009E80', eyeColor:'#1A1A2E', spotColor:'#40FFD0',
     desc:'We model AI-driven unemployment until the economy breaks. Digitally. Then we figure out what stops it. Then we do it again. The goal is to break it on a screen before it breaks in real life.',
     tags:['OPEN SOURCE','AI','POLICY TESTING'],
-    url:'/crashlab', pixelSize:4, baseSize:1.15, speed:0.85 },
+    url:'https://crashlab.org', pixelSize:4, baseSize:1.15, speed:0.85 },
   { id:'wgfaa', name:"Won't Get Fooled Again Act", badge:'POLICY',
     bodyColor:'#B388FF', outlineColor:'#7050C0', bellyColor:'#E8D8FF',
     finColor:'#8050E0', eyeColor:'#1A1A2E', spotColor:'#D0B0FF',
     desc:'The AI bubble is going to burst. When it does, Washington\'s instinct will be to write a very large check to the people who caused it. This is the law we\'re writing to make sure that doesn\'t happen again.',
     tags:['LEGISLATION','BANKING','ACCOUNTABILITY'],
-    url:'/wontgetfooled', pixelSize:4, baseSize:0.85, speed:0.7 },
+    url:'https://www.newconsensus.com/projects/wgfaa', pixelSize:4, baseSize:0.85, speed:0.7 },
   { id:'costwaiting', name:'The Cost of Waiting', badge:'DATA',
     bodyColor:'#FF6B6B', outlineColor:'#C04040', bellyColor:'#FFD0D0',
     finColor:'#D04848', eyeColor:'#1A1A2E', spotColor:'#FF9090',
     desc:'Every year we don\'t act costs trillions. We did the math. We wish we hadn\'t. Here it is anyway.',
     tags:['DATA VIZ','URGENCY','CLIMATE'],
-    url:'/costofwaiting', pixelSize:4, baseSize:0.75, speed:0.95 },
+    url:'https://thecostofwaiting.org', pixelSize:4, baseSize:0.75, speed:0.95 },
   { id:'bigsim', name:'BigSim', badge:'MODEL',
     bodyColor:'#FF8C42', outlineColor:'#C06020', bellyColor:'#FFD8B8',
     finColor:'#D06820', eyeColor:'#1A1A2E', spotColor:'#FFB060',
     desc:'An agent-based economic model so policymakers can test ideas before deploying them on actual humans. Somehow this doesn\'t exist yet. We\'re building it.',
     tags:['AGENT-BASED','ECONOMY','RESEARCH'],
-    url:'/bigsim', pixelSize:4, baseSize:0.95, speed:1.1 },
+    url:'https://sim.newconsensus.ai', pixelSize:4, baseSize:0.95, speed:1.1 },
   { id:'convening', name:'2026 AI Convening', badge:'EVENT',
     bodyColor:'#4FC3F7', outlineColor:'#2080B0', bellyColor:'#D0EFFF',
     finColor:'#2090D0', eyeColor:'#1A1A2E', spotColor:'#80D8FF',
     desc:'Getting the people who\'ll actually have to govern through the AI crisis in a room to war-game it before it happens. Turns out you can prepare for things. Wild concept.',
     tags:['AI','STRATEGY','2026'],
-    url:'/convening', pixelSize:4, baseSize:0.7, speed:1.2 }
+    url:'https://www.newconsensus.com/projects/ai-convening', pixelSize:4, baseSize:0.7, speed:1.2 }
 ];
 
 // ===== CANVAS SETUP =====
