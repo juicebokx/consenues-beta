@@ -742,7 +742,9 @@
 
       .stats-bar { grid-template-columns: 1fr 1fr; }
       .stats-bar-item { padding: 28px 20px; }
-      .stats-bar-item:nth-child(2) { border-right: none; }
+      .stats-bar-item:nth-child(2n) { border-right: none; }
+      .stats-bar-item:nth-child(3) { border-bottom: 1px solid var(--border); }
+      .stats-bar-item:nth-child(4) { border-bottom: 1px solid var(--border); }
 
       .assignment { grid-template-columns: 1fr; }
       .assignment-left { padding: 60px 24px 40px; border-right: none; border-bottom: 1px solid var(--border); }
