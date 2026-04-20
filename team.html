@@ -1,367 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/tokens.css">
+  <link rel="stylesheet" href="/tokens.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team — New Consensus</title>
   <meta name="description" content="New Consensus is what happens when you get tired of think tanks that think but don't do anything.">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .page-wrap {
-      padding-top: 92px;
+    :root {
+      --saikat: #e63329;
+      --zack: #4a9eff;
+      --bill: #39c96e;
+      --t-mono: 'JetBrains Mono', monospace;
+      --t-sans: 'Inter', sans-serif;
+      --t-bg: #0a0a0a;
+      --t-surface: #111;
+      --t-surface2: #181818;
+      --t-border: rgba(255,255,255,0.07);
+      --t-border-mid: rgba(255,255,255,0.14);
+      --t-text: #e0e0dc;
+      --t-text-dim: #666660;
+      --t-text-mid: #999990;
     }
 
-    .page-hero {
-      padding: 48px 40px 18px;
-      max-width: 980px;
-      animation: flicker 5s infinite;
-    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--t-bg); color: var(--t-text); font-family: var(--t-mono); font-size: 14px; line-height: 1.7; overflow-x: hidden; }
+    main.page-wrap { position: relative; z-index: 1; padding-top: 92px; }
 
-    .hero-headline {
-      font-size: clamp(40px, 8vw, 72px);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 18px;
-    }
+    @keyframes up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
 
-    .hero-subhead {
-      font-family: var(--font-mono);
-      font-size: 15px;
-      color: var(--gray-200);
-      line-height: 1.9;
-      max-width: 680px;
-    }
+    /* HERO */
+    .hero { padding: 80px 64px 72px; border-bottom: 1px solid var(--t-border-mid); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }
+    .hero-kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.3em; color: var(--red-400, #f7ff70); text-transform: uppercase; margin-bottom: 20px; opacity: 0; animation: up 0.6s 0.1s forwards; }
+    .hero-title { font-family: var(--t-sans); font-size: clamp(2.8rem,5vw,5rem); font-weight: 900; line-height: 1.0; color: #fff; letter-spacing: -0.03em; opacity: 0; animation: up 0.7s 0.2s forwards; }
+    .hero-right { opacity: 0; animation: up 0.7s 0.35s forwards; }
+    .hero-desc { font-size: 13px; color: var(--t-text-mid); line-height: 1.85; max-width: 440px; }
 
-    .bio-card {
-      background: var(--gray-900);
-      border: 1px solid var(--gray-700);
-      padding: 32px;
-      transition: border-color var(--transition-med);
-      position: relative;
-    }
+    /* ORG / TEXT SECTIONS */
+    .org-grid { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--t-border-mid); }
+    .org-cell { padding: 56px 64px; border-right: 1px solid var(--t-border); }
+    .org-cell:last-child { border-right: none; }
+    .org-label { font-size: 10px; font-weight: 700; letter-spacing: 0.3em; color: var(--t-text-dim); text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .org-label::before { content: ''; width: 16px; height: 2px; background: var(--red-400, #f7ff70); flex-shrink: 0; }
+    .org-heading { font-family: var(--t-sans); font-size: clamp(1.4rem,2.5vw,2rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .org-body { font-size: 13px; color: var(--t-text-mid); line-height: 1.85; }
+    .org-body p { margin-bottom: 14px; }
+    .org-body p:last-child { margin-bottom: 0; }
 
-    .bio-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--red-500);
-    }
+    /* SLIDE NAVIGATOR */
+    .team-section { border-bottom: 1px solid var(--t-border-mid); }
 
-    .bio-card:hover {
-      border-color: var(--gray-600);
-    }
+    .slide-nav { display: flex; border-bottom: 1px solid var(--t-border-mid); }
+    .stab { flex: 1; padding: 32px 40px 28px; cursor: pointer; border-right: 1px solid var(--t-border); position: relative; transition: background 0.25s; }
+    .stab:last-child { border-right: none; }
+    .stab-num { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--t-text-dim); margin-bottom: 12px; transition: color 0.25s; }
+    .stab-name { font-family: var(--t-sans); font-size: clamp(1.2rem,2.2vw,1.8rem); font-weight: 900; color: var(--t-text-dim); letter-spacing: -0.02em; line-height: 1; margin-bottom: 6px; transition: color 0.25s; }
+    .stab-role { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--t-text-dim); transition: color 0.25s; }
+    .stab-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; transform: scaleX(0); transition: transform 0.3s cubic-bezier(.4,0,.2,1); }
+    .stab.active .stab-bar { transform: scaleX(1); }
 
-    .bio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-      margin-top: 32px;
-    }
+    /* Saikat — red */
+    .stab-saikat:hover, .stab-saikat.active { background: rgba(230,51,41,0.07); }
+    .stab-saikat.active .stab-name, .stab-saikat.active .stab-role { color: var(--saikat); }
+    .stab-saikat .stab-bar { background: var(--saikat); }
+    /* Zack — blue */
+    .stab-zack:hover, .stab-zack.active { background: rgba(74,158,255,0.06); }
+    .stab-zack.active .stab-name, .stab-zack.active .stab-role { color: var(--zack); }
+    .stab-zack .stab-bar { background: var(--zack); }
+    /* Bill — green */
+    .stab-bill:hover, .stab-bill.active { background: rgba(57,201,110,0.06); }
+    .stab-bill.active .stab-name, .stab-bill.active .stab-role { color: var(--bill); }
+    .stab-bill .stab-bar { background: var(--bill); }
 
-    .bio-name {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
+    /* Panels */
+    .spanel { display: none; grid-template-columns: 1fr 280px; min-height: 480px; opacity: 0; transform: translateY(10px); transition: opacity 0.22s ease-out, transform 0.22s ease-out; }
+    .spanel.active { display: grid; }
+    .spanel.visible { opacity: 1; transform: translateY(0); }
 
-    .bio-title {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--red-300);
-      text-transform: lowercase;
-      margin-bottom: 16px;
-    }
-
-    .bio-body {
-      font-size: 14px;
-      color: var(--gray-300);
-      line-height: 1.7;
-    }
-
-    .bio-vitals {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid var(--gray-800);
-    }
-
-    .vital-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--gray-500);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    .vital-value {
-      font-size: 13px;
-      color: var(--white);
-    }
-
-    .fave-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--gray-500);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    .fave-val {
-      font-size: 13px;
-      color: var(--white);
-    }
-
-    .text-section {
-      padding: 56px 40px;
-      border-top: 1px solid var(--gray-800);
-      max-width: 860px;
-    }
-
-    .text-section-headline {
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      margin-bottom: 24px;
-      font-family: var(--font-mono);
-      text-transform: lowercase;
-    }
-
-    .text-section-body {
-      font-size: clamp(15px, 1.6vw, 17px);
-      color: var(--gray-300);
-      line-height: 1.85;
-      margin-bottom: 16px;
-    }
-
-    .text-section-body:last-child {
-      margin-bottom: 0;
-    }
-
-    .team-section-label {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gray-500);
-      margin-bottom: 8px;
-      padding: 56px 40px 0;
-    }
-
-    .contact-section {
-      padding: 56px 40px 80px;
-      border-top: 1px solid var(--gray-800);
-      max-width: 860px;
-    }
-
-    .contact-headline {
-      font-size: clamp(20px, 2.5vw, 28px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      margin-bottom: 16px;
-    }
-
-    .contact-body {
-      font-size: 16px;
-      color: var(--gray-300);
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
-
-    .contact-list {
+    .spanel-left {
+      padding: 56px 64px;
+      border-right: 1px solid var(--t-border);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      position: relative;
+      overflow: hidden;
     }
-
-    .contact-item {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--gray-400);
+    /* Scanlines */
+    .spanel-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.018) 3px, rgba(255,255,255,0.018) 4px);
+      pointer-events: none;
+      z-index: 0;
     }
+    .spanel-left > * { position: relative; z-index: 1; }
 
-    .contact-item a {
-      color: var(--red-300);
+    /* Ghost watermark */
+    .sp-ghost {
+      position: absolute;
+      font-family: var(--t-sans);
+      font-size: clamp(5rem, 12vw, 11rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      white-space: nowrap;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    .sp-saikat .sp-ghost { color: rgba(230,51,41,0.07); }
+    .sp-zack   .sp-ghost { color: rgba(74,158,255,0.07); }
+    .sp-bill   .sp-ghost { color: rgba(57,201,110,0.07); }
+
+    .sp-num { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; color: var(--t-text-dim); margin-bottom: 28px; }
+    .sp-name { font-family: var(--t-sans); font-size: clamp(2.8rem,5vw,5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .sp-role { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 36px; }
+    .sp-bio { font-family: var(--t-sans); font-size: 17px; color: var(--t-text); line-height: 1.85; max-width: 600px; margin-bottom: 36px; }
+    .sp-meta { display: flex; gap: 48px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--t-border); }
+    .sp-meta-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--t-text-dim); margin-bottom: 5px; }
+    .sp-meta-value { font-size: 12px; color: var(--t-text-mid); font-style: italic; line-height: 1.5; }
+
+    /* Terminal Twitter links */
+    .sp-twitter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-family: var(--t-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--t-text-dim);
+      transition: color 0.2s;
+      align-self: flex-start;
     }
+    .sp-twitter-arrow { opacity: 0.35; transition: opacity 0.2s; }
+    .sp-twitter:hover { color: var(--t-text); }
+    .sp-twitter:hover .sp-twitter-arrow { opacity: 1; }
+    .sp-saikat .sp-twitter:hover { color: var(--saikat); }
+    .sp-zack   .sp-twitter:hover { color: var(--zack); }
+    .sp-bill   .sp-twitter:hover { color: var(--bill); }
 
-    .contact-item a:hover {
-      color: var(--red-400);
-      border-color: var(--red-400);
-    }
+    /* Right panel */
+    .spanel-right { display: flex; flex-direction: column; }
 
-    @media (max-width: 768px) {
-      .page-hero { padding: 34px 24px; }
-      .bio-vitals { grid-template-columns: 1fr; }
-      .text-section { padding: 40px 24px; }
-      .team-section-label { padding: 40px 24px 0; }
-      .contact-section { padding: 40px 24px 64px; }
+    /* Ticker */
+    .ticker-wrap { border-bottom: 1px solid var(--t-border); overflow: hidden; height: 36px; display: flex; align-items: center; flex-shrink: 0; }
+    .ticker-track { display: flex; gap: 44px; animation: ticker-scroll 22s linear infinite; white-space: nowrap; padding-left: 32px; }
+    @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-item { display: flex; align-items: baseline; gap: 9px; font-size: 11px; }
+    .ticker-key { font-size: 8px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; flex-shrink: 0; }
+    .sp-saikat .ticker-key { color: var(--saikat); }
+    .sp-zack   .ticker-key { color: var(--zack); }
+    .sp-bill   .ticker-key { color: var(--bill); }
+    .ticker-val { color: var(--t-text-mid); }
+
+    /* Receipt */
+    .receipt-hd { padding: 16px 24px 12px; border-bottom: 1px dashed var(--t-border-mid); display: flex; align-items: center; gap: 10px; }
+    .receipt-hd-label { font-size: 9px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--t-text-dim); }
+    .receipt-hd-line { flex: 1; height: 1px; border-top: 1px dashed var(--t-border); }
+    .rrow { display: flex; gap: 12px; padding: 9px 24px; border-bottom: 1px solid var(--t-border); align-items: baseline; transition: background 0.15s; }
+    .rrow:last-child { border-bottom: none; }
+    .rrow:hover { background: rgba(255,255,255,0.02); }
+    .rk { font-size: 8px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; flex-shrink: 0; min-width: 48px; opacity: 0.8; }
+    .rk-sep { color: var(--t-text-dim); font-size: 9px; flex-shrink: 0; }
+    .rv { font-size: 11px; color: var(--t-text); line-height: 1.4; }
+
+    .sp-saikat .sp-name, .sp-saikat .sp-role { color: var(--saikat); }
+    .sp-zack   .sp-name, .sp-zack   .sp-role { color: var(--zack); }
+    .sp-bill   .sp-name, .sp-bill   .sp-role { color: var(--bill); }
+    .sp-saikat .rk { color: var(--saikat); }
+    .sp-zack   .rk { color: var(--zack); }
+    .sp-bill   .rk { color: var(--bill); }
+
+    /* CONTACT */
+    .contact { padding: 80px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-kicker { font-size: 10px; font-weight: 700; letter-spacing: 0.35em; color: var(--t-text-dim); text-transform: uppercase; margin-bottom: 20px; }
+    .contact-title { font-family: var(--t-sans); font-size: clamp(1.8rem,3vw,3rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 16px; }
+    .contact-sub { font-size: 12px; color: var(--t-text-mid); line-height: 1.8; }
+    .contact-right { display: flex; flex-direction: column; gap: 2px; }
+    .contact-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--t-surface); border: 1px solid var(--t-border); text-decoration: none; transition: border-color 0.2s, background 0.2s; gap: 16px; }
+    .contact-item:hover { border-color: var(--t-border-mid); background: var(--t-surface2); }
+    .contact-item-label { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--t-text-dim); }
+    .contact-item-email { font-size: 12px; color: var(--red-400, #f7ff70); letter-spacing: 0.02em; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s, transform 0.6s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 60px 24px 48px; }
+      .org-grid { grid-template-columns: 1fr; }
+      .org-cell { border-right: none; border-bottom: 1px solid var(--t-border); padding: 40px 24px; }
+      .slide-nav { flex-direction: column; }
+      .stab { border-right: none; border-bottom: 1px solid var(--t-border); padding: 20px 24px; }
+      .spanel.active { grid-template-columns: 1fr; }
+      .spanel-left { padding: 32px 24px; border-right: none; }
+      .sp-bio { font-size: 15px; }
+      .spanel-right { border-top: 1px solid var(--t-border); }
+      .contact { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
     }
-</style>
+  </style>
 </head>
 <body>
-
   <div class="scanlines"></div>
   <div class="scan-bar"></div>
-
-  <!-- Panic button is injected by shared-layout.js -->
 
   <div id="site-header"></div>
 
   <main class="page-wrap">
 
-    <section class="page-hero">
-      <p class="hero-eyebrow">the team</p>
-      <h1 class="hero-headline">The People Building the Plan</h1>
-      <p class="hero-subhead">New Consensus is what happens when you get tired of think tanks that think but don't do anything.</p>
-    </section>
-
-    <div class="text-section">
-      <h2 class="text-section-headline">what we do</h2>
-      <p class="text-section-body">We design comprehensive, detailed plans for governments to actually achieve economic renewal and transformation. Not vibes. Not white papers that die in someone's inbox. Actual plans.</p>
-      <p class="text-section-body">The tripocalypse — climate crisis, AI displacement, rising fascism — has the same root cause and the same solution. Rebuild the economy to solve all three simultaneously. We have everything we need to build that world in a single generation. The only thing stopping us is politics. Not physics. Politics.</p>
-      <p class="text-section-body">So we're fixing the politics part.</p>
-    </div>
-
-    <div class="text-section">
-      <h2 class="text-section-headline">why the old consensus sucks</h2>
-      <p class="text-section-body">The reigning economic consensus — the "Washington Consensus" — has been teaching world leaders to accept slow economic growth, stagnant wages, and gradual decline as "just how things are."</p>
-      <p class="text-section-body">We're done with that.</p>
-      <p class="text-section-body">A new consensus is rising. One that isn't afraid to think as big as the problems we face. We solve climate change, economic stagnation, and wealth gaps by proposing solutions modeled after mass economic mobilizations of the past. You know, when we actually built things.</p>
-      <p class="text-section-body">Like in 1942, when America retooled its entire economy in under three years because we had to.</p>
-      <p class="text-section-body">We're at that moment again. Except now the enemy is three things at once and also kind of abstract.</p>
-    </div>
-
-    <p class="team-section-label">the people building it</p>
-
-    <section class="section">
-      <div class="team-grid">
-
-        <div class="bio-card">
-          <div class="bio-name">Saikat Chakrabarti</div>
-          <div class="bio-title">Co-founder &amp; Congressional Policy Director</div>
-          <p class="bio-text">Founding engineer at Stripe, then decided payments were boring and went to organize the 2016 Bernie Sanders campaign instead. Co-founded Brand New Congress and Justice Democrats. Ran AOC&rsquo;s campaign, became her Chief of Staff, and led the effort to draft the Green New Deal.</p>
-          <p class="bio-text">Now he designs economic policy.</p>
-          <div class="bio-divider"></div>
-          <div class="bio-vitals">
-            <div class="vital-item">
-              <div class="vital-label">First Job</div>
-              <div class="vital-value">Founding engineer at Stripe</div>
-            </div>
-            <div class="vital-item">
-              <div class="vital-label">Hidden Talent</div>
-              <div class="vital-value">Explaining complex policy through metaphors nobody asked for</div>
-            </div>
-          </div>
-          <div class="faves-label">Favorites</div>
-          <div class="faves-list">
-            <div class="fave-row"><span class="fave-key">sport</span><span class="fave-val">Congressional speed-walking</span></div>
-            <div class="fave-row"><span class="fave-key">color</span><span class="fave-val">Green (New Deal green, specifically)</span></div>
-            <div class="fave-row"><span class="fave-key">color combo</span><span class="fave-val">Red state + Blue state = Purple policy</span></div>
-            <div class="fave-row"><span class="fave-key">building</span><span class="fave-val">The Capitol <em>(when people are actually working in it)</em></span></div>
-            <div class="fave-row"><span class="fave-key">book</span><span class="fave-val">The Big Short but for climate</span></div>
-            <div class="fave-row"><span class="fave-key">music</span><span class="fave-val">Campaign rally chants</span></div>
-            <div class="fave-row"><span class="fave-key">band</span><span class="fave-val">Rage Against the Machine <em>(obviously)</em></span></div>
-            <div class="fave-row"><span class="fave-key">game</span><span class="fave-val">4D chess with Mitch McConnell</span></div>
-            <div class="fave-row"><span class="fave-key">movie</span><span class="fave-val">Mr. Smith Goes to Washington <em>(unironically)</em></span></div>
-            <div class="fave-row"><span class="fave-key">food</span><span class="fave-val">Whatever AOC&rsquo;s staff ordered at 2am during Green New Deal drafting sessions</span></div>
-          </div>
-        </div>
-
-        <div class="bio-card">
-          <div class="bio-name">Zack Exley</div>
-          <div class="bio-title">Co-founder &amp; Executive Director</div>
-          <p class="bio-text">Pioneered tech-powered political campaigning back when that was weird (MoveOn.org, Howard Dean 2004). Co-founded Brand New Congress and Justice Democrats. Led distributed organizing for Bernie 2016. Helped shape the 2018 Green New Deal and spread it to other countries.</p>
-          <p class="bio-text">At New Consensus, he makes sure we actually build the thing instead of just talking about it.</p>
-          <div class="bio-divider"></div>
-          <div class="bio-vitals">
-            <div class="vital-item">
-              <div class="vital-label">First Job</div>
-              <div class="vital-value">Internet revolutionary (when the internet was still dial-up)</div>
-            </div>
-            <div class="vital-item">
-              <div class="vital-label">Hidden Talent</div>
-              <div class="vital-value">Making things actually happen instead of PowerPointing about them</div>
-            </div>
-          </div>
-          <div class="faves-label">Favorites</div>
-          <div class="faves-list">
-            <div class="fave-row"><span class="fave-key">sport</span><span class="fave-val">Marathon emailing</span></div>
-            <div class="fave-row"><span class="fave-key">color</span><span class="fave-val">Turning red into blue</span></div>
-            <div class="fave-row"><span class="fave-key">color combo</span><span class="fave-val">Progress bar blue + completion green</span></div>
-            <div class="fave-row"><span class="fave-key">building</span><span class="fave-val">Community centers (the people&rsquo;s architecture)</span></div>
-            <div class="fave-row"><span class="fave-key">book</span><span class="fave-val">Getting Things Done (he actually did them)</span></div>
-            <div class="fave-row"><span class="fave-key">music</span><span class="fave-val">Protest folk meets electronic organizing beats</span></div>
-            <div class="fave-row"><span class="fave-key">band</span><span class="fave-val">Public Enemy</span></div>
-            <div class="fave-row"><span class="fave-key">game</span><span class="fave-val">Civilization (but making it real)</span></div>
-            <div class="fave-row"><span class="fave-key">movie</span><span class="fave-val">Network (&ldquo;I&rsquo;m mad as hell!&rdquo;)</span></div>
-            <div class="fave-row"><span class="fave-key">food</span><span class="fave-val">Movement potluck casseroles</span></div>
-          </div>
-        </div>
-
-        <div class="bio-card">
-          <div class="bio-name">Bill O&rsquo;Toole</div>
-          <div class="bio-title">Researcher</div>
-          <p class="bio-text">Spent a decade as a journalist and editor in Burma and Pittsburgh, then pivoted to political communications and digital strategy. Now he&rsquo;s helping build Mission for America, which is over 20 chapters of economic policy that someone had to write.</p>
-          <p class="bio-text">He survived. Barely.</p>
-          <div class="bio-divider"></div>
-          <div class="bio-vitals">
-            <div class="vital-item">
-              <div class="vital-label">First Job</div>
-              <div class="vital-value">Journalist (back when newspapers existed)</div>
-            </div>
-            <div class="vital-item">
-              <div class="vital-label">Previous Life</div>
-              <div class="vital-value">Burma and Pittsburgh (the tonal whiplash was real)</div>
-            </div>
-            <div class="vital-item">
-              <div class="vital-label">Hidden Talent</div>
-              <div class="vital-value">Surviving 20+ chapter policy writing marathons without losing his mind (allegedly)</div>
-            </div>
-          </div>
-          <div class="faves-label">Favorites</div>
-          <div class="faves-list">
-            <div class="fave-row"><span class="fave-key">sport</span><span class="fave-val">Extreme deadline surfing</span></div>
-            <div class="fave-row"><span class="fave-key">color</span><span class="fave-val">The dark side of his eyelids at 4am</span></div>
-            <div class="fave-row"><span class="fave-key">color combo</span><span class="fave-val">Red-eye flight red + deadline panic yellow</span></div>
-            <div class="fave-row"><span class="fave-key">building</span><span class="fave-val">Any library with strong coffee</span></div>
-            <div class="fave-row"><span class="fave-key">book</span><span class="fave-val">Anything under 20 chapters</span></div>
-            <div class="fave-row"><span class="fave-key">music</span><span class="fave-val">White noise for concentration</span></div>
-            <div class="fave-row"><span class="fave-key">band</span><span class="fave-val">The sound of silence (when research is finally done)</span></div>
-            <div class="fave-row"><span class="fave-key">game</span><span class="fave-val">Minesweeper (it&rsquo;s basically fact-checking)</span></div>
-            <div class="fave-row"><span class="fave-key">movie</span><span class="fave-val">All the President&rsquo;s Men (the journalist&rsquo;s Lord of the Rings)</span></div>
-            <div class="fave-row"><span class="fave-key">food</span><span class="fave-val">Coffee (survival juice) &middot; More coffee &middot; Whatever can be eaten with one hand while typing</span></div>
-          </div>
-        </div>
-
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-kicker">the team</div>
+        <h1 class="hero-title">The People<br>Building<br>the Plan</h1>
+      </div>
+      <div class="hero-right">
+        <p class="hero-desc">New Consensus is what happens when you get tired of think tanks that think but don't do anything.</p>
       </div>
     </section>
 
-    <div class="contact-section">
-      <h2 class="contact-headline">get in touch — we actually respond.</h2>
-      <p class="contact-body">Questions? Want to collaborate? Just want to yell about the Tripocalypse?</p>
-      <div class="contact-list">
-        <div class="contact-item">General inquiries: <a href="mailto:info@newconsensus.com">info@newconsensus.com</a></div>
-        <div class="contact-item">Press / Media: <a href="mailto:press@newconsensus.com">press@newconsensus.com</a></div>
-        <div class="contact-item">Zack directly: <a href="mailto:zack@newconsensus.com">zack@newconsensus.com</a> (he asked to be included)</div>
+    <div class="org-grid">
+      <div class="org-cell fade-in">
+        <div class="org-label">what we do</div>
+        <h2 class="org-heading">Actual Plans.<br>Not Vibes.</h2>
+        <div class="org-body">
+          <p>We design comprehensive, detailed plans for governments to actually achieve economic renewal and transformation. Not white papers that die in someone's inbox.</p>
+          <p>The tripocalypse — climate crisis, AI displacement, rising fascism — has the same root cause and the same solution. Rebuild the economy to solve all three simultaneously.</p>
+        </div>
+      </div>
+      <div class="org-cell fade-in">
+        <div class="org-label">why the old consensus sucks</div>
+        <h2 class="org-heading">We're Done<br>With That.</h2>
+        <div class="org-body">
+          <p>The "Washington Consensus" has been teaching world leaders to accept slow growth, stagnant wages, and gradual decline as "just how things are."</p>
+          <p>We have everything we need to build that world in a single generation. The only thing stopping us is politics. Not physics. Politics. So we're fixing the politics part.</p>
+        </div>
       </div>
     </div>
+
+    <div class="team-section fade-in">
+      <div class="slide-nav">
+        <div class="stab stab-saikat active" onclick="sw('saikat')">
+          <div class="stab-num">01 / 03</div>
+          <div class="stab-name">Saikat Chakrabarti</div>
+          <div class="stab-role">Co-founder · Policy Director</div>
+          <div class="stab-bar"></div>
+        </div>
+        <div class="stab stab-zack" onclick="sw('zack')">
+          <div class="stab-num">02 / 03</div>
+          <div class="stab-name">Zack Exley</div>
+          <div class="stab-role">Co-founder · Exec Director</div>
+          <div class="stab-bar"></div>
+        </div>
+        <div class="stab stab-bill" onclick="sw('bill')">
+          <div class="stab-num">03 / 03</div>
+          <div class="stab-name">Bill O'Toole</div>
+          <div class="stab-role">Researcher</div>
+          <div class="stab-bar"></div>
+        </div>
+      </div>
+
+      <div class="spanel sp-saikat active" id="panel-saikat">
+        <div class="spanel-left">
+          <div class="sp-ghost" aria-hidden="true">Saikat</div>
+          <div class="sp-num">01 / 03</div>
+          <div class="sp-name">Saikat<br>Chakrabarti</div>
+          <div class="sp-role">Co-founder &amp; Congressional Policy Director</div>
+          <p class="sp-bio">Founding engineer at Stripe, then decided payments were boring and went to organize the 2016 Bernie Sanders campaign instead. Co-founded Brand New Congress and Justice Democrats. Ran AOC&rsquo;s campaign, became her Chief of Staff, and led the effort to draft the Green New Deal. Now he designs economic policy.</p>
+          <div class="sp-meta">
+            <div class="sp-meta-item">
+              <div class="sp-meta-label">First Job</div>
+              <div class="sp-meta-value">Founding engineer at Stripe</div>
+            </div>
+            <div class="sp-meta-item">
+              <div class="sp-meta-label">Hidden Talent</div>
+              <div class="sp-meta-value">Explaining complex policy through metaphors nobody asked for</div>
+            </div>
+          </div>
+          <a href="https://x.com/saikatc" target="_blank" class="sp-twitter"><span class="sp-twitter-arrow">→</span> x.com/@saikatc</a>
+        </div>
+        <div class="spanel-right">
+          <div class="ticker-wrap"><div class="ticker-track">
+            <span class="ticker-item"><span class="ticker-key">sport</span><span class="ticker-val">Congressional speed-walking</span></span>
+            <span class="ticker-item"><span class="ticker-key">band</span><span class="ticker-val">Rage Against the Machine</span></span>
+            <span class="ticker-item"><span class="ticker-key">game</span><span class="ticker-val">4D chess w/ Mitch McConnell</span></span>
+            <span class="ticker-item"><span class="ticker-key">movie</span><span class="ticker-val">Mr. Smith Goes to Washington</span></span>
+            <span class="ticker-item"><span class="ticker-key">food</span><span class="ticker-val">Whatever AOC ordered at 2am</span></span>
+            <span class="ticker-item"><span class="ticker-key">sport</span><span class="ticker-val">Congressional speed-walking</span></span>
+            <span class="ticker-item"><span class="ticker-key">band</span><span class="ticker-val">Rage Against the Machine</span></span>
+            <span class="ticker-item"><span class="ticker-key">game</span><span class="ticker-val">4D chess w/ Mitch McConnell</span></span>
+            <span class="ticker-item"><span class="ticker-key">movie</span><span class="ticker-val">Mr. Smith Goes to Washington</span></span>
+            <span class="ticker-item"><span class="ticker-key">food</span><span class="ticker-val">Whatever AOC ordered at 2am</span></span>
+          </div></div>
+          <div class="receipt-hd"><span class="receipt-hd-label">field notes</span><span class="receipt-hd-line"></span></div>
+          <div class="rrow"><span class="rk">sport</span><span class="rk-sep">—</span><span class="rv">Congressional speed-walking</span></div>
+          <div class="rrow"><span class="rk">color</span><span class="rk-sep">—</span><span class="rv">Green (New Deal green, specifically)</span></div>
+          <div class="rrow"><span class="rk">combo</span><span class="rk-sep">—</span><span class="rv">Red state + Blue state = Purple policy</span></div>
+          <div class="rrow"><span class="rk">building</span><span class="rk-sep">—</span><span class="rv">The Capitol (when people work in it)</span></div>
+          <div class="rrow"><span class="rk">book</span><span class="rk-sep">—</span><span class="rv">The Big Short but for climate</span></div>
+          <div class="rrow"><span class="rk">band</span><span class="rk-sep">—</span><span class="rv">Rage Against the Machine</span></div>
+          <div class="rrow"><span class="rk">game</span><span class="rk-sep">—</span><span class="rv">4D chess w/ Mitch McConnell</span></div>
+          <div class="rrow"><span class="rk">movie</span><span class="rk-sep">—</span><span class="rv">Mr. Smith Goes to Washington</span></div>
+          <div class="rrow"><span class="rk">food</span><span class="rk-sep">—</span><span class="rv">Whatever AOC ordered at 2am</span></div>
+        </div>
+      </div>
+
+      <div class="spanel sp-zack" id="panel-zack">
+        <div class="spanel-left">
+          <div class="sp-ghost" aria-hidden="true">Zack</div>
+          <div class="sp-num">02 / 03</div>
+          <div class="sp-name">Zack<br>Exley</div>
+          <div class="sp-role">Co-founder &amp; Executive Director</div>
+          <p class="sp-bio">Pioneered tech-powered political campaigning back when that was weird (MoveOn.org, Howard Dean 2004). Co-founded Brand New Congress and Justice Democrats. Led distributed organizing for Bernie 2016. Helped shape the 2018 Green New Deal and spread it to other countries. At New Consensus, he makes sure we actually build the thing.</p>
+          <div class="sp-meta">
+            <div class="sp-meta-item">
+              <div class="sp-meta-label">First Job</div>
+              <div class="sp-meta-value">Internet revolutionary (when dial-up was still a thing)</div>
+            </div>
+            <div class="sp-meta-item">
+              <div class="sp-meta-label">Hidden Talent</div>
+              <div class="sp-meta-value">Making things actually happen instead of PowerPointing about them</div>
+            </div>
+          </div>
+          <a href="https://x.com/zackexley" target="_blank" class="sp-twitter"><span class="sp-twitter-arrow">→</span> x.com/@zackexley</a>
+        </div>
+        <div class="spanel-right">
+          <div class="ticker-wrap"><div class="ticker-track">
+            <span class="ticker-item"><span class="ticker-key">sport</span><span class="ticker-val">Marathon emailing</span></span>
+            <span class="ticker-item"><span class="ticker-key">band</span><span class="ticker-val">Public Enemy</span></span>
+            <span class="ticker-item"><span class="ticker-key">game</span><span class="ticker-val">Civilization (making it real)</span></span>
+            <span class="ticker-item"><span class="ticker-key">movie</span><span class="ticker-val">Network ("I'm mad as hell!")</span></span>
+            <span class="ticker-item"><span class="ticker-key">food</span><span class="ticker-val">Movement potluck casseroles</span></span>
+            <span class="ticker-item"><span class="ticker-key">sport</span><span class="ticker-val">Marathon emailing</span></span>
+            <span class="ticker-item"><span class="ticker-key">band</span><span class="ticker-val">Public Enemy</span></span>
+            <span class="ticker-item"><span class="ticker-key">game</span><span class="ticker-val">Civilization (making it real)</span></span>
+            <span class="ticker-item"><span class="ticker-key">movie</span><span class="ticker-val">Network ("I'm mad as hell!")</span></span>
+            <span class="ticker-item"><span class="ticker-key">food</span><span class="ticker-val">Movement potluck casseroles</span></span>
+          </div></div>
+          <div class="receipt-hd"><span class="receipt-hd-label">field notes</span><span class="receipt-hd-line"></span></div>
+          <div class="rrow"><span class="rk">sport</span><span class="rk-sep">—</span><span class="rv">Marathon emailing</span></div>
+          <div class="rrow"><span class="rk">color</span><span class="rk-sep">—</span><span class="rv">Turning red into blue</span></div>
+          <div class="rrow"><span class="rk">combo</span><span class="rk-sep">—</span><span class="rv">Progress bar blue + completion green</span></div>
+          <div class="rrow"><span class="rk">building</span><span class="rk-sep">—</span><span class="rv">Community centers (the people's architecture)</span></div>
+          <div class="rrow"><span class="rk">book</span><span class="rk-sep">—</span><span class="rv">Getting Things Done (he actually did them)</span></div>
+          <div class="rrow"><span class="rk">band</span><span class="rk-sep">—</span><span class="rv">Public Enemy</span></div>
+          <div class="rrow"><span class="rk">game</span><span class="rk-sep">—</span><span class="rv">Civilization (but making it real)</span></div>
+          <div class="rrow"><span class="rk">movie</span><span class="rk-sep">—</span><span class="rv">Network ("I'm mad as hell!")</span></div>
+          <div class="rrow"><span class="rk">food</span><span class="rk-sep">—</span><span class="rv">Movement potluck casseroles</span></div>
+        </div>
+      </div>
+
+      <div class="spanel sp-bill" id="panel-bill">
+        <div class="spanel-left">
+          <div class="sp-ghost" aria-hidden="true">Bill</div>
+          <div class="sp-num">03 / 03</div>
+          <div class="sp-name">Bill<br>O'Toole</div>
+          <div class="sp-role">Researcher</div>
+          <p class="sp-bio">Spent a decade as a journalist and editor in Burma and Pittsburgh, then pivoted to political communications and digital strategy. Now he&rsquo;s helping build Mission for America, which is over 20 chapters of economic policy that someone had to write. He survived. Barely.</p>
+          <div class="sp-meta">
+            <div class="sp-meta-item">
+              <div class="sp-meta-label">First Job</div>
+              <div class="sp-meta-value">Journalist (back when newspapers existed)</div>
+            </div>
+            <div class="sp-meta-item">
+              <div class="sp-meta-label">Previous Life</div>
+              <div class="sp-meta-value">Burma and Pittsburgh (the tonal whiplash was real)</div>
+            </div>
+          </div>
+        </div>
+        <div class="spanel-right">
+          <div class="ticker-wrap"><div class="ticker-track">
+            <span class="ticker-item"><span class="ticker-key">sport</span><span class="ticker-val">Extreme deadline surfing</span></span>
+            <span class="ticker-item"><span class="ticker-key">book</span><span class="ticker-val">Anything under 20 chapters</span></span>
+            <span class="ticker-item"><span class="ticker-key">game</span><span class="ticker-val">Minesweeper (= fact-checking)</span></span>
+            <span class="ticker-item"><span class="ticker-key">movie</span><span class="ticker-val">All the President's Men</span></span>
+            <span class="ticker-item"><span class="ticker-key">food</span><span class="ticker-val">Coffee · more coffee</span></span>
+            <span class="ticker-item"><span class="ticker-key">sport</span><span class="ticker-val">Extreme deadline surfing</span></span>
+            <span class="ticker-item"><span class="ticker-key">book</span><span class="ticker-val">Anything under 20 chapters</span></span>
+            <span class="ticker-item"><span class="ticker-key">game</span><span class="ticker-val">Minesweeper (= fact-checking)</span></span>
+            <span class="ticker-item"><span class="ticker-key">movie</span><span class="ticker-val">All the President's Men</span></span>
+            <span class="ticker-item"><span class="ticker-key">food</span><span class="ticker-val">Coffee · more coffee</span></span>
+          </div></div>
+          <div class="receipt-hd"><span class="receipt-hd-label">field notes</span><span class="receipt-hd-line"></span></div>
+          <div class="rrow"><span class="rk">sport</span><span class="rk-sep">—</span><span class="rv">Extreme deadline surfing</span></div>
+          <div class="rrow"><span class="rk">color</span><span class="rk-sep">—</span><span class="rv">Dark side of his eyelids at 4am</span></div>
+          <div class="rrow"><span class="rk">combo</span><span class="rk-sep">—</span><span class="rv">Red-eye red + deadline panic yellow</span></div>
+          <div class="rrow"><span class="rk">building</span><span class="rk-sep">—</span><span class="rv">Any library with strong coffee</span></div>
+          <div class="rrow"><span class="rk">book</span><span class="rk-sep">—</span><span class="rv">Anything under 20 chapters</span></div>
+          <div class="rrow"><span class="rk">band</span><span class="rk-sep">—</span><span class="rv">Sound of silence (research is done)</span></div>
+          <div class="rrow"><span class="rk">game</span><span class="rk-sep">—</span><span class="rv">Minesweeper (= fact-checking)</span></div>
+          <div class="rrow"><span class="rk">movie</span><span class="rk-sep">—</span><span class="rv">All the President's Men</span></div>
+          <div class="rrow"><span class="rk">food</span><span class="rk-sep">—</span><span class="rv">Coffee · more coffee · one-hand food</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="contact">
+      <div class="fade-in">
+        <div class="contact-kicker">get in touch</div>
+        <h2 class="contact-title">We actually respond.</h2>
+        <p class="contact-sub">Questions? Want to collaborate? Just want to yell about the Tripocalypse?</p>
+      </div>
+      <div class="contact-right fade-in">
+        <a href="mailto:info@newconsensus.com" class="contact-item">
+          <span class="contact-item-label">General inquiries</span>
+          <span class="contact-item-email">info@newconsensus.com</span>
+        </a>
+        <a href="mailto:press@newconsensus.com" class="contact-item">
+          <span class="contact-item-label">Press / Media</span>
+          <span class="contact-item-email">press@newconsensus.com</span>
+        </a>
+        <a href="mailto:zack@newconsensus.com" class="contact-item">
+          <span class="contact-item-label">Zack directly (he asked)</span>
+          <span class="contact-item-email">zack@newconsensus.com</span>
+        </a>
+      </div>
+    </section>
 
   </main>
 
@@ -383,19 +446,10 @@
       today.setHours(0, 0, 0, 0);
       return Math.ceil((inauguration - today) / (1000 * 60 * 60 * 24));
     }
-
     function updateCountdownDisplays() {
-      const daysRemaining = getDaysRemaining();
-      const daysLeftEl = document.getElementById('daysLeft');
-      const bigCountdownEl = document.getElementById('bigCountdown');
-      if (daysLeftEl) {
-        daysLeftEl.textContent = daysRemaining.toLocaleString() + ' days';
-      }
-      if (bigCountdownEl) {
-        bigCountdownEl.textContent = daysRemaining.toLocaleString();
-      }
+      const el = document.getElementById('bigCountdown');
+      if (el) el.textContent = getDaysRemaining().toLocaleString();
     }
-
     updateCountdownDisplays();
     setInterval(updateCountdownDisplays, 60 * 1000);
 
@@ -409,86 +463,28 @@
     }
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeGlitch(); });
 
-    function handleNewsletterSubmit(e) {
-      e.preventDefault();
-      var btn = e.target.querySelector('button');
-      btn.textContent = 'subscribed!';
-      btn.style.background = '#00a020';
-      setTimeout(function() { btn.textContent = 'subscribe'; btn.style.background = ''; }, 3000);
+    /* Slide navigator */
+    function sw(person) {
+      document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+      const panels = document.querySelectorAll('.spanel');
+      panels.forEach(p => p.classList.remove('visible'));
+      setTimeout(() => {
+        panels.forEach(p => p.classList.remove('active'));
+        document.querySelector('.stab-' + person).classList.add('active');
+        const target = document.getElementById('panel-' + person);
+        target.classList.add('active');
+        requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('visible')));
+      }, 160);
     }
 
-    (function setupNavDropdown() {
-      const dropdowns = document.querySelectorAll('.nav-dropdown');
-      if (!dropdowns.length) return;
+    document.querySelectorAll('.spanel.active').forEach(p => {
+      requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('visible')));
+    });
 
-      function isMobile() {
-        return window.innerWidth <= 768;
-      }
-
-      function setOpen(dropdown, open) {
-        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-        dropdown.classList.toggle('open', open);
-        if (open) {
-          dropdown.setAttribute('open', '');
-        } else {
-          dropdown.removeAttribute('open');
-        }
-        if (trigger) {
-          trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        }
-      }
-
-      function closeAll() {
-        dropdowns.forEach((dropdown) => setOpen(dropdown, false));
-      }
-
-      dropdowns.forEach((dropdown) => {
-        const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-        if (!trigger) return;
-
-        trigger.addEventListener('click', (e) => {
-          if (isMobile()) {
-            e.preventDefault();
-            setOpen(dropdown, !dropdown.classList.contains('open'));
-          }
-        });
-
-        trigger.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            setOpen(dropdown, !dropdown.classList.contains('open'));
-          }
-          if (e.key === 'Escape') {
-            setOpen(dropdown, false);
-            trigger.blur();
-          }
-        });
-
-        dropdown.addEventListener('mouseenter', () => {
-          if (!isMobile()) setOpen(dropdown, true);
-        });
-
-        dropdown.addEventListener('mouseleave', () => {
-          if (!isMobile()) setOpen(dropdown, false);
-        });
-
-        dropdown.addEventListener('focusout', (e) => {
-          if (!dropdown.contains(e.relatedTarget)) {
-            setOpen(dropdown, false);
-          }
-        });
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.nav-dropdown')) {
-          closeAll();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeAll();
-      });
-    })();
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
   </script>
 
   <script src="/shared-layout.js"></script>

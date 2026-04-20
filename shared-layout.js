@@ -91,8 +91,9 @@
   .nav-dropdown-menu {
     position: absolute;
     top: calc(100% + 8px);
-    left: 0;
-    min-width: 240px;
+    right: 0;
+    left: auto;
+    min-width: 200px;
     background: #141414;
     border: 1px solid #2a2a2a;
     border-radius: 8px;
