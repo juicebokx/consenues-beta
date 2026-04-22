@@ -2,338 +2,365 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" href="/tokens.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Mission - New Consensus</title>
-  <meta name="description" content="Build a clean economy with great jobs for everyone. That's the assignment.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mission — New Consensus</title>
+<meta name="description" content="Build a clean economy with great jobs for everyone. That's the assignment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1a6ef5;
+  --blue-dark: #0f4fc2;
+  --yellow: #ffcc00;
+  --off-white: #f7f7f5;
+  --black: #111111;
+  --white: #ffffff;
+  --gray: #6b7280;
+  --light-gray: #e5e7eb;
+  --display: 'Barlow Condensed', sans-serif;
+  --body: 'Barlow', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); background: var(--off-white); color: var(--black); overflow-x: hidden; }
 
-    .page-wrap {
-      padding-top: 92px;
-    }
+.page-wrap { padding-top: 72px; }
 
-    .hero {
-      max-width: 980px;
-      padding: 54px 40px 28px;
-    }
+/* HERO */
+.hero {
+  background: var(--blue);
+  min-height: 100vh;
+  padding: 80px 80px 80px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--red-300);
-      margin-bottom: 18px;
-    }
+.hero::before { display: none; }
 
-    .hero-headline {
-      font-size: clamp(52px, 8vw, 96px);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-      color: var(--white);
-    }
+.hero-eyebrow {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  margin-bottom: 20px; position: relative;
+}
 
-    .hero-subhead {
-      font-size: clamp(20px, 2.8vw, 30px);
-      color: var(--gray-400);
-      line-height: 1.3;
-      font-style: italic;
-    }
+.hero-title {
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(80px, 12vw, 160px);
+  line-height: 0.9; text-transform: uppercase;
+  letter-spacing: -2px; position: relative;
+}
+.hero-title .line-black { color: var(--white); display: block; }
+.hero-title .line-blue { color: var(--yellow); display: block; }
 
-    .section {
-      padding: 78px 40px;
-      border-top: 1px solid var(--gray-800);
-      position: relative;
-    }
+.hero-bottom {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-top: 60px; position: relative;
+}
+.hero-sub {
+  font-size: 18px; color: rgba(255,255,255,0.65); line-height: 1.5;
+  max-width: 400px;
+}
 
-    .section-tinted {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
-    }
+/* SCROLL TEXT SECTION */
+.scroll-text-section {
+  background: var(--off-white);
+  padding: 48px 80px 56px;
+  overflow: hidden;
+}
 
-    .section-slot {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gray-500);
-      margin-bottom: 16px;
-    }
+.scroll-text-wrap {
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(18px, 2.2vw, 30px);
+  text-transform: uppercase; line-height: 1.4;
+}
 
-    .section-headline {
-      font-size: clamp(30px, 4.5vw, 54px);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      text-transform: lowercase;
-      margin-bottom: 26px;
-      max-width: 980px;
-      color: var(--white);
-    }
+.scroll-text-wrap .t-black { color: var(--black); }
+.scroll-text-wrap .t-orange { color: #e05a2b; }
+.scroll-text-wrap .t-green  { color: #2a9d5c; }
+.scroll-text-wrap .t-blue   { color: #2563eb; }
+.scroll-text-wrap .t-gold   { color: #c8920a; }
+.scroll-text-wrap .t-dim    { color: #aaa; }
 
-    .section-body {
-      max-width: 860px;
-      font-size: clamp(16px, 1.8vw, 18px);
-      color: var(--gray-300);
-      line-height: 1.8;
-    }
+/* TWO-COL BLUE SECTION */
+.two-col-blue {
+  background: var(--blue);
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.two-col-panel {
+  padding: 60px 72px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.two-col-panel:last-child { border-right: none; }
 
-    .section-body p + p {
-      margin-top: 18px;
-    }
+.panel-eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+}
+.panel-eyebrow::before { content: ''; display: block; width: 20px; height: 2px; background: rgba(255,255,255,0.4); }
 
-    .section-body strong {
-      color: var(--white);
-      font-weight: 700;
-    }
+.panel-title {
+  font-family: var(--display); font-weight: 900; font-size: 52px;
+  text-transform: uppercase; line-height: 0.95; letter-spacing: -1px;
+  color: var(--white); margin-bottom: 28px;
+}
 
-    .punchline {
-      font-style: italic;
-      color: var(--gray-400);
-      font-size: clamp(20px, 2.2vw, 28px);
-      line-height: 1.3;
-      margin: 22px 0;
-    }
+.panel-body {
+  font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.65);
+}
+.panel-body p + p { margin-top: 16px; }
+.panel-body strong { color: var(--white); font-weight: 500; }
 
-    .peak-callout {
-      margin: 30px 0;
-      padding: 24px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: clamp(24px, 4vw, 40px);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      line-height: 1.1;
-      text-transform: uppercase;
-      color: var(--red-400);
-    }
+.panel-items { margin-top: 32px; }
+.panel-item {
+  padding: 16px 0;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.panel-item-problem {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px;
+}
+.panel-item-solution {
+  font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.3;
+}
 
-    .mission-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 16px;
-      font-family: var(--font-mono);
-      color: var(--red-300);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      padding-bottom: 2px;
-      font-size: 14px;
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
-      transition: color var(--transition-fast), border-color var(--transition-fast);
-    }
+/* HOW SIMPLE */
+.how-section {
+  background: var(--off-white);
+  padding: 100px 80px;
+}
 
-    .mission-link:hover {
-      color: var(--red-400);
-      border-color: var(--red-400);
-    }
+.section-eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 32px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 20px; height: 2px; background: var(--blue); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
+.how-grid {
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 80px; align-items: start;
+}
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.how-label {
+  font-family: var(--display); font-weight: 900;
+  font-size: 54px; text-transform: uppercase;
+  line-height: 0.95; letter-spacing: -1px; color: var(--black);
+}
+.how-label em { font-style: italic; color: var(--blue); }
 
-    .america-bridge {
-      padding: 80px 40px;
-      border-top: 1px solid var(--gray-800);
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    }
+.logic-item {
+  display: grid; grid-template-columns: 28px 1fr;
+  gap: 20px; padding: 28px 0;
+  border-top: 1px solid var(--light-gray);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .5s, transform .5s;
+}
+.logic-item.visible { opacity: 1; transform: translateY(0); }
+.logic-item:nth-child(2) { transition-delay: .08s; }
+.logic-item:nth-child(3) { transition-delay: .16s; }
+.logic-item:nth-child(4) { transition-delay: .24s; }
 
-    .america-bridge-inner {
-      max-width: 640px;
-    }
+.logic-arrow {
+  font-family: var(--mono); font-size: 14px;
+  color: var(--blue); margin-top: 2px;
+}
+.logic-item-body { font-size: 15px; color: #555; line-height: 1.6; }
 
-    .america-bridge-title {
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--white);
-      margin-bottom: 18px;
-    }
+/* CTA BLOCK */
+.cta-block {
+  background: var(--blue);
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.cta-panel {
+  padding: 80px 72px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.cta-panel:last-child { border-right: none; }
+.cta-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 20px;
+}
+.cta-heading {
+  font-family: var(--display); font-weight: 900; font-size: 48px;
+  text-transform: uppercase; line-height: 0.95; letter-spacing: -1px;
+  color: var(--white); margin-bottom: 24px;
+}
+.cta-heading em { font-style: italic; color: var(--yellow); }
+.cta-sub { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 32px; }
+.btn {
+  display: inline-block; font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none;
+  padding: 14px 28px; transition: opacity .15s; cursor: pointer; border: none;
+}
+.btn-blue { background: var(--white); color: var(--blue); font-weight: 700; }
+.btn-blue:hover { opacity: 0.88; }
+.btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.35); color: var(--white); }
+.btn-outline:hover { border-color: var(--white); }
 
-    .america-bridge-body {
-      font-size: clamp(15px, 1.6vw, 17px);
-      color: var(--gray-400);
-      line-height: 1.75;
-      margin-bottom: 28px;
-      max-width: 520px;
-    }
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .55s, transform .55s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .america-bridge-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-mono);
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      color: var(--red-300);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      padding-bottom: 2px;
-      transition: color 0.15s ease, border-color 0.15s ease;
-    }
+/* MOBILE */
+@media (max-width: 768px) {
+  .page-wrap { padding-top: 64px; }
 
-    .america-bridge-link:hover {
-      color: var(--red-400);
-      border-color: var(--red-400);
-    }
+  .hero {
+    padding: 60px 24px 40px;
+    min-height: 90vh;
+  }
+  .hero-title {
+    font-size: clamp(56px, 14vw, 80px);
+  }
+  .hero-bottom { margin-top: 32px; }
+  .hero-sub { font-size: 15px; }
 
-    @media (max-width: 768px) {
-      .page-wrap { padding-top: 84px; }
-      .hero { padding: 38px 24px 18px; }
-      .section { padding: 54px 24px; }
-      .america-bridge { padding: 56px 24px; }
-    }
+  .scroll-text-section { padding: 40px 24px; }
+  .scroll-text-wrap { font-size: clamp(16px, 4.5vw, 22px); }
+
+  .two-col-blue { grid-template-columns: 1fr; }
+  .two-col-panel {
+    padding: 48px 24px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .two-col-panel:last-child { border-bottom: none; }
+  .panel-title { font-size: 40px; }
+
+  .how-section { padding: 60px 24px; }
+  .how-grid { grid-template-columns: 1fr; gap: 40px; }
+  .how-label { font-size: 40px; }
+
+  .cta-block { grid-template-columns: 1fr; }
+  .cta-panel {
+    padding: 48px 24px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .cta-panel:last-child { border-bottom: none; }
+  .cta-heading { font-size: 36px; }
+}
 </style>
 </head>
 <body>
-  <div class="scanlines"></div>
-  <div class="scan-bar"></div>
-
-  <!-- Panic button is injected by shared-layout.js -->
-
   <div id="site-header"></div>
 
   <main class="page-wrap">
-    <section class="hero reveal">
-      <p class="hero-eyebrow">the solution</p>
-      <h1 class="hero-headline">The Mission for Humanity</h1>
-      <p class="hero-subhead">For humanity. For the 21st century. No pressure.</p>
-    </section>
 
-    <section class="section reveal">
-      <div class="section-slot">02</div>
-      <h2 class="section-headline">here's the assignment.</h2>
-      <div class="section-body">
-        <p>AI is eliminating jobs. Someone needs to create new ones. The planet is heating. Someone needs to build a clean economy. Fascism is rising. Someone needs to prove democracy still works.</p>
-        <p>Turns out all three assignments are the same assignment.</p>
-        <p>Build a clean economy with great jobs for everyone. That's it. That's the whole thing. Prosperity, democracy, freedom — all of it falls out of that one project if you do it right.</p>
-        <p class="punchline">Simple. Obvious. Boring. Been done before.</p>
-        <p>More on that in a second.</p>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">the solution</div>
+      <h1 class="hero-title">
+        <span class="line-black">The Mission</span>
+        <span class="line-black">for</span>
+        <span class="line-blue">Humanity</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-sub">For humanity. For the 21st century. No pressure.</p>
       </div>
     </section>
 
-    <section class="section section-tinted reveal">
-      <div class="section-slot">03</div>
-      <h2 class="section-headline">spoiler: we've survived this before.</h2>
-      <div class="section-body">
-        <p><strong>1930s. Sound familiar?</strong></p>
-        <p>Few getting rich. Masses falling behind. Machines taking jobs. Very weird people winning elections. Countries sleepwalking toward something nobody wanted to name out loud.</p>
-        <p>You know what happened next.</p>
-        <p>Hundreds of millions died. Then — and only then — humanity finally did the obvious thing. Reset the whole system. Jobs for everyone. A middle class. A future. The thing we should have done before the dying started.</p>
-        <p>A billion people got that future. A billion more are still waiting. And a billion whose parents had it just lost it.</p>
-        <p class="punchline">Here we are again.</p>
+    <!-- SCROLL TEXT -->
+    <section class="scroll-text-section">
+      <div class="scroll-text-wrap">
+        <span class="t-black">AI is eliminating jobs. </span><span class="t-orange">Someone needs to create new ones. </span><span class="t-black">The planet is heating. </span><span class="t-green">Someone needs to build a clean economy. </span><span class="t-black">Fascism is rising. </span><span class="t-blue">Someone needs to prove democracy still works. </span><span class="t-black">Turns out all three assignments are </span><span class="t-gold">the same assignment. </span><span class="t-black">Build a clean economy with great jobs for everyone. That's it. That's the whole thing. Prosperity, democracy, freedom — all of it falls out of that one project if you do it right. </span><span class="t-dim">Simple. Obvious. Boring. Been done before. More on that in a second.</span>
       </div>
     </section>
 
-    <section class="section reveal">
-      <div class="section-slot">04</div>
-      <h2 class="section-headline">so. do we really have to wait for world war 3?</h2>
-      <div class="section-body">
-        <p>Every single time. Same story. Same solution. Different body count.</p>
-        <p>The solution is always massive public investment. Jobs for everyone. Reset the system. Build the thing that needs to be built. It works every time. We just never do it until after the catastrophe.</p>
-        <p class="peak-callout">DO WE REALLY HAVE TO WAIT FOR WORLD WAR 3 TO ACTUALLY HAPPEN TO HIT RESET?</p>
-        <p class="punchline">Sure hope not.</p>
-        <p>Here's our radical idea: do it now. Before the dying. Novel concept. We're workshopping it.</p>
+    <!-- TWO COL — spoiler + so. -->
+    <div class="two-col-blue">
+      <div class="two-col-panel reveal">
+        <div class="panel-eyebrow">03 · spoiler: we've survived this before.</div>
+        <div class="panel-title">1930s.<br>Sound<br>familiar?</div>
+        <div class="panel-body">
+          <p>Few getting rich. Masses falling behind. Machines taking jobs. Very weird people winning elections. Countries sleepwalking toward something nobody wanted to name out loud.</p>
+          <p>You know what happened next. Hundreds of millions died. Then — and only then — humanity finally did the obvious thing.</p>
+          <p>Reset the whole system. Jobs for everyone. A middle class. A future. The thing we should have done before the dying started.</p>
+          <p>A billion people got that future. A billion more are still waiting. And a billion whose parents had it just lost it. Here we are again.</p>
+        </div>
+      </div>
+      <div class="two-col-panel reveal">
+        <div class="panel-eyebrow">04 · so. do we really have to wait for world war 3?</div>
+        <div class="panel-items">
+          <div class="panel-item">
+            <div class="panel-item-problem">every single time.</div>
+            <div class="panel-item-solution">Same story. Same solution. Different body count.</div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-item-problem">the solution is always</div>
+            <div class="panel-item-solution">massive public investment. Jobs for everyone. Reset the system. Build the thing that needs to be built. It works every time. We just never do it until after the catastrophe.</div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-item-problem">DO WE REALLY HAVE TO WAIT FOR WORLD WAR 3 TO ACTUALLY HAPPEN TO HIT RESET?</div>
+            <div class="panel-item-solution">Sure hope not. Here's our radical idea: do it now. Before the dying. Novel concept. We're workshopping it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW SIMPLE -->
+    <section class="how-section">
+      <div class="section-eyebrow">05 · here's how simple this actually is.</div>
+      <div class="how-grid">
+        <div class="how-label reveal">Fix<br>one.<br><em>Fix<br>all<br>three.</em></div>
+        <div class="logic-items">
+          <div class="logic-item">
+            <div class="logic-arrow">→</div>
+            <div>
+              <div class="logic-item-body">If you want to build a bike shed, you can build a bike shed. If you're a country and you want to build a new economy with great jobs for everyone, you can build that too. Same logic. Bigger shed.</div>
+            </div>
+          </div>
+          <div class="logic-item">
+            <div class="logic-arrow">→</div>
+            <div>
+              <div class="logic-item-body">The crises feed each other. So do the solutions. A clean economy creates jobs. Jobs kill desperation. Desperation dead means fascism starved. Fascism starved means climate policy survives. Fix one. Fix all three. It has always worked this way.</div>
+            </div>
+          </div>
+          <div class="logic-item">
+            <div class="logic-arrow">→</div>
+            <div>
+              <div class="logic-item-body">We wrote the plan. It's long. It covers everything. You should read it.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section section-tinted reveal">
-      <div class="section-slot">05</div>
-      <h2 class="section-headline">here's how simple this actually is.</h2>
-      <div class="section-body">
-        <p>If you want to build a bike shed, you can build a bike shed.</p>
-        <p>If you're a country and you want to build a new economy with great jobs for everyone, you can build that too. Same logic. Bigger shed.</p>
-        <p>The crises feed each other. So do the solutions. A clean economy creates jobs. Jobs kill desperation. Desperation dead means fascism starved. Fascism starved means climate policy survives.</p>
-        <p>Fix one. Fix all three. It has always worked this way.</p>
-        <p>We wrote the plan. It's long. It covers everything. You should read it.</p>
-        <a href="https://www.newconsensus.com/read" class="mission-link" target="_blank" rel="noopener noreferrer">read the mission for america → (we wrote it down so you wouldn't have to)</a>
+    <!-- CTA BLOCK -->
+    <div class="cta-block">
+      <div class="cta-panel">
+        <div>
+          <div class="cta-label">read the mission for america →</div>
+          <div class="cta-heading">The Mission<br>for <em>America</em></div>
+          <p class="cta-sub">(we wrote it down so you wouldn't have to)</p>
+          <p class="cta-sub" style="margin-top:16px;">Real change needs real plans. The Mission for America is our first detailed national blueprint for thriving in the age of AI — creating prosperity, rebuilding industry, and accelerating the clean economy.</p>
+        </div>
+        <a href="/mission-for-america" class="btn btn-blue" style="margin-top:32px; align-self:flex-start;">Explore the Mission for America →</a>
       </div>
-    </section>
-
-    <section class="america-bridge reveal">
-      <div class="america-bridge-inner">
-        <h2 class="america-bridge-title">Real change needs real plans.</h2>
-        <p class="america-bridge-body">The Mission for America is our first detailed national blueprint for thriving in the age of AI — creating prosperity, rebuilding industry, and accelerating the clean economy.</p>
-        <a href="/mission-for-america" class="america-bridge-link">Explore the Mission for America →</a>
+      <div class="cta-panel" style="justify-content:center; align-items:center;">
+        <div class="cta-heading" style="font-size:32px; color:rgba(255,255,255,0.12); font-style:italic;">Build a clean economy<br>with great jobs<br>for everyone.</div>
       </div>
-    </section>
+    </div>
 
   </main>
 
   <div id="site-footer"></div>
 
-  <div class="glitch-overlay" id="glitchOverlay">
-    <button class="close-glitch" onclick="closeGlitch()">x ok I get it</button>
-    <div class="countdown-big" id="bigCountdown">1,018</div>
-    <div class="countdown-label-big">days until someone has to have a plan</div>
-  </div>
-
   <script>
-    function getDaysRemaining() {
-      const inauguration = new Date('2029-01-20');
-      inauguration.setHours(0, 0, 0, 0);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return Math.ceil((inauguration - today) / (1000 * 60 * 60 * 24));
-    }
-
-    function updateCountdownDisplays() {
-      const bigCountdownEl = document.getElementById('bigCountdown');
-      if (bigCountdownEl) {
-        bigCountdownEl.textContent = getDaysRemaining().toLocaleString();
-      }
-    }
-
-    function triggerPanic() {
-      document.getElementById('glitchOverlay').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeGlitch() {
-      document.getElementById('glitchOverlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeGlitch();
-    });
-
-    updateCountdownDisplays();
-    setInterval(updateCountdownDisplays, 60 * 1000);
-
-    (function setupRevealAnimations() {
-      const revealItems = document.querySelectorAll('.reveal');
-      if (!revealItems.length) return;
-
-      const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            obs.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -8% 0px'
-      });
-
-      revealItems.forEach((item, index) => {
-        item.style.transitionDelay = `${Math.min(index * 70, 180)}ms`;
-        observer.observe(item);
-      });
-    })();
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .logic-item').forEach(el => obs.observe(el));
   </script>
 
   <script src="/shared-layout.js"></script>
