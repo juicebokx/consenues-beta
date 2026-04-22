@@ -337,6 +337,7 @@
     padding: 0 !important;
     border-top: none !important;
     gap: 0 !important;
+    background: #0a0a0a;
   }
 
   .footer-main {
