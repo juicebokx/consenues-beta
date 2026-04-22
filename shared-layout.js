@@ -1037,7 +1037,6 @@
   <div class="panic-modal-header">
     <div>
       <span class="pm-rec-dot"></span>
-      <span class="pm-rec-label">Emergency broadcast</span>
     </div>
     <button class="pm-close-btn" id="pm-close">&times; close (fine, I&rsquo;ll help)</button>
   </div>
