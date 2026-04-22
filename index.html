@@ -963,86 +963,6 @@
     }
 
     /* ============================================
-       PANIC OVERLAY
-    ============================================ */
-    .glitch-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--black);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .glitch-overlay.active {
-      display: flex;
-      animation: glitchIn 0.3s ease-out;
-    }
-
-    .emergency-text {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--red-500);
-      text-transform: uppercase;
-      letter-spacing: 6px;
-      margin-bottom: 48px;
-      animation: blink 0.8s infinite;
-    }
-
-    .countdown-big {
-      font-family: var(--font-mono);
-      font-size: clamp(60px, 15vw, 120px);
-      color: var(--white);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .countdown-label-big {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--gray-500);
-      margin-top: 16px;
-      text-transform: lowercase;
-    }
-
-    .panic-subtext {
-      font-size: 15px;
-      color: var(--gray-400);
-      max-width: 440px;
-      margin-top: 48px;
-      line-height: 1.8;
-    }
-
-    .panic-subtext strong {
-      color: var(--white);
-    }
-
-    .close-glitch {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      background: none;
-      border: 1px solid var(--gray-600);
-      color: var(--gray-400);
-      padding: 10px 20px;
-      font-size: 12px;
-      font-family: var(--font-mono);
-      transition: all var(--transition-fast);
-    }
-
-    .close-glitch:hover {
-      border-color: var(--red-500);
-      color: var(--red-400);
-    }
-
-    /* ============================================
        RESPONSIVE
     ============================================ */
     @media (max-width: 768px) {
@@ -1331,16 +1251,6 @@ The last time everything broke at once, the people who showed up early shaped ev
   <!-- Footer -->
   <div id="site-footer"></div>
 
-  <!-- Panic Overlay -->
-  <div class="glitch-overlay" id="glitchOverlay">
-    <button class="close-glitch" onclick="closeGlitch()">× close (fine, I'll help)</button>
-    <div class="emergency-text">DON'T PANIC</div>
-    <div class="countdown-label-big">oh good, you found the panic button</div>
-    <div class="countdown-big" id="bigCountdown">1,018</div>
-    <div class="countdown-label-big">days to get everything in place</div>
-    <p class="panic-subtext" id="panicSubtext">Start preparing with us now. Sign up to serve in the 2029 presidential administration.<br><br>AI's eating jobs. Climate's eating continents. Fascism's eating democracy. In <span id="panicDaysInline">1,018</span> days, a new government will need a plan and several thousand people to staff it. We're writing the plan. You could be one of the people.</p>
-  </div>
-
   <script>
     // Set current date in VHS timestamp
     const now = new Date();
@@ -1365,57 +1275,22 @@ The last time everything broke at once, the people who showed up early shaped ev
     function updateCountdownDisplays() {
       const daysRemaining = getDaysRemaining();
       const daysLeftEl = document.getElementById('daysLeft');
-      const bigCountdownEl = document.getElementById('bigCountdown');
-      const panicSubtextEl = document.getElementById('panicSubtext');
-      const panicDaysInlineEl = document.getElementById('panicDaysInline');
       const daysRemainingText = daysRemaining.toLocaleString();
-
-      if (daysLeftEl) {
-        daysLeftEl.textContent = daysRemainingText + ' days';
-      }
-      if (bigCountdownEl) {
-        bigCountdownEl.textContent = daysRemainingText;
-      }
-      if (panicSubtextEl) {
-        panicSubtextEl.innerHTML = "Start preparing with us now. Sign up to serve in the 2029 presidential administration.<br><br>AI's eating jobs. Climate's eating continents. Fascism's eating democracy. In " + daysRemainingText + " days, a new government will need a plan and several thousand people to staff it. We're writing the plan. You could be one of the people.";
-      }
-      if (panicDaysInlineEl) {
-        panicDaysInlineEl.textContent = daysRemainingText;
-      }
+      if (daysLeftEl) daysLeftEl.textContent = daysRemainingText + ' days';
     }
 
     updateCountdownDisplays();
     setInterval(updateCountdownDisplays, 60 * 1000);
 
-    // Panic button functions
-    function triggerPanic() {
-      const overlay = document.getElementById('glitchOverlay');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeGlitch() {
-      const overlay = document.getElementById('glitchOverlay');
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeGlitch();
-      }
-    });
-
-    // Easter egg: Konami code triggers panic
+    // Easter egg: Konami code triggers panic modal
     let konamiCode = [];
     const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    
+
     document.addEventListener('keydown', (e) => {
       konamiCode.push(e.key);
       konamiCode = konamiCode.slice(-10);
       if (konamiCode.join(',') === konamiSequence.join(',')) {
-        triggerPanic();
+        if (typeof window.openPanicModal === 'function') window.openPanicModal();
       }
     });
 

@@ -430,39 +430,7 @@
 
   <div id="site-footer"></div>
 
-  <div class="glitch-overlay" id="glitchOverlay">
-    <button class="close-glitch" onclick="closeGlitch()">x ok I get it</button>
-    <div class="emergency-text">THIS IS FINE</div>
-    <div class="countdown-big" id="bigCountdown">1,018</div>
-    <div class="countdown-label-big">days until someone has to have a plan</div>
-    <p class="panic-subtext">The next president takes office January 2029. By then, AI will have hollowed out entire professions. The climate will be worse. The economy will be&hellip; whatever this is. <strong>They&rsquo;ll need a plan. This is the plan.</strong></p>
-  </div>
-
   <script>
-    function getDaysRemaining() {
-      const inauguration = new Date('2029-01-20');
-      inauguration.setHours(0, 0, 0, 0);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return Math.ceil((inauguration - today) / (1000 * 60 * 60 * 24));
-    }
-    function updateCountdownDisplays() {
-      const el = document.getElementById('bigCountdown');
-      if (el) el.textContent = getDaysRemaining().toLocaleString();
-    }
-    updateCountdownDisplays();
-    setInterval(updateCountdownDisplays, 60 * 1000);
-
-    function triggerPanic() {
-      document.getElementById('glitchOverlay').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeGlitch() {
-      document.getElementById('glitchOverlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeGlitch(); });
-
     /* Slide navigator */
     function sw(person) {
       document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));

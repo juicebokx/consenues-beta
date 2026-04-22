@@ -524,55 +524,168 @@
     line-height: 1.1;
   }
 
-  .shared-glitch-overlay {
+  .panic-modal-wrap {
     display: none;
     position: fixed;
     inset: 0;
-    background: #0a0a0a;
     z-index: 2000;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    padding: 40px;
+  }
+
+  .panic-modal-wrap.active { display: flex; }
+
+  .pm-scanlines {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .panic-modal {
+    position: relative;
+    width: 500px;
+    max-width: 94vw;
+    background: #060608;
+    border: 1px solid rgba(255,255,255,0.1);
+    z-index: 2;
+  }
+
+  .panic-modal-header {
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pm-rec-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff2a14;
+    animation: pmBlink 1s step-end infinite;
+    display: inline-block;
+  }
+
+  @keyframes pmBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .pm-rec-label {
+    font-size: 8px;
+    letter-spacing: 0.28em;
+    color: rgba(255,60,40,0.55);
+    text-transform: uppercase;
+    margin-left: 7px;
+    vertical-align: middle;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  .pm-close-btn {
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.12);
+    background: transparent;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .pm-close-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+  .panic-modal-body {
+    padding: 44px 52px 52px;
     text-align: center;
   }
 
-  .shared-glitch-overlay.active { display: flex; }
+  .pm-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 28px;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
 
-  .shared-glitch-overlay .close-glitch {
+  .pm-counter-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .pm-counter-num {
+    font-size: 46px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    position: relative;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  .pm-ghost {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    background: none;
-    border: 1px solid #2a2a2a;
-    color: #909090;
-    padding: 10px 16px;
-    border-radius: 8px;
+    inset: 0;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+    pointer-events: none;
+    opacity: 0;
+    transition: none;
     font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  .pm-ghost-r { color: rgba(255,30,10,0.6); }
+  .pm-ghost-b { color: rgba(0,170,255,0.4); }
+
+  .pm-counter-sub {
+    font-size: 8px;
+    letter-spacing: 0.28em;
+    color: rgba(255,255,255,0.18);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 36px;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  .pm-rule {
+    width: 28px;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 auto 32px;
+  }
+
+  .pm-headline {
     font-size: 12px;
-    cursor: pointer;
-    text-transform: lowercase;
-  }
-
-  .shared-glitch-overlay .close-glitch:hover {
-    color: #ffffff;
-    border-color: #404040;
-  }
-
-  .shared-glitch-overlay .emergency-text {
+    color: rgba(255,255,255,0.62);
+    line-height: 1.75;
+    letter-spacing: 0.03em;
+    margin-bottom: 22px;
     font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-    font-size: clamp(40px, 9vw, 96px);
-    color: #ff2020;
-    letter-spacing: 0.08em;
-    margin-bottom: 24px;
   }
 
-  .shared-glitch-overlay .emergency-sub {
+  .pm-body-text {
+    font-size: 10px;
+    color: rgba(255,255,255,0.26);
+    line-height: 2;
+    letter-spacing: 0.03em;
     font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-    font-size: 14px;
-    color: #909090;
-    max-width: 560px;
-    line-height: 1.7;
+  }
+
+  .pm-glitch-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    opacity: 0;
+    pointer-events: none;
   }
 
   @media (max-width: 768px) {
@@ -899,9 +1012,130 @@
   }
 
   function injectPanicButton() {
-    // If this page already has its own panic button, leave it alone.
-    if (document.querySelector('.panic-btn')) return;
-    if (document.getElementById('shared-panic-btn')) return;
+    // Inject the shared modal once
+    if (!document.getElementById('shared-panic-modal')) {
+      const wrap = document.createElement('div');
+      wrap.id = 'shared-panic-modal';
+      wrap.className = 'panic-modal-wrap';
+      wrap.innerHTML = `
+<div class="pm-scanlines"></div>
+<div class="panic-modal" id="pm-box">
+  <div class="pm-glitch-line" id="pm-g1"></div>
+  <div class="pm-glitch-line" id="pm-g2"></div>
+  <div class="panic-modal-header">
+    <div>
+      <span class="pm-rec-dot"></span>
+      <span class="pm-rec-label">Emergency broadcast</span>
+    </div>
+    <button class="pm-close-btn" id="pm-close">&times; close (fine, I&rsquo;ll help)</button>
+  </div>
+  <div class="panic-modal-body">
+    <span class="pm-eyebrow">oh good, you found the panic button</span>
+    <div class="pm-counter-wrap">
+      <span class="pm-ghost pm-ghost-r" id="pm-ghost-r"></span>
+      <span class="pm-ghost pm-ghost-b" id="pm-ghost-b"></span>
+      <span class="pm-counter-num" id="pm-counter"></span>
+    </div>
+    <span class="pm-counter-sub">days to get everything in place</span>
+    <div class="pm-rule"></div>
+    <p class="pm-headline">Start preparing with us now. Sign up to serve in the 2029 presidential administration.</p>
+    <p class="pm-body-text">AI&rsquo;s eating jobs. Climate&rsquo;s eating continents. Fascism&rsquo;s eating democracy.<br>In <span id="pm-days-inline"></span> days, a new government will need a plan<br>and several thousand people to staff it.<br>We&rsquo;re writing the plan. You could be one of the people.</p>
+  </div>
+</div>`;
+      document.body.appendChild(wrap);
+
+      function getDays() {
+        const t = new Date('2029-01-20');
+        t.setHours(0,0,0,0);
+        const n = new Date();
+        n.setHours(0,0,0,0);
+        return Math.ceil((t - n) / 864e5);
+      }
+
+      function updateCounter() {
+        const d = getDays().toLocaleString();
+        const el = document.getElementById('pm-counter');
+        const gr = document.getElementById('pm-ghost-r');
+        const gb = document.getElementById('pm-ghost-b');
+        const il = document.getElementById('pm-days-inline');
+        if (el) el.textContent = d;
+        if (gr) gr.textContent = d;
+        if (gb) gb.textContent = d;
+        if (il) il.textContent = d;
+      }
+      updateCounter();
+
+      const box = document.getElementById('pm-box');
+      const cm  = document.getElementById('pm-counter');
+      const gr  = document.getElementById('pm-ghost-r');
+      const gb  = document.getElementById('pm-ghost-b');
+      const g1  = document.getElementById('pm-g1');
+      const g2  = document.getElementById('pm-g2');
+      const CH  = ['1','0','3','|','_','\u2588','\u2592'];
+
+      function corrupt() {
+        let s = '';
+        for (let i = 0; i < 4; i++) s += CH[Math.floor(Math.random() * CH.length)];
+        return s[0] + ',' + s.slice(1, 4);
+      }
+
+      function glitch() {
+        const tv = getDays().toLocaleString();
+        const fr = [corrupt(), tv, corrupt(), tv];
+        let f = 0;
+        const iv = setInterval(function() {
+          const v = fr[f++];
+          if (cm) cm.textContent = v;
+          if (f >= fr.length) { clearInterval(iv); if (cm) cm.textContent = tv; }
+        }, 60);
+        const rx = (Math.random() - 0.5) * 5;
+        const bx = (Math.random() - 0.5) * 4;
+        if (gr) gr.style.cssText = 'opacity:1;transform:translate(' + rx + 'px,1px)';
+        if (gb) gb.style.cssText = 'opacity:1;transform:translate(' + bx + 'px,-1px)';
+        if (g1) g1.style.cssText = 'top:' + (Math.floor(Math.random()*280+60)) + 'px;background:rgba(255,30,10,.1);opacity:1;height:2px';
+        if (g2) g2.style.cssText = 'top:' + (Math.floor(Math.random()*280+80)) + 'px;background:rgba(0,170,255,.07);opacity:1;height:1px';
+        if (box) box.style.transform = 'translateX(' + ((Math.random()-0.5)*3) + 'px)';
+        setTimeout(function() {
+          if (gr) gr.style.cssText = 'opacity:0';
+          if (gb) gb.style.cssText = 'opacity:0';
+          if (g1) g1.style.opacity = '0';
+          if (g2) g2.style.opacity = '0';
+          if (box) box.style.transform = '';
+        }, 110);
+      }
+
+      setTimeout(glitch, 500);
+      setInterval(glitch, 3400);
+
+      function openModal() {
+        wrap.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        if (box) {
+          box.style.transition = 'opacity .2s,transform .2s';
+          box.style.opacity = '0';
+          box.style.transform = 'scaleY(.03) scaleX(1.04)';
+          setTimeout(function() {
+            wrap.classList.remove('active');
+            box.style.cssText = '';
+            document.body.style.overflow = '';
+          }, 220);
+        }
+      }
+
+      document.getElementById('pm-close').addEventListener('click', closeModal);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && wrap.classList.contains('active')) closeModal();
+      });
+
+      window.openPanicModal  = openModal;
+      window.closePanicModal = closeModal;
+    }
+
+    // Inject the floating button if no page-level panic button exists
+    if (document.querySelector('.panic-btn') || document.getElementById('shared-panic-btn')) return;
 
     const btn = document.createElement('button');
     btn.id = 'shared-panic-btn';
@@ -909,60 +1143,8 @@
     btn.setAttribute('aria-label', 'Panic button');
     btn.innerHTML = '<span>PANIC</span>';
     document.body.appendChild(btn);
-
-    // Reuse an existing overlay if the page already defines one.
-    let overlay = document.getElementById('glitchOverlay')
-      || document.querySelector('.glitch-overlay');
-
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.id = 'glitchOverlay';
-      overlay.className = 'shared-glitch-overlay';
-      overlay.innerHTML = [
-        '<button class="close-glitch" type="button" aria-label="close">\u00d7 close</button>',
-        '<div class="emergency-text">DON\'T PANIC</div>',
-        '<div class="emergency-sub">you found the panic button. now get back to work \u2014 there isn\'t much time.</div>'
-      ].join('');
-      document.body.appendChild(overlay);
-    }
-
-    function openOverlay() {
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeOverlay() {
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    // Prefer any page-defined handlers so existing behavior on index/library/etc. wins.
-    btn.addEventListener('click', function () {
-      if (typeof window.triggerPanic === 'function') {
-        window.triggerPanic();
-      } else {
-        openOverlay();
-      }
-    });
-
-    const closeBtn = overlay.querySelector('.close-glitch');
-    if (closeBtn && !closeBtn.onclick) {
-      closeBtn.addEventListener('click', function () {
-        if (typeof window.closeGlitch === 'function') {
-          window.closeGlitch();
-        } else {
-          closeOverlay();
-        }
-      });
-    }
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        if (typeof window.closeGlitch === 'function') {
-          window.closeGlitch();
-        } else {
-          closeOverlay();
-        }
-      }
+    btn.addEventListener('click', function() {
+      if (typeof window.openPanicModal === 'function') window.openPanicModal();
     });
   }
 
