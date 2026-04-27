@@ -3,9 +3,9 @@
 (() => {
   const palettes = {
     red:    ['#ff2020', '#ff4040', '#ff6060'],
-    blue:   ['#0000cc', '#0000ff', '#3366ff'],
+    blue:   ['#4D80FF', '#6E9CFF', '#90BAFF'],
     purple: ['#8b5cf6', '#a78bfa', '#c4b5fd'],
-    yellow: ['#d4c84a', '#e0d870', '#ede99a']
+    yellow: ['#8A6200', '#A87B00', '#C49400']
   };
   const keys = Object.keys(palettes);
   const shades = palettes[keys[Math.floor(Math.random() * keys.length)]];
