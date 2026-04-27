@@ -304,11 +304,12 @@
     .past-card {
       padding: 28px 36px;
       border-right: 3px solid var(--gold);
+      border-bottom: 3px solid var(--gold);
       text-decoration: none;
       transition: all 0.1s;
       background: var(--bg);
     }
-    .past-card:last-child { border-right: none; }
+    .past-card:nth-child(3n) { border-right: none; }
     .past-card:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow); z-index: 1; }
     .past-type { font-size: 9px; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 8px; }
     .past-name { font-family: var(--mono); font-size: 1.15rem; font-weight: 900; color: var(--ink); line-height: 1.1; margin-bottom: 10px; }
