@@ -1079,25 +1079,7 @@
 </head>
 <body>
 
-  <script>
-    const cssVar = (name) =>
-      getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-
-    const palettes = {
-      red: [cssVar('--palette-red-500'), cssVar('--palette-red-400'), cssVar('--palette-red-300')],
-      blue: [cssVar('--palette-blue-500'), cssVar('--palette-blue-400'), cssVar('--palette-blue-300')],
-      purple: [cssVar('--palette-purple-500'), cssVar('--palette-purple-400'), cssVar('--palette-purple-300')],
-      green: [cssVar('--palette-green-500'), cssVar('--palette-green-400'), cssVar('--palette-green-300')],
-      yellow: [cssVar('--palette-yellow-500'), cssVar('--palette-yellow-400'), cssVar('--palette-yellow-300')]
-    };
-    const colors = Object.keys(palettes);
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const shades = palettes[randomColor];
-    console.log('Selected color:', randomColor, shades);
-    document.documentElement.style.setProperty('--red-500', shades[0]);
-    document.documentElement.style.setProperty('--red-400', shades[1]);
-    document.documentElement.style.setProperty('--red-300', shades[2]);
-  </script>
+  <script src="/palette-randomizer.js"></script>
 
   <!-- VHS Effects -->
   <div class="scanlines"></div>
