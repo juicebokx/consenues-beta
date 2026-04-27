@@ -48,6 +48,8 @@
     }
     .hero-title .accent { color: var(--purple); }
     .hero-desc { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; font-weight: 700; }
+    .hero-desc--mobile { display: none; }
+    .hero-desc--desktop { display: block; }
     .hero-hint {
       display: inline-flex; align-items: center; gap: 8px;
       margin-top: 20px;
@@ -343,6 +345,8 @@
         color: #fff;
       }
       .hero-desc { font-size: 14px; max-width: 100%; color: rgba(255,255,255,0.65); }
+      .hero-desc--desktop { display: none; }
+      .hero-desc--mobile { display: block; }
       .hero-hint { display: none; }
 
       /* Fish tank — hidden */
@@ -478,7 +482,8 @@
       <h1 class="hero-title">The<br><span class="accent">Projects</span></h1>
     </div>
     <div>
-      <p class="hero-desc">The think tank has a fish tank. The fish tank has the plan. The plan is going to save the world. The fish are just here for moral support.</p>
+      <p class="hero-desc hero-desc--desktop">The think tank has a fish tank. The fish tank has the plan. The plan is going to save the world. The fish are just here for moral support.</p>
+      <p class="hero-desc hero-desc--mobile">Most think tanks have a projects page. Ours has a fish tank. You're on mobile so you'll just have to trust us on that one.</p>
       <div class="hero-hint">👇 click the water to cast</div>
     </div>
   </section>
