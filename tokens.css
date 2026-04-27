@@ -355,7 +355,7 @@ button {
 .cta-primary {
   background: var(--red-500);
   border-color: var(--red-500);
-  color: var(--black);
+  color: var(--white);
 }
 
 .cta-primary:hover {
