@@ -89,6 +89,7 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      min-width: 0;
     }
     /* Scanlines */
     .spanel-left::before {
@@ -151,10 +152,10 @@
     .sp-bill   .sp-twitter:hover { color: var(--bill); }
 
     /* Right panel */
-    .spanel-right { display: flex; flex-direction: column; }
+    .spanel-right { display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
 
     /* Ticker */
-    .ticker-wrap { border-bottom: 1px solid var(--t-border); overflow: hidden; height: 36px; display: flex; align-items: center; flex-shrink: 0; }
+    .ticker-wrap { border-bottom: 1px solid var(--t-border); overflow: hidden; height: 36px; display: flex; align-items: center; flex-shrink: 0; width: 100%; }
     .ticker-track { display: flex; gap: 44px; animation: ticker-scroll 22s linear infinite; white-space: nowrap; padding-left: 32px; }
     @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .ticker-item { display: flex; align-items: baseline; gap: 9px; font-size: 11px; }
