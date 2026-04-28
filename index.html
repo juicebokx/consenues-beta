@@ -1473,5 +1473,137 @@ The last time everything broke at once, the people who showed up early shaped ev
   </script>
 
   <script src="/shared-layout.js"></script>
-  <!-- <script src="/cms-wire.js"></script> --></body>
+  <!-- <script src="/cms-wire.js"></script> -->
+
+  <!-- ============================================
+       SITE MODE ALERT — homepage only
+  ============================================ -->
+  <div id="site-mode-alert" style="display:none;" role="dialog" aria-modal="true" aria-label="Switch to serious mode?">
+  </div>
+
+  <style>
+    #site-mode-alert {
+      position: fixed;
+      top: 80px;
+      left: 24px;
+      z-index: 9000;
+      width: 280px;
+      background: #f5f5f0;
+      border: 1px solid #888;
+      box-shadow: 4px 4px 0 #000;
+      font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      color: #111;
+    }
+    #site-mode-alert .sma-titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #888;
+      padding: 5px 8px;
+    }
+    #site-mode-alert .sma-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    #site-mode-alert .sma-close {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      padding: 1px 5px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #site-mode-alert .sma-close:hover { background: rgba(255,255,255,0.15); }
+    #site-mode-alert .sma-body {
+      padding: 14px 14px 12px;
+    }
+    #site-mode-alert .sma-heading {
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      color: #111;
+    }
+    #site-mode-alert .sma-desc {
+      font-size: 12px;
+      color: #555;
+      margin: 0 0 14px;
+      line-height: 1.5;
+    }
+    #site-mode-alert .sma-btns {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    #site-mode-alert .sma-btn {
+      font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border: 1px solid #999;
+      background: #e0ddd8;
+      color: #111;
+      cursor: pointer;
+    }
+    #site-mode-alert .sma-btn:hover { background: #d0cdc8; }
+    #site-mode-alert .sma-btn-serious {
+      background: #e63946;
+      border-color: #b02a33;
+      color: #fff;
+    }
+    #site-mode-alert .sma-btn-serious:hover { background: #cf2f3b; }
+
+    @media (max-width: 720px) {
+      #site-mode-alert {
+        left: 12px;
+        right: 12px;
+        width: auto;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      const FLAG = 'nc-site-mode-alert-dismissed';
+      if (localStorage.getItem(FLAG)) return;
+
+      const el = document.getElementById('site-mode-alert');
+      el.innerHTML = `
+        <div class="sma-titlebar">
+          <span class="sma-title">⚠ system</span>
+          <button class="sma-close" id="sma-x" aria-label="Close">×</button>
+        </div>
+        <div class="sma-body">
+          <p class="sma-heading">switch to serious mode?</p>
+          <p class="sma-desc">you are currently on the fun version of this site.</p>
+          <div class="sma-btns">
+            <button class="sma-btn" id="sma-stay">stay fun</button>
+            <button class="sma-btn sma-btn-serious" id="sma-serious">go serious</button>
+          </div>
+        </div>
+      `;
+
+      function dismiss() {
+        localStorage.setItem(FLAG, '1');
+        el.style.display = 'none';
+      }
+
+      document.getElementById('sma-x').addEventListener('click', dismiss);
+      document.getElementById('sma-stay').addEventListener('click', dismiss);
+      document.getElementById('sma-serious').addEventListener('click', function () {
+        dismiss();
+        window.location.href = 'https://www.newconsensus.com/';
+      });
+
+      setTimeout(function () { el.style.display = 'block'; }, 1500);
+    })();
+  </script>
+
+</body>
 </html>
