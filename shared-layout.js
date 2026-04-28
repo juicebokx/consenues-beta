@@ -875,12 +875,15 @@
       <div class="footer-nav-col">
         <span class="footer-nav-label">The Solution</span>
         <a href="/mission-for-america" class="footer-link">Mission for America</a>
+        <a href="/the-mission" class="footer-link">Mission for Humanity</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-label">The Projects</span>
-        <a href="/crashlab" class="footer-link">CrashLab</a>
-        <a href="/wont-get-fooled-again-act" class="footer-link">Won&rsquo;t Get Fooled Again Act</a>
-        <a href="/cost-of-waiting" class="footer-link">The Cost of Waiting</a>
+        <a href="https://crashlab.org" class="footer-link" target="_blank" rel="noopener">CrashLab</a>
+        <a href="https://www.newconsensus.com/projects/wgfaa" class="footer-link" target="_blank" rel="noopener">Won&rsquo;t Get Fooled Again Act</a>
+        <a href="https://thecostofwaiting.org" class="footer-link" target="_blank" rel="noopener">The Cost of Waiting</a>
+        <a href="https://sim.newconsensus.ai" class="footer-link" target="_blank" rel="noopener">BigSim</a>
+        <a href="https://www.newconsensus.com/projects/ai-convening" class="footer-link" target="_blank" rel="noopener">2026 AI Convening</a>
       </div>
       <div class="footer-nav-col">
         <span class="footer-nav-label">The Intel</span>
