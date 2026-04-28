@@ -49,12 +49,12 @@
 
   .net-pill {
     font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 400;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 5px 10px;
+    padding: 3px 7px;
     line-height: 1;
     display: inline-flex;
     align-items: center;
@@ -889,7 +889,7 @@
   <div class="nav-brand">
     <a href="/" class="nav-logo">New Consensus</a>
     <div class="nav-edition-toggle">
-      <button class="net-pill net-fun" type="button" disabled aria-current="true">FUN</button><a class="net-pill net-serious" href="https://www.newconsensus.com/" rel="noopener">SERIOUS</a>
+      <button class="net-pill net-fun" type="button" disabled aria-current="true">FUN</button><a class="net-pill net-serious" href="https://www.newconsensus.com/" target="_blank" rel="noopener">SERIOUS</a>
     </div>
   </div>
   <div class="nav-links">
