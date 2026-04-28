@@ -9,7 +9,7 @@
     padding: 20px 40px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -24,12 +24,63 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   }
 
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
   .nav-logo {
     font-weight: 600;
     font-size: 15px;
     color: #ffffff;
     letter-spacing: -0.02em;
     text-decoration: none;
+    line-height: 1;
+  }
+
+  /* ============================================
+     EDITION TOGGLE — FUN | SERIOUS
+  ============================================ */
+  .nav-edition-toggle {
+    display: inline-flex;
+    align-items: stretch;
+  }
+
+  .net-pill {
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px 10px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.15s ease;
+  }
+
+  .net-fun {
+    color: #e63946;
+    background: rgba(230, 57, 70, 0.08);
+    border: 1px solid #e63946;
+    border-radius: 3px 0 0 3px;
+    cursor: default;
+  }
+
+  .net-serious {
+    color: rgba(245, 245, 240, 0.4);
+    background: transparent;
+    border: 1px solid rgba(245, 245, 240, 0.15);
+    border-left: none;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+  }
+
+  .net-serious:hover {
+    color: rgba(245, 245, 240, 0.75);
+    border-color: rgba(245, 245, 240, 0.35);
   }
 
   .nav-links {
@@ -754,6 +805,10 @@
       display: none;
     }
 
+    .nav-edition-toggle {
+      display: none;
+    }
+
     .nav-hamburger {
       display: inline-flex;
     }
@@ -831,7 +886,12 @@
   function buildHeader(flags) {
     return `
 <nav class="nav">
-  <a href="/" class="nav-logo">New Consensus</a>
+  <div class="nav-brand">
+    <a href="/" class="nav-logo">New Consensus</a>
+    <div class="nav-edition-toggle">
+      <button class="net-pill net-fun" type="button" disabled aria-current="true">FUN</button><a class="net-pill net-serious" href="https://www.newconsensus.com/" rel="noopener">SERIOUS</a>
+    </div>
+  </div>
   <div class="nav-links">
     <a class="nav-link${flags.tripocalypse ? ' active' : ''}" href="/tripocalypse">The Tripocalypse</a>
     <a class="nav-link${flags.evidence ? ' active' : ''}" href="/mission-for-america">The Mission</a>
