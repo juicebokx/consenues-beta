@@ -811,7 +811,7 @@
         <a href="/jobs" class="nav-dropdown-item${flags.jobs ? ' active' : ''}">Jobs</a>
         <a href="/press" class="nav-dropdown-item${flags.press ? ' active' : ''}">Press</a>
         <a href="/library" class="nav-dropdown-item${flags.library ? ' active' : ''}">Library</a>
-        <a href="/blog" class="nav-dropdown-item${flags.blog ? ' active' : ''}">Blog</a>
+        <a href="https://www.newconsensus.com/blog" class="nav-dropdown-item${flags.blog ? ' active' : ''}" target="_blank" rel="noopener">Blog</a>
         <a href="/contact" class="nav-dropdown-item${flags.contact ? ' active' : ''}">Contact</a>
       </div>
     </div>
@@ -837,7 +837,7 @@
         <a href="/jobs" class="mobile-menu-sublink${flags.jobs ? ' active' : ''}">Jobs</a>
         <a href="/press" class="mobile-menu-sublink${flags.press ? ' active' : ''}">Press</a>
         <a href="/library" class="mobile-menu-sublink${flags.library ? ' active' : ''}">Library</a>
-        <a href="/blog" class="mobile-menu-sublink${flags.blog ? ' active' : ''}">Blog</a>
+        <a href="https://www.newconsensus.com/blog" class="mobile-menu-sublink${flags.blog ? ' active' : ''}" target="_blank" rel="noopener">Blog</a>
         <a href="/contact" class="mobile-menu-sublink${flags.contact ? ' active' : ''}">Contact</a>
       </div>
     </div>
