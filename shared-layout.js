@@ -451,9 +451,9 @@
 
   .footer-copy {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
     padding: 20px 48px;
     border-top: 1px solid rgba(255,255,255,0.07);
     font-size: 12px;
@@ -475,6 +475,41 @@
     font-style: italic;
     color: rgba(255,255,255,0.18);
   }
+
+  /* ============================================
+     JUICEBOKX CREDIT
+  ============================================ */
+  .term {
+    font-family: 'VT323', monospace;
+    font-size: 19px;
+    color: #00ff66;
+    text-decoration: none;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: text-shadow 0.2s;
+  }
+  .term:hover { text-shadow: 0 0 6px rgba(0, 255, 102, 0.5); }
+  .term .juice { font-size: 14px; }
+  .term .prompt { color: #ff8c1a; }
+  .term .brand {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(0, 255, 102, 0.5);
+    transition: text-decoration-color 0.2s;
+  }
+  .term:hover .brand { text-decoration-color: #00ff66; }
+  .term .arrow {
+    font-size: 13px;
+    margin-left: 4px;
+    color: #ff8c1a;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+  .term:hover .arrow { transform: translate(2px, -2px); }
 
   /* ============================================
      SHARED PANIC BUTTON + GLITCH OVERLAY
@@ -752,7 +787,7 @@
     .footer-copy {
       flex-direction: column;
       align-items: flex-start;
-      gap: 4px;
+      gap: 10px;
       padding: 20px 24px;
       margin-bottom: 100px;
     }
@@ -903,6 +938,9 @@
   </div>
   <div class="footer-copy">
     <span>&copy; 2026 New Consensus. All rights reserved. <span class="footer-copy-aside">(Assuming there&rsquo;s still a world to reserve rights in.)</span></span>
+    <a class="term" href="https://juicebokx.world/" target="_blank" rel="noopener noreferrer">
+      <span class="juice">🧃</span><span class="prompt">&gt;</span> built by <span class="brand">juicebokx world</span><span class="arrow">↗</span>
+    </a>
   </div>
 </footer>`;
   }
@@ -1166,6 +1204,13 @@
       styleEl.id = 'shared-layout-style';
       styleEl.textContent = style;
       document.head.appendChild(styleEl);
+    }
+    if (!document.getElementById('shared-vt323-font')) {
+      const link = document.createElement('link');
+      link.id = 'shared-vt323-font';
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=VT323&display=swap';
+      document.head.appendChild(link);
     }
 
     const flags = activeFlags(window.location.pathname);
