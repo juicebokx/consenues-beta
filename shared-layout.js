@@ -889,7 +889,7 @@
   <div class="nav-brand">
     <a href="/" class="nav-logo">New Consensus</a>
     <div class="nav-edition-toggle">
-      <button class="net-pill net-fun" type="button" disabled aria-current="true">FUN</button><a class="net-pill net-serious" href="https://www.newconsensus.com/" target="_blank" rel="noopener">SERIOUS</a>
+      <button class="net-pill net-fun" type="button" disabled aria-current="true">REAL</button><a class="net-pill net-serious" href="https://www.newconsensus.com/" target="_blank" rel="noopener">SERIOUS</a>
     </div>
   </div>
   <div class="nav-links">
